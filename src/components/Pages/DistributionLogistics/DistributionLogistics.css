@@ -1,0 +1,4678 @@
+/* ===== DISTRIBUTION LOGISTICS - COMPREHENSIVE STYLING ===== */
+
+/* Main Container */
+.logistics-page-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8fbff 0%, #f0f7ff 100%);
+  padding: 1.5rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ===== ENHANCED PAGE HEADER ===== */
+.logistics-page-header {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.08);
+  margin-bottom: 2rem;
+  border: 1px solid rgba(59, 130, 246, 0.1);
+  overflow: hidden;
+}
+
+.header-content-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 2.5rem;
+  border-bottom: 1px solid rgba(59, 130, 246, 0.08);
+}
+
+.header-title-area {
+  flex: 1;
+}
+
+.logistics-main-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 0.5rem 0;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.logistics-subtitle {
+  font-size: 1.1rem;
+  color: #64748b;
+  margin: 0;
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+.header-actions-area {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.header-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.header-action-btn.primary {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.header-action-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+}
+
+.header-action-btn.secondary {
+  background: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.header-action-btn.secondary:hover {
+  background: rgba(59, 130, 246, 0.15);
+  transform: translateY(-1px);
+}
+
+/* Quick Stats Bar */
+.header-quick-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.quick-stat-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem 2rem;
+  background: white;
+  transition: all 0.3s ease;
+}
+
+.quick-stat-item:hover {
+  background: rgba(59, 130, 246, 0.02);
+  transform: translateY(-1px);
+}
+
+.quick-stat-icon {
+  font-size: 1.5rem;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+  border-radius: 12px;
+}
+
+.quick-stat-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.quick-stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1;
+}
+
+.quick-stat-label {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-top: 0.25rem;
+}
+
+/* ===== ENHANCED NAVIGATION TABS ===== */
+.logistics-navigation-container {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.08);
+  margin-bottom: 2rem;
+  border: 1px solid rgba(59, 130, 246, 0.1);
+  overflow: hidden;
+  position: relative;
+}
+
+.logistics-navigation-tabs {
+  display: flex;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  position: relative;
+}
+
+.logistics-nav-tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  border-right: 1px solid rgba(59, 130, 246, 0.08);
+}
+
+.logistics-nav-tab:last-child {
+  border-right: none;
+}
+
+.logistics-nav-tab:hover {
+  background: rgba(59, 130, 246, 0.05);
+  transform: translateY(-1px);
+}
+
+.logistics-nav-tab.active {
+  background: white;
+  box-shadow: 0 -2px 8px rgba(59, 130, 246, 0.1);
+}
+
+.logistics-nav-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+}
+
+.nav-tab-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
+  transition: all 0.3s ease;
+}
+
+.logistics-nav-tab.active .nav-tab-icon {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.nav-tab-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.nav-tab-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 0.25rem;
+}
+
+.nav-tab-subtitle {
+  font-size: 0.8rem;
+  color: #64748b;
+  font-weight: 400;
+}
+
+.logistics-nav-tab.active .nav-tab-title {
+  color: #3b82f6;
+}
+
+.tab-indicator {
+  position: absolute;
+  bottom: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+  transition: all 0.3s ease;
+}
+
+/* ===== CONTENT CONTAINER ===== */
+.logistics-content-container {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.1);
+  overflow: hidden;
+}
+
+.content-wrapper {
+  padding: 2.5rem;
+  animation: logistics-fadeIn 0.4s ease-out;
+}
+
+@keyframes logistics-fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== OVERVIEW SECTION STYLING ===== */
+.logistics-overview-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Enhanced Stats Grid */
+.logistics-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.logistics-stat-card {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.logistics-stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #e2e8f0, #cbd5e1);
+}
+
+.logistics-stat-card.primary-stat::before {
+  background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+}
+
+.logistics-stat-card.secondary-stat::before {
+  background: linear-gradient(90deg, #10b981, #059669);
+}
+
+.logistics-stat-card.success-stat::before {
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+}
+
+.logistics-stat-card.warning-stat::before {
+  background: linear-gradient(90deg, #f59e0b, #d97706);
+}
+
+.logistics-stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+}
+
+.stat-icon-wrapper {
+  margin-bottom: 1.5rem;
+}
+
+.stat-icon-bg {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.vehicles-bg {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+}
+
+.routes-bg {
+  background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.deliveries-bg {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+.pending-bg {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.stat-content-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #1e293b;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #64748b;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+
+.stat-trend {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  display: inline-block;
+  width: fit-content;
+}
+
+.stat-trend.positive {
+  background: rgba(34, 197, 94, 0.1);
+  color: #16a34a;
+}
+
+.stat-trend.negative {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+}
+
+.stat-trend.neutral {
+  background: rgba(100, 116, 139, 0.1);
+  color: #64748b;
+}
+
+/* Performance Metrics Row */
+.performance-metrics-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 16px;
+  border: 1px solid rgba(59, 130, 246, 0.08);
+  margin-bottom: 2rem;
+}
+
+.performance-metric-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+  min-height: 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.performance-metric-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.performance-metric-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.performance-metric-item:hover::before {
+  opacity: 1;
+}
+
+.metric-icon {
+  font-size: 1.5rem;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+/* Specific metric icon styles */
+.performance-metric-item:nth-child(1) .metric-icon {
+  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+}
+
+.performance-metric-item:nth-child(2) .metric-icon {
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+}
+
+.performance-metric-item:nth-child(3) .metric-icon {
+  background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+}
+
+.performance-metric-item:nth-child(4) .metric-icon {
+  background: linear-gradient(135deg, #fce7f3, #fbcfe8);
+}
+
+.metric-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.metric-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1;
+}
+
+.metric-label {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin-top: 0.25rem;
+}
+
+/* ===== MAIN CONTENT SECTIONS ===== */
+.logistics-main-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.logistics-content-section {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.section-header-logistics {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid rgba(59, 130, 246, 0.1);
+}
+
+.section-header-logistics h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+.refresh-tracking-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.refresh-tracking-btn:hover {
+  background: rgba(59, 130, 246, 0.15);
+  transform: translateY(-1px);
+}
+
+.alerts-count {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* Real-Time Vehicle Tracking */
+.tracking-vehicles-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.tracking-vehicle-card {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.tracking-vehicle-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  border-radius: 2px 0 0 2px;
+}
+
+.tracking-vehicle-card.delivering::before {
+  background: linear-gradient(180deg, #22c55e, #16a34a);
+}
+
+.tracking-vehicle-card.returning::before {
+  background: linear-gradient(180deg, #3b82f6, #1d4ed8);
+}
+
+.tracking-vehicle-card.loading::before {
+  background: linear-gradient(180deg, #f59e0b, #d97706);
+}
+
+.tracking-vehicle-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.vehicle-header-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.vehicle-id-badge {
+  background: linear-gradient(135deg, #1e293b, #334155);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.vehicle-status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.vehicle-status-indicator.delivering {
+  background: rgba(34, 197, 94, 0.1);
+  color: #16a34a;
+}
+
+.vehicle-status-indicator.returning {
+  background: rgba(59, 130, 246, 0.1);
+  color: #1d4ed8;
+}
+
+.vehicle-status-indicator.loading {
+  background: rgba(245, 158, 11, 0.1);
+  color: #d97706;
+}
+
+.vehicle-driver-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.driver-name {
+  font-weight: 600;
+  color: #1e293b;
+  font-size: 1rem;
+}
+
+.current-location {
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.vehicle-progress-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.progress-bar-container {
+  flex: 1;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.progress-percentage {
+  font-weight: 600;
+  color: #1e293b;
+  font-size: 0.9rem;
+  min-width: 40px;
+}
+
+.vehicle-details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background: white;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.detail-label {
+  font-size: 0.8rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.detail-value {
+  font-size: 0.8rem;
+  color: #1e293b;
+  font-weight: 600;
+}
+
+/* Emergency Alerts */
+.emergency-alerts-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.emergency-alert-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.emergency-alert-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  border-radius: 2px 0 0 2px;
+}
+
+.emergency-alert-card.high::before {
+  background: linear-gradient(180deg, #ef4444, #dc2626);
+}
+
+.emergency-alert-card.medium::before {
+  background: linear-gradient(180deg, #f59e0b, #d97706);
+}
+
+.emergency-alert-card.low::before {
+  background: linear-gradient(180deg, #22c55e, #16a34a);
+}
+
+.emergency-alert-card.resolved {
+  opacity: 0.7;
+}
+
+.emergency-alert-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.alert-header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.alert-type-icon {
+  font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(59, 130, 246, 0.1);
+  border-radius: 10px;
+}
+
+.alert-severity-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.emergency-alert-card.high .alert-severity-badge {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+}
+
+.emergency-alert-card.medium .alert-severity-badge {
+  background: rgba(245, 158, 11, 0.1);
+  color: #d97706;
+}
+
+.alert-content-section {
+  margin-bottom: 1rem;
+}
+
+.alert-message {
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.alert-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.alert-vehicle, .alert-location {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.alert-timestamp {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  font-style: italic;
+}
+
+.alert-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.alert-action-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.alert-action-btn.primary {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+}
+
+.alert-action-btn.primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.alert-action-btn.secondary {
+  background: rgba(100, 116, 139, 0.1);
+  color: #64748b;
+}
+
+.alert-action-btn.secondary:hover {
+  background: rgba(100, 116, 139, 0.15);
+}
+
+/* Enhanced Distribution Map */
+.enhanced-distribution-map {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  margin-top: 2rem;
+}
+
+.map-header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid rgba(59, 130, 246, 0.1);
+}
+
+.map-header-section h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+.map-controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.map-control-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  background: white;
+  color: #3b82f6;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.map-control-btn.active {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+  border-color: transparent;
+}
+
+.map-control-btn:hover:not(.active) {
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.interactive-map-container {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid rgba(59, 130, 246, 0.1);
+}
+
+.enhanced-distribution-svg {
+  width: 100%;
+  height: 300px;
+  border-radius: 8px;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.map-legend {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(59, 130, 246, 0.1);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+
+/* ===== VEHICLES MANAGEMENT STYLING ===== */
+.vehicles-management-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Fleet Overview Stats */
+.fleet-overview-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.fleet-stat-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+.fleet-stat-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.fleet-stat-item.operational {
+  border-left: 4px solid #22c55e;
+}
+
+.fleet-stat-item.maintenance {
+  border-left: 4px solid #ef4444;
+}
+
+.fleet-stat-item.idle {
+  border-left: 4px solid #f59e0b;
+}
+
+.fleet-stat-item.efficiency {
+  border-left: 4px solid #3b82f6;
+}
+
+.fleet-stat-icon {
+  font-size: 1.5rem;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+  border-radius: 12px;
+}
+
+.fleet-stat-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.fleet-stat-number {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1;
+}
+
+.fleet-stat-label {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-top: 0.25rem;
+}
+
+/* Vehicle Management Controls */
+.vehicle-management-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 12px;
+  border: 1px solid rgba(59, 130, 246, 0.1);
+  margin-bottom: 2rem;
+}
+
+.control-filters {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.filter-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  background: white;
+  color: #3b82f6;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-btn.active {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+  border-color: transparent;
+}
+
+.filter-btn:hover:not(.active) {
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.control-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.control-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.85rem;
+}
+
+.control-action-btn.primary {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+}
+
+.control-action-btn.primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.control-action-btn.secondary {
+  background: rgba(100, 116, 139, 0.1);
+  color: #64748b;
+  border: 1px solid rgba(100, 116, 139, 0.2);
+}
+
+.control-action-btn.secondary:hover {
+  background: rgba(100, 116, 139, 0.15);
+}
+
+/* Enhanced Vehicles Grid */
+.enhanced-vehicles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.enhanced-vehicle-card {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.enhanced-vehicle-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  border-radius: 16px 16px 0 0;
+}
+
+.enhanced-vehicle-card.active-vehicle::before {
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+}
+
+.enhanced-vehicle-card.maintenance-vehicle::before {
+  background: linear-gradient(90deg, #ef4444, #dc2626);
+}
+
+.enhanced-vehicle-card.idle-vehicle::before {
+  background: linear-gradient(90deg, #f59e0b, #d97706);
+}
+
+.enhanced-vehicle-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+}
+
+.vehicle-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.vehicle-identification {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.vehicle-id-badge {
+  background: linear-gradient(135deg, #1e293b, #334155);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.vehicle-status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.vehicle-status-indicator.active {
+  background: rgba(34, 197, 94, 0.1);
+  color: #16a34a;
+}
+
+.vehicle-status-indicator.maintenance {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+}
+
+.vehicle-status-indicator.idle {
+  background: rgba(245, 158, 11, 0.1);
+  color: #d97706;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: logistics-pulse 2s infinite;
+}
+
+@keyframes logistics-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.action-menu-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: #64748b;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.action-menu-btn:hover {
+  background: rgba(100, 116, 139, 0.1);
+  color: #1e293b;
+}
+
+.vehicle-driver-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 12px;
+}
+
+.driver-avatar {
+  font-size: 2rem;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.driver-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.driver-name {
+  font-weight: 600;
+  color: #1e293b;
+  font-size: 1rem;
+}
+
+.driver-rating {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-top: 0.25rem;
+}
+
+.vehicle-specifications {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.spec-item {
+  display: flex;
+  flex-direction: column;
+  padding: 0.75rem;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.spec-label {
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-bottom: 0.25rem;
+}
+
+.spec-value {
+  font-weight: 600;
+  color: #1e293b;
+  font-size: 0.9rem;
+}
+
+.vehicle-current-status {
+  margin-bottom: 1.5rem;
+}
+
+.status-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.status-label {
+  font-size: 0.85rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.status-value {
+  font-size: 0.85rem;
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.load-indicator, .fuel-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.load-bar, .fuel-bar {
+  width: 80px;
+  height: 6px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.load-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+.fuel-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+.load-percentage, .fuel-percentage {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #1e293b;
+  min-width: 35px;
+}
+
+.vehicle-performance-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.performance-metric {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 8px;
+  border: 1px solid rgba(59, 130, 246, 0.1);
+}
+
+.metric-icon {
+  font-size: 1rem;
+}
+
+.metric-value {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.vehicle-card-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.vehicle-action-btn {
+  flex: 1;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.85rem;
+}
+
+.vehicle-action-btn.primary {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+}
+
+.vehicle-action-btn.primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.vehicle-action-btn.secondary {
+  background: rgba(100, 116, 139, 0.1);
+  color: #64748b;
+  border: 1px solid rgba(100, 116, 139, 0.2);
+}
+
+.vehicle-action-btn.secondary:hover {
+  background: rgba(100, 116, 139, 0.15);
+}
+
+/* Maintenance Details */
+.maintenance-details {
+  margin-bottom: 1.5rem;
+}
+
+.maintenance-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  margin-bottom: 0.5rem;
+}
+
+.maintenance-type {
+  font-size: 0.85rem;
+  color: #1e293b;
+  font-weight: 500;
+}
+
+.maintenance-status {
+  font-size: 0.8rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.maintenance-progress {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 8px;
+}
+
+.progress-label {
+  font-size: 0.85rem;
+  color: #64748b;
+  font-weight: 500;
+  min-width: 80px;
+}
+
+.progress-bar-maintenance {
+  flex: 1;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill-maintenance {
+  height: 100%;
+  background: linear-gradient(90deg, #f59e0b, #d97706);
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.progress-text {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #1e293b;
+  min-width: 35px;
+}
+
+.maintenance-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.timeline-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background: white;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.timeline-label {
+  font-size: 0.8rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.timeline-value {
+  font-size: 0.8rem;
+  color: #1e293b;
+  font-weight: 600;
+}
+
+/* Idle Status Details */
+.idle-status-details {
+  margin-bottom: 1.5rem;
+}
+
+.idle-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.idle-label {
+  font-size: 0.85rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.idle-value {
+  font-size: 0.85rem;
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.availability-status {
+  margin-bottom: 1.5rem;
+}
+
+.availability-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: rgba(34, 197, 94, 0.1);
+  border-radius: 8px;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.availability-indicator.available {
+  background: rgba(34, 197, 94, 0.1);
+  color: #16a34a;
+}
+
+.availability-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: logistics-pulse 2s infinite;
+}
+
+/* Fleet Performance Summary */
+.fleet-performance-summary {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid rgba(59, 130, 246, 0.1);
+}
+
+.summary-header h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+.time-period-selector {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  background: white;
+  color: #3b82f6;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.performance-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.summary-metric-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 12px;
+  border: 1px solid rgba(59, 130, 246, 0.1);
+  transition: all 0.3s ease;
+}
+
+.summary-metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.summary-metric-icon {
+  font-size: 1.5rem;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.summary-metric-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.summary-metric-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1;
+}
+
+.summary-metric-label {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin: 0.25rem 0;
+}
+
+.summary-metric-change {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  width: fit-content;
+}
+
+.summary-metric-change.positive {
+  background: rgba(34, 197, 94, 0.1);
+  color: #16a34a;
+}
+
+.summary-metric-change.negative {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+}
+
+/* ===== RESPONSIVE DESIGN RULES ===== */
+
+/* Large screens (1400px and up) - Optimal for 90% screen size */
+@media (min-width: 1400px) {
+  .performance-metrics-row {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    padding: 2.5rem;
+  }
+  
+  .performance-metric-item {
+    padding: 1.5rem;
+  }
+  
+  .metric-icon {
+    width: 56px;
+    height: 56px;
+    font-size: 1.75rem;
+  }
+  
+  .metric-value {
+    font-size: 1.5rem;
+  }
+  
+  .metric-label {
+    font-size: 0.9rem;
+  }
+}
+
+/* Desktop screens (1200px to 1399px) */
+@media (max-width: 1399px) and (min-width: 1200px) {
+  .performance-metrics-row {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+    padding: 2rem;
+  }
+  
+  .performance-metric-item {
+    padding: 1.25rem;
+  }
+  
+  .metric-icon {
+    width: 52px;
+    height: 52px;
+    font-size: 1.6rem;
+  }
+  
+  .metric-value {
+    font-size: 1.35rem;
+  }
+  
+  .metric-label {
+    font-size: 0.85rem;
+  }
+}
+
+/* Medium desktop screens (992px to 1199px) */
+@media (max-width: 1199px) and (min-width: 992px) {
+  .performance-metrics-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    padding: 2rem;
+  }
+  
+  .performance-metric-item {
+    padding: 1.5rem;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .metric-icon {
+    width: 48px;
+    height: 48px;
+    font-size: 1.5rem;
+    margin: 0 auto;
+  }
+  
+  .metric-details {
+    align-items: center;
+  }
+  
+  .metric-value {
+    font-size: 1.25rem;
+  }
+  
+  .metric-label {
+    font-size: 0.8rem;
+  }
+}
+
+/* Tablet screens (768px to 991px) */
+@media (max-width: 991px) and (min-width: 768px) {
+  .performance-metrics-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .performance-metric-item {
+    padding: 1.25rem;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .metric-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 1.4rem;
+    margin: 0 auto;
+  }
+  
+  .metric-details {
+    align-items: center;
+  }
+  
+  .metric-value {
+    font-size: 1.2rem;
+  }
+  
+  .metric-label {
+    font-size: 0.75rem;
+  }
+}
+
+/* Mobile screens (576px to 767px) */
+@media (max-width: 767px) and (min-width: 576px) {
+  .performance-metrics-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .performance-metric-item {
+    padding: 1.5rem;
+    justify-content: flex-start;
+    text-align: left;
+    flex-direction: row;
+    gap: 1rem;
+  }
+  
+  .metric-icon {
+    width: 48px;
+    height: 48px;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+  
+  .metric-details {
+    align-items: flex-start;
+  }
+  
+  .metric-value {
+    font-size: 1.25rem;
+  }
+  
+  .metric-label {
+    font-size: 0.8rem;
+  }
+}
+
+/* Small mobile screens (up to 575px) */
+@media (max-width: 575px) {
+  .performance-metrics-row {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+  
+  .performance-metric-item {
+    padding: 1rem;
+    justify-content: flex-start;
+    text-align: left;
+    flex-direction: row;
+    gap: 0.75rem;
+  }
+  
+  .metric-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+  }
+  
+  .metric-details {
+    align-items: flex-start;
+  }
+  
+  .metric-value {
+    font-size: 1.1rem;
+  }
+  
+  .metric-label {
+    font-size: 0.75rem;
+  }
+}
+
+/* Additional responsive rules for main stats grid */
+@media (max-width: 1199px) and (min-width: 992px) {
+  .logistics-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 991px) and (min-width: 768px) {
+  .logistics-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+  
+  .logistics-stat-card {
+    padding: 1.5rem;
+  }
+  
+  .stat-number {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .logistics-stats-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .logistics-stat-card {
+    padding: 1.5rem;
+  }
+  
+  .stat-number {
+    font-size: 2rem;
+  }
+}
+
+/* Responsive rules for main content layout */
+@media (max-width: 1199px) {
+  .logistics-main-content {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* Header responsive adjustments */
+@media (max-width: 991px) {
+  .header-content-section {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+  
+  .header-actions-area {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  
+  .logistics-main-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .header-quick-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .quick-stat-item {
+    padding: 1rem;
+  }
+  
+  .logistics-main-title {
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 575px) {
+  .header-quick-stats {
+    grid-template-columns: 1fr;
+  }
+  
+  .logistics-main-title {
+    font-size: 1.5rem;
+  }
+  
+  .logistics-page-container {
+    padding: 1rem;
+  }
+}
+
+/* Navigation tabs responsive */
+@media (max-width: 991px) {
+  .logistics-navigation-tabs {
+    flex-direction: column;
+  }
+  
+  .logistics-nav-tab {
+    border-right: none;
+    border-bottom: 1px solid rgba(59, 130, 246, 0.08);
+  }
+  
+  .logistics-nav-tab:last-child {
+    border-bottom: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .nav-tab-content {
+    align-items: center;
+    text-align: center;
+  }
+  
+  .nav-tab-title {
+    font-size: 0.9rem;
+  }
+  
+  .nav-tab-subtitle {
+    font-size: 0.75rem;
+  }
+}
+
+/* Enhanced vehicles grid responsive */
+@media (max-width: 1199px) {
+  .enhanced-vehicles-grid {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .enhanced-vehicles-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .enhanced-vehicle-card {
+    padding: 1.5rem;
+  }
+}
+
+/* Performance summary grid responsive */
+@media (max-width: 1199px) and (min-width: 768px) {
+  .performance-summary-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .performance-summary-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .summary-metric-card {
+    padding: 1.25rem;
+  }
+}
+
+/* ===== ROUTES MANAGEMENT STYLING ===== */
+.routes-management-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Route Analytics Dashboard */
+.route-analytics-dashboard {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.analytics-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid rgba(59, 130, 246, 0.1);
+}
+
+.analytics-header h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+.analytics-controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.analytics-control-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  background: white;
+  color: #3b82f6;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.analytics-control-btn.active {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+  border-color: transparent;
+}
+
+.analytics-control-btn:hover:not(.active) {
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.analytics-metrics-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.analytics-metric-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 12px;
+  border: 1px solid rgba(59, 130, 246, 0.1);
+  transition: all 0.3s ease;
+}
+
+.analytics-metric-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.metric-icon-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.routes-active {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+}
+
+.routes-completed {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+.routes-efficiency {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.routes-savings {
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+}
+
+.metric-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.metric-number {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1;
+}
+
+.metric-label {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin: 0.25rem 0;
+}
+
+.metric-trend {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  width: fit-content;
+}
+
+.metric-trend.positive {
+  background: rgba(34, 197, 94, 0.1);
+  color: #16a34a;
+}
+
+/* Route Optimization Panel */
+.route-optimization-panel {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.optimization-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid rgba(59, 130, 246, 0.1);
+}
+
+.optimization-header h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+.optimize-all-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.85rem;
+}
+
+.optimize-all-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+}
+
+.optimization-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.optimization-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 12px;
+  border: 1px solid rgba(59, 130, 246, 0.1);
+  text-align: center;
+}
+
+.stat-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.stat-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 0.25rem;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+/* Enhanced Routes Grid */
+.enhanced-routes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.enhanced-route-card {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.enhanced-route-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  border-radius: 16px 16px 0 0;
+}
+
+.enhanced-route-card.active-route::before {
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+}
+
+.enhanced-route-card.pending-route::before {
+  background: linear-gradient(90deg, #f59e0b, #d97706);
+}
+
+.enhanced-route-card.completed-route::before {
+  background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+}
+
+.enhanced-route-card.optimized-route::before {
+  background: linear-gradient(90deg, #8b5cf6, #7c3aed);
+}
+
+.enhanced-route-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+}
+
+.route-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.route-identification {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.route-id-badge {
+  background: linear-gradient(135deg, #1e293b, #334155);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.route-status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.route-status-indicator.active {
+  background: rgba(34, 197, 94, 0.1);
+  color: #16a34a;
+}
+
+.route-status-indicator.pending {
+  background: rgba(245, 158, 11, 0.1);
+  color: #d97706;
+}
+
+.route-status-indicator.completed {
+  background: rgba(59, 130, 246, 0.1);
+  color: #1d4ed8;
+}
+
+.route-status-indicator.optimized {
+  background: rgba(139, 92, 246, 0.1);
+  color: #7c3aed;
+}
+
+.status-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: logistics-pulse 2s infinite;
+}
+
+.route-priority {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.route-priority.high {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+}
+
+.route-priority.medium {
+  background: rgba(245, 158, 11, 0.1);
+  color: #d97706;
+}
+
+.route-priority.low {
+  background: rgba(34, 197, 94, 0.1);
+  color: #16a34a;
+}
+
+.route-title-section {
+  margin-bottom: 1.5rem;
+}
+
+.route-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 0.5rem 0;
+}
+
+.route-description {
+  font-size: 0.85rem;
+  color: #64748b;
+  line-height: 1.4;
+}
+
+.route-assignment-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 12px;
+}
+
+.assigned-vehicle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.vehicle-icon {
+  font-size: 1.2rem;
+}
+
+.vehicle-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.vehicle-id {
+  font-weight: 600;
+  color: #1e293b;
+  font-size: 0.9rem;
+}
+
+.driver-name {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin-top: 0.25rem;
+}
+
+.route-timing {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.start-time, .eta {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.route-progress-section {
+  margin-bottom: 1.5rem;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.progress-label {
+  font-size: 0.85rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.progress-percentage {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.route-progress-bar {
+  margin-bottom: 1rem;
+}
+
+.progress-track {
+  width: 100%;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill-route {
+  height: 100%;
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.progress-stops {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stop {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: 2px solid transparent;
+}
+
+.stop.completed {
+  background: #22c55e;
+  color: white;
+}
+
+.stop.current {
+  background: #f59e0b;
+  color: white;
+  animation: logistics-pulse 2s infinite;
+}
+
+.stop.pending {
+  background: rgba(0, 0, 0, 0.1);
+  color: #64748b;
+}
+
+.route-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.route-metric {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.metric-icon {
+  font-size: 1rem;
+}
+
+.metric-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.metric-value {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1e293b;
+  line-height: 1;
+}
+
+.metric-label {
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-top: 0.25rem;
+}
+
+.route-card-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.route-action-btn {
+  flex: 1;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.85rem;
+}
+
+.route-action-btn.primary {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+}
+
+.route-action-btn.primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.route-action-btn.secondary {
+  background: rgba(100, 116, 139, 0.1);
+  color: #64748b;
+  border: 1px solid rgba(100, 116, 139, 0.2);
+}
+
+.route-action-btn.secondary:hover {
+  background: rgba(100, 116, 139, 0.15);
+}
+
+.route-action-btn.tertiary {
+  background: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.route-action-btn.tertiary:hover {
+  background: rgba(59, 130, 246, 0.15);
+}
+
+/* Route Preparation Status */
+.route-preparation-status {
+  margin-bottom: 1.5rem;
+}
+
+.preparation-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  margin-bottom: 0.5rem;
+}
+
+.prep-icon {
+  font-size: 1rem;
+}
+
+.prep-text {
+  font-size: 0.85rem;
+  color: #1e293b;
+  font-weight: 500;
+}
+
+.preparation-item.completed {
+  background: rgba(34, 197, 94, 0.05);
+  border-color: rgba(34, 197, 94, 0.2);
+}
+
+.preparation-item.pending {
+  background: rgba(245, 158, 11, 0.05);
+  border-color: rgba(245, 158, 11, 0.2);
+}
+
+/* Completion Summary */
+.completion-summary {
+  margin-bottom: 1.5rem;
+}
+
+.completion-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+.completion-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 8px;
+  border: 1px solid rgba(59, 130, 246, 0.1);
+  text-align: center;
+}
+
+.stat-icon {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.stat-value {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 0.25rem;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+/* Optimization Benefits */
+.optimization-benefits {
+  margin-bottom: 1.5rem;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: rgba(139, 92, 246, 0.05);
+  border-radius: 8px;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  margin-bottom: 0.5rem;
+}
+
+.benefit-icon {
+  font-size: 1rem;
+  color: #7c3aed;
+}
+
+.benefit-text {
+  font-size: 0.85rem;
+  color: #1e293b;
+  font-weight: 500;
+}
+
+/* Route Management Tools */
+.route-management-tools {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.tools-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid rgba(59, 130, 246, 0.1);
+}
+
+.tools-header h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+.management-tools-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.management-tool-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 12px;
+  border: 1px solid rgba(59, 130, 246, 0.1);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.management-tool-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+}
+
+.tool-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.tool-content h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 0.5rem 0;
+}
+
+.tool-content p {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.4;
+}
+
+.tool-action-btn {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.85rem;
+}
+
+.tool-action-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+/* ===== WAREHOUSES MANAGEMENT STYLING ===== */
+.warehouses-management-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Warehouse Overview */
+.warehouse-overview-section {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.overview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid rgba(59, 130, 246, 0.1);
+}
+
+.overview-header h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+.overview-controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.overview-control-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  background: white;
+  color: #3b82f6;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.overview-control-btn.active {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+  border-color: transparent;
+}
+
+.overview-control-btn:hover:not(.active) {
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.warehouse-stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.warehouse-stat-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 12px;
+  border: 1px solid rgba(59, 130, 246, 0.1);
+  transition: all 0.3s ease;
+}
+
+.warehouse-stat-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.stat-icon-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.warehouse-total {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+}
+
+.warehouse-capacity {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+.warehouse-utilization {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.warehouse-temperature {
+  background: linear-gradient(135deg, #06b6d4, #0891b2);
+}
+
+.stat-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-number {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin-top: 0.25rem;
+}
+
+/* Warehouse Cards Grid */
+.warehouse-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.warehouse-card {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.warehouse-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  border-radius: 16px 16px 0 0;
+}
+
+.warehouse-card.operational::before {
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+}
+
+.warehouse-card.maintenance::before {
+  background: linear-gradient(90deg, #ef4444, #dc2626);
+}
+
+.warehouse-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+}
+
+.warehouse-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.warehouse-identification {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.warehouse-id-badge {
+  background: linear-gradient(135deg, #1e293b, #334155);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.warehouse-status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.warehouse-status-indicator.operational {
+  background: rgba(34, 197, 94, 0.1);
+  color: #16a34a;
+}
+
+.warehouse-status-indicator.maintenance {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+}
+
+.warehouse-info-section {
+  margin-bottom: 1.5rem;
+}
+
+.warehouse-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 0.5rem 0;
+}
+
+.warehouse-location {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.warehouse-capacity-section {
+  margin-bottom: 1.5rem;
+}
+
+.capacity-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.capacity-label {
+  font-size: 0.85rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.capacity-percentage {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.capacity-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+}
+
+.capacity-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.capacity-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.current-stock {
+  font-weight: 600;
+  color: #1e293b;
+  font-size: 0.9rem;
+}
+
+.total-capacity {
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.warehouse-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.warehouse-metric {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 8px;
+  border: 1px solid rgba(59, 130, 246, 0.1);
+}
+
+.metric-icon {
+  font-size: 1rem;
+}
+
+.metric-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.metric-value {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1e293b;
+  line-height: 1;
+}
+
+.metric-label {
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-top: 0.25rem;
+}
+
+.warehouse-card-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.warehouse-action-btn {
+  flex: 1;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.85rem;
+}
+
+.warehouse-action-btn.primary {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+}
+
+.warehouse-action-btn.primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.warehouse-action-btn.secondary {
+  background: rgba(100, 116, 139, 0.1);
+  color: #64748b;
+  border: 1px solid rgba(100, 116, 139, 0.2);
+}
+
+.warehouse-action-btn.secondary:hover {
+  background: rgba(100, 116, 139, 0.15);
+}
+
+/* Inventory Management */
+.inventory-management-section {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.inventory-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid rgba(59, 130, 246, 0.1);
+}
+
+.inventory-header h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+.inventory-refresh-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.inventory-refresh-btn:hover {
+  background: rgba(59, 130, 246, 0.15);
+  transform: translateY(-1px);
+}
+
+.inventory-summary-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.inventory-summary-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 12px;
+  border: 1px solid rgba(59, 130, 246, 0.1);
+  transition: all 0.3s ease;
+}
+
+.inventory-summary-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.summary-icon {
+  font-size: 1.5rem;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.summary-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.summary-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1;
+}
+
+.summary-label {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin: 0.25rem 0;
+}
+
+.summary-change {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  width: fit-content;
+}
+
+.summary-change.positive {
+  background: rgba(34, 197, 94, 0.1);
+  color: #16a34a;
+}
+
+.summary-change.negative {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+}
+
+.summary-change.neutral {
+  background: rgba(100, 116, 139, 0.1);
+  color: #64748b;
+}
+
+.summary-change.warning {
+  background: rgba(245, 158, 11, 0.1);
+  color: #d97706;
+}
+
+/* ===== ANALYTICS MANAGEMENT STYLING ===== */
+.analytics-management-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Delivery Analytics Overview */
+.delivery-analytics-overview {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.analytics-overview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid rgba(59, 130, 246, 0.1);
+}
+
+.analytics-overview-header h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+.analytics-time-selector {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  background: white;
+  color: #3b82f6;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.analytics-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.analytics-overview-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 12px;
+  border: 1px solid rgba(59, 130, 246, 0.1);
+  transition: all 0.3s ease;
+}
+
+.analytics-overview-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.overview-card-icon {
+  font-size: 1.5rem;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.overview-card-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.overview-card-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1;
+}
+
+.overview-card-label {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin: 0.25rem 0;
+}
+
+.overview-card-trend {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  width: fit-content;
+}
+
+.overview-card-trend.positive {
+  background: rgba(34, 197, 94, 0.1);
+  color: #16a34a;
+}
+
+.overview-card-trend.negative {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+}
+
+/* Performance Metrics Dashboard */
+.performance-metrics-dashboard {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.metrics-dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid rgba(59, 130, 246, 0.1);
+}
+
+.metrics-dashboard-header h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+.dashboard-controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.dashboard-control-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  background: white;
+  color: #3b82f6;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dashboard-control-btn.active {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+  border-color: transparent;
+}
+
+.dashboard-control-btn:hover:not(.active) {
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.kpi-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.kpi-metric-card {
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 12px;
+  border: 1px solid rgba(59, 130, 246, 0.1);
+  transition: all 0.3s ease;
+}
+
+.kpi-metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.kpi-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.kpi-title {
+  font-size: 0.9rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.kpi-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.kpi-progress-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.kpi-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.kpi-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.kpi-target {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.kpi-trend {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}
+
+.kpi-trend.positive {
+  background: rgba(34, 197, 94, 0.1);
+  color: #16a34a;
+}
+
+.kpi-trend.negative {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+}
+
+/* Driver Performance Analysis */
+.driver-performance-analysis {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.driver-analysis-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid rgba(59, 130, 246, 0.1);
+}
+
+.driver-analysis-header h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+.performance-report-btn {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.85rem;
+}
+
+.performance-report-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.driver-performance-table {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.performance-table-header {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  gap: 1rem;
+  padding: 1rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 8px;
+  font-weight: 600;
+  color: #64748b;
+  font-size: 0.85rem;
+}
+
+.performance-table-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  gap: 1rem;
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.performance-table-row:hover {
+  background: rgba(59, 130, 246, 0.02);
+  border-color: rgba(59, 130, 246, 0.1);
+}
+
+.driver-info-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.driver-avatar {
+  font-size: 1.2rem;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+  border-radius: 8px;
+}
+
+.driver-name {
+  font-weight: 600;
+  color: #1e293b;
+  font-size: 0.9rem;
+}
+
+.rating-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.rating-stars {
+  color: #f59e0b;
+}
+
+.rating-value {
+  font-weight: 600;
+  color: #1e293b;
+  font-size: 0.9rem;
+}
+
+.deliveries-cell {
+  text-align: center;
+}
+
+.deliveries-count {
+  font-weight: 600;
+  color: #1e293b;
+  font-size: 0.9rem;
+}
+
+.ontime-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ontime-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.ontime-bar {
+  flex: 1;
+  height: 6px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.ontime-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+.ontime-percentage {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #1e293b;
+  min-width: 35px;
+}
+
+.actions-cell {
+  text-align: center;
+}
+
+.table-action-btn {
+  padding: 0.5rem 1rem;
+  background: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.table-action-btn:hover {
+  background: rgba(59, 130, 246, 0.15);
+}
+
+/* Vehicle Efficiency Analysis */
+.vehicle-efficiency-analysis {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.efficiency-analysis-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid rgba(59, 130, 246, 0.1);
+}
+
+.efficiency-analysis-header h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+.efficiency-report-btn {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.85rem;
+}
+
+.efficiency-report-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.vehicle-efficiency-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.efficiency-card {
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 12px;
+  border: 1px solid rgba(59, 130, 246, 0.1);
+  transition: all 0.3s ease;
+}
+
+.efficiency-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.efficiency-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.vehicle-id {
+  font-weight: 600;
+  color: #1e293b;
+  font-size: 1rem;
+}
+
+.efficiency-status {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.efficiency-status.good {
+  background: rgba(34, 197, 94, 0.1);
+  color: #16a34a;
+}
+
+.efficiency-status.fair {
+  background: rgba(245, 158, 11, 0.1);
+  color: #d97706;
+}
+
+.efficiency-status.excellent {
+  background: rgba(59, 130, 246, 0.1);
+  color: #1d4ed8;
+}
+
+.efficiency-metrics {
+  margin-bottom: 1rem;
+}
+
+.efficiency-metric {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.metric-label {
+  font-size: 0.85rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.efficiency-bar {
+  width: 80px;
+  height: 6px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 0 0.5rem;
+}
+
+.efficiency-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+.metric-value {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.efficiency-actions {
+  text-align: center;
+}
+
+.efficiency-action-btn {
+  padding: 0.75rem 1.5rem;
+  background: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.85rem;
+}
+
+.efficiency-action-btn:hover {
+  background: rgba(59, 130, 246, 0.15);
+  transform: translateY(-1px);
+}
+
+.stat-card.vehicles .stat-icon {
+  background: rgba(52, 152, 219, 0.1);
+  color: #3498db;
+}
+
+.stat-card.routes .stat-icon {
+  background: rgba(46, 204, 113, 0.1);
+  color: #2ecc71;
+}
+
+.stat-card.deliveries .stat-icon {
+  background: rgba(39, 174, 96, 0.1);
+  color: #27ae60;
+}
+
+.stat-card.pending .stat-icon {
+  background: rgba(243, 156, 18, 0.1);
+  color: #f39c12;
+}
+
+.stat-info h3 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+  color: #2c3e50;
+}
+
+.stat-info p {
+  margin: 0;
+  color: #7f8c8d;
+  font-weight: 500;
+}
+
+/* Overview Content */
+.overview-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.recent-activities, .distribution-map {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.recent-activities h3, .distribution-map h3 {
+  margin: 0 0 1rem 0;
+  color: #2c3e50;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.activity-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.activity-item:hover {
+  background: #e8f5e8;
+  border-left-color: #27ae60;
+}
+
+.activity-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.activity-icon.delivery {
+  background: rgba(52, 152, 219, 0.1);
+  color: #3498db;
+}
+
+.activity-icon.route {
+  background: rgba(46, 204, 113, 0.1);
+  color: #2ecc71;
+}
+
+.activity-icon.order {
+  background: rgba(230, 126, 34, 0.1);
+  color: #e67e22;
+}
+
+.activity-details p {
+  margin: 0 0 0.25rem 0;
+  color: #2c3e50;
+  font-size: 0.9rem;
+}
+
+.activity-time {
+  font-size: 0.8rem;
+  color: #7f8c8d;
+}
+
+/* Map Placeholder */
+.map-placeholder {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1rem;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.map-content {
+  text-align: center;
+  width: 100%;
+}
+
+.distribution-svg {
+  border-radius: 8px;
+  background: white;
+  margin-bottom: 1rem;
+}
+
+.distribution-point {
+  cursor: pointer;
+}
+
+.map-description {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Vehicles Grid */
+.vehicles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.vehicle-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-left: 4px solid transparent;
+  transition: transform 0.3s ease;
+}
+
+.vehicle-card:hover {
+  transform: translateY(-2px);
+}
+
+.vehicle-card.active {
+  border-left-color: #27ae60;
+}
+
+.vehicle-card.maintenance {
+  border-left-color: #e74c3c;
+}
+
+.vehicle-card.idle {
+  border-left-color: #f39c12;
+}
+
+.vehicle-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.vehicle-id {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.vehicle-status {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.vehicle-status.active {
+  background: rgba(39, 174, 96, 0.1);
+  color: #27ae60;
+}
+
+.vehicle-status.maintenance {
+  background: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+}
+
+.vehicle-status.idle {
+  background: rgba(243, 156, 18, 0.1);
+  color: #f39c12;
+}
+
+.vehicle-details p {
+  margin: 0.5rem 0;
+  color: #5d6d7e;
+  font-size: 0.9rem;
+}
+
+/* Routes List */
+.routes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.route-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-left: 4px solid transparent;
+}
+
+.route-card:nth-child(odd) {
+  border-left-color: #3498db;
+}
+
+.route-card:nth-child(even) {
+  border-left-color: #2ecc71;
+}
+
+.route-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.route-header h4 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1.1rem;
+}
+
+.route-status {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.route-status.active {
+  background: rgba(39, 174, 96, 0.1);
+  color: #27ae60;
+}
+
+.route-status.pending {
+  background: rgba(243, 156, 18, 0.1);
+  color: #f39c12;
+}
+
+.route-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.route-details p {
+  margin: 0.25rem 0;
+  color: #5d6d7e;
+  font-size: 0.9rem;
+}
+
+.route-progress {
+  margin-top: 1rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #ecf0f1;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #27ae60, #2ecc71);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  font-size: 0.8rem;
+  color: #7f8c8d;
+  font-weight: 500;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Large Tablets and Small Desktops */
+@media (max-width: 1200px) {
+  .logistics-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .performance-metrics-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .analytics-metrics-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .warehouse-stats-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .enhanced-vehicles-grid {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  }
+  
+  .enhanced-routes-grid {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  }
+}
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .logistics-page-container {
+    padding: 1rem;
+  }
+  
+  .header-content-section {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+  
+  .header-actions-area {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  
+  .quick-stat-item {
+    padding: 1rem 1.5rem;
+  }
+  
+  .logistics-navigation-tabs {
+    flex-wrap: wrap;
+  }
+  
+  .logistics-nav-tab {
+    flex: 1;
+    min-width: 200px;
+  }
+  
+  .logistics-main-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .logistics-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .performance-metrics-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .fleet-overview-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .analytics-overview-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .warehouse-cards-grid {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+  
+  .inventory-summary-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .performance-summary-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .optimization-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .management-tools-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .kpi-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .vehicle-efficiency-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}
+
+/* Mobile Landscape */
+@media (max-width: 768px) {
+  .logistics-page-container {
+    padding: 0.75rem;
+  }
+  
+  .logistics-main-title {
+    font-size: 2rem;
+  }
+  
+  .logistics-subtitle {
+    font-size: 1rem;
+  }
+  
+  .header-content-section {
+    padding: 1.5rem 2rem;
+  }
+  
+  .header-quick-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .logistics-navigation-tabs {
+    flex-direction: column;
+  }
+  
+  .logistics-nav-tab {
+    justify-content: flex-start;
+    padding: 1rem 1.5rem;
+  }
+  
+  .nav-tab-content {
+    align-items: flex-start;
+  }
+  
+  .content-wrapper {
+    padding: 1.5rem;
+  }
+  
+  .logistics-stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .performance-metrics-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .fleet-overview-stats {
+    grid-template-columns: 1fr;
+  }
+  
+  .vehicle-management-controls {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+  
+  .control-filters {
+    justify-content: center;
+  }
+  
+  .control-actions {
+    justify-content: center;
+  }
+  
+  .enhanced-vehicles-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .enhanced-routes-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .analytics-overview-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .warehouse-stats-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .warehouse-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .inventory-summary-cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .performance-summary-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .optimization-stats {
+    grid-template-columns: 1fr;
+  }
+  
+  .management-tools-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .vehicle-efficiency-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .performance-table-header,
+  .performance-table-row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  
+  .performance-table-header {
+    display: none;
+  }
+  
+  .performance-table-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .driver-info-cell,
+  .rating-cell,
+  .deliveries-cell,
+  .ontime-cell,
+  .actions-cell {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  }
+  
+  .driver-info-cell::before { content: "Driver:"; }
+  .rating-cell::before { content: "Rating:"; }
+  .deliveries-cell::before { content: "Deliveries:"; }
+  .ontime-cell::before { content: "On-Time:"; }
+  .actions-cell::before { content: "Actions:"; }
+  
+  .driver-info-cell::before,
+  .rating-cell::before,
+  .deliveries-cell::before,
+  .ontime-cell::before,
+  .actions-cell::before {
+    font-weight: 600;
+    color: #64748b;
+    font-size: 0.8rem;
+  }
+}
+
+/* Mobile Portrait */
+@media (max-width: 480px) {
+  .logistics-page-container {
+    padding: 0.5rem;
+  }
+  
+  .logistics-main-title {
+    font-size: 1.75rem;
+  }
+  
+  .logistics-subtitle {
+    font-size: 0.9rem;
+  }
+  
+  .header-content-section {
+    padding: 1rem 1.5rem;
+  }
+  
+  .header-actions-area {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .header-action-btn {
+    justify-content: center;
+  }
+  
+  .header-quick-stats {
+    grid-template-columns: 1fr;
+  }
+  
+  .quick-stat-item {
+    padding: 1rem;
+  }
+  
+  .logistics-nav-tab {
+    padding: 0.75rem 1rem;
+  }
+  
+  .nav-tab-icon {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .nav-tab-title {
+    font-size: 0.9rem;
+  }
+  
+  .nav-tab-subtitle {
+    font-size: 0.75rem;
+  }
+  
+  .content-wrapper {
+    padding: 1rem;
+  }
+  
+  .logistics-stat-card {
+    padding: 1.5rem;
+  }
+  
+  .stat-number {
+    font-size: 2rem;
+  }
+  
+  .performance-metric-item {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  
+  .enhanced-vehicle-card,
+  .enhanced-route-card,
+  .warehouse-card {
+    padding: 1.5rem;
+  }
+  
+  .vehicle-specifications {
+    grid-template-columns: 1fr;
+  }
+  
+  .vehicle-details-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .route-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .warehouse-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .progress-stops {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .stop {
+    width: 20px;
+    height: 20px;
+    font-size: 0.7rem;
+  }
+  
+  .vehicle-card-actions,
+  .route-card-actions,
+  .warehouse-card-actions {
+    flex-direction: column;
+  }
+  
+  .analytics-overview-card,
+  .analytics-metric-item,
+  .warehouse-stat-item,
+  .fleet-stat-item {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.75rem;
+  }
+  
+  .summary-metric-card,
+  .inventory-summary-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.75rem;
+  }
+  
+  .efficiency-card {
+    padding: 1rem;
+  }
+  
+  .efficiency-metric {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+  
+  .efficiency-bar {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+/* Extra Small Devices */
+@media (max-width: 360px) {
+  .logistics-main-title {
+    font-size: 1.5rem;
+  }
+  
+  .logistics-subtitle {
+    font-size: 0.85rem;
+  }
+  
+  .header-content-section {
+    padding: 0.75rem 1rem;
+  }
+  
+  .content-wrapper {
+    padding: 0.75rem;
+  }
+  
+  .logistics-stat-card {
+    padding: 1rem;
+  }
+  
+  .stat-number {
+    font-size: 1.75rem;
+  }
+  
+  .enhanced-vehicle-card,
+  .enhanced-route-card,
+  .warehouse-card {
+    padding: 1rem;
+  }
+  
+  .route-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .logistics-page-container {
+    background: white;
+    box-shadow: none;
+  }
+  
+  .header-actions-area,
+  .refresh-tracking-btn,
+  .alert-actions,
+  .vehicle-card-actions,
+  .route-card-actions,
+  .warehouse-card-actions,
+  .map-controls,
+  .control-actions,
+  .analytics-controls,
+  .dashboard-controls {
+    display: none;
+  }
+  
+  .logistics-navigation-container {
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+  
+  .logistics-content-container {
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+}
+
+/* Dark Mode Support (Optional) */
+@media (prefers-color-scheme: dark) {
+  .logistics-page-container {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    color: #f1f5f9;
+  }
+  
+  .logistics-page-header,
+  .logistics-navigation-container,
+  .logistics-content-container,
+  .logistics-content-section,
+  .enhanced-vehicle-card,
+  .enhanced-route-card,
+  .warehouse-card {
+    background: #334155;
+    border-color: rgba(148, 163, 184, 0.2);
+  }
+  
+  .logistics-main-title,
+  .nav-tab-title,
+  .stat-number,
+  .driver-name,
+  .vehicle-id,
+  .route-title,
+  .warehouse-name {
+    color: #f1f5f9;
+  }
+  
+  .logistics-subtitle,
+  .nav-tab-subtitle,
+  .stat-label,
+  .detail-label,
+  .metric-label {
+    color: #cbd5e1;
+  }
+}

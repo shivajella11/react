@@ -1,0 +1,14 @@
+LOGO INSTRUCTIONS
+=================
+
+Please add your logo.png file to this directory.
+
+Requirements:
+- File name: logo.png
+- Recommended size: 40px height (width will auto-adjust)
+- Format: PNG with transparent background preferred
+- Should be a simple, clean logo that works well in both light and dark themes
+
+The logo will be displayed in the top-left corner of the navigation bar, replacing the "MilkReact" text.
+
+Current path expected by the application: /images/logo.png

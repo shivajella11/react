@@ -1,0 +1,11 @@
+export { default as Dashboard } from './Dashboard/Dashboard';
+export { default as CattleManagement } from './CattleManagement/CattleManagement';
+export { default as MilkCollection } from './MilkCollection/MilkCollection';
+export { default as CRM } from './CRM/CRM';
+export { default as MarketAnalysis } from './MarketAnalysis/MarketAnalysis';
+export { default as Plants } from './Plants/Plants';
+export { default as DistributionLogistics } from './DistributionLogistics/DistributionLogistics';
+export { default as Reports } from './Reports/Reports';
+export { default as Farmers } from './Farmers';
+export { default as QualityControl } from './QualityControl';
+export { default as Settings } from './Settings/Settings';

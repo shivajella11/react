@@ -1,0 +1,275 @@
+/* Customer Stats Component Styles */
+.customer-stats {
+  margin-bottom: 1rem;
+}
+
+.customer-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.stat-card {
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  transition: var(--transition);
+  border-left: 3px solid transparent;
+  position: relative;
+  overflow: hidden;
+  min-height: 80px;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+  border-radius: 50%;
+  transform: translate(20px, -20px);
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.stat-card.primary {
+  border-left-color: var(--primary-color);
+}
+
+.stat-card.primary .stat-icon {
+  color: var(--primary-color);
+  background: rgba(67, 97, 238, 0.1);
+}
+
+.stat-card.success {
+  border-left-color: var(--success-color);
+}
+
+.stat-card.success .stat-icon {
+  color: var(--success-color);
+  background: rgba(76, 201, 240, 0.1);
+}
+
+.stat-card.revenue {
+  border-left-color: #28a745;
+}
+
+.stat-card.revenue .stat-icon {
+  color: #28a745;
+  background: rgba(40, 167, 69, 0.1);
+}
+
+.stat-card.rating {
+  border-left-color: var(--warning-color);
+}
+
+.stat-card.rating .stat-icon {
+  color: var(--warning-color);
+  background: rgba(248, 150, 30, 0.1);
+}
+
+.stat-card.activity {
+  border-left-color: #17a2b8;
+}
+
+.stat-card.activity .stat-icon {
+  color: #17a2b8;
+  background: rgba(23, 162, 184, 0.1);
+}
+
+.stat-card.warning {
+  border-left-color: var(--danger-color);
+}
+
+.stat-card.warning .stat-icon {
+  color: var(--danger-color);
+  background: rgba(249, 65, 68, 0.1);
+}
+
+.stat-icon {
+  font-size: 1.5rem;
+  padding: 0.6rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.stat-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.stat-main {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.3rem;
+}
+
+.stat-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--dark-text);
+  line-height: 1.2;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--light-text);
+  font-weight: 500;
+  flex: 1;
+}
+
+.stat-breakdown {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+}
+
+.stat-breakdown span {
+  padding: 0.2rem 0.5rem;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+.active-count {
+  background: rgba(40, 167, 69, 0.1);
+  color: #28a745;
+}
+
+.premium-count {
+  background: rgba(156, 39, 176, 0.1);
+  color: var(--premium-color);
+}
+
+.inactive-count {
+  background: rgba(249, 65, 68, 0.1);
+  color: var(--danger-color);
+}
+
+/* Responsive Design */
+@media (max-width: 1400px) {
+  .customer-stats-grid {
+    gap: 0.6rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  .customer-stats-grid {
+    gap: 0.6rem;
+  }
+  
+  .stat-card {
+    min-height: 70px;
+    padding: 0.6rem;
+  }
+  
+  .stat-icon {
+    font-size: 1.3rem;
+    padding: 0.5rem;
+  }
+  
+  .stat-value {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .customer-stats-grid {
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .customer-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, auto);
+    gap: 0.5rem;
+  }
+  
+  .stat-card {
+    padding: 0.6rem;
+    min-height: 65px;
+  }
+  
+  .stat-icon {
+    font-size: 1.2rem;
+    padding: 0.4rem;
+  }
+  
+  .stat-value {
+    font-size: 1.1rem;
+  }
+  
+  .stat-label {
+    font-size: 0.75rem;
+  }
+  
+  .stat-breakdown {
+    gap: 0.3rem;
+  }
+  
+  .stat-breakdown span {
+    padding: 0.15rem 0.4rem;
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .customer-stats-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(6, auto);
+    gap: 0.4rem;
+  }
+  
+  .stat-card {
+    flex-direction: row;
+    text-align: left;
+    padding: 0.5rem;
+    min-height: 60px;
+  }
+  
+  .stat-icon {
+    font-size: 1rem;
+    padding: 0.3rem;
+  }
+  
+  .stat-value {
+    font-size: 1rem;
+  }
+  
+  .stat-label {
+    font-size: 0.7rem;
+  }
+  
+  .stat-main {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2rem;
+  }
+  
+  .stat-breakdown {
+    justify-content: flex-start;
+    gap: 0.25rem;
+  }
+  
+  .stat-breakdown span {
+    padding: 0.1rem 0.3rem;
+    font-size: 0.65rem;
+  }
+}

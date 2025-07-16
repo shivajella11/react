@@ -1,0 +1,200 @@
+/* Customer Filters Component Styles */
+.customer-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-top: 1px solid #e0e0e0;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 0.6rem 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #dee2e6;
+  transition: var(--transition);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.filter-group:hover {
+  border-color: var(--primary-color);
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+.filter-group:focus-within {
+  border-color: var(--primary-color);
+  background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+  box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2), 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.filter-icon {
+  color: var(--primary-color);
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.filter-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #495057;
+  white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.filter-group select {
+  border: none;
+  background: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  color: #212529;
+  cursor: pointer;
+  outline: none;
+  min-width: 120px;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.filter-group select:focus {
+  outline: none;
+}
+
+.filter-group select option {
+  background: white;
+  color: var(--dark-text);
+  padding: 0.5rem;
+}
+
+/* Filter Reset Button */
+.filter-reset {
+  background: var(--light-text);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filter-reset:hover {
+  background: var(--dark-text);
+}
+
+/* Active Filter Indicator */
+.filter-group.active {
+  background: linear-gradient(135deg, #e3f2fd 0%, #90caf9 100%);
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
+}
+
+.filter-group.active .filter-icon {
+  color: var(--primary-color);
+}
+
+.filter-group.active label {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+/* Filter Summary */
+.filter-summary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+  font-size: 0.9rem;
+  color: var(--light-text);
+}
+
+.filter-count {
+  background: var(--primary-color);
+  color: white;
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+/* Specific Filter Type Styling */
+.filter-group[data-filter="status"] {
+  background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+  border-color: #ff9800;
+}
+
+.filter-group[data-filter="status"]:hover {
+  background: linear-gradient(135deg, #fff8e1 0%, #ffcc02 100%);
+}
+
+.filter-group[data-filter="type"] {
+  background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+  border-color: #9c27b0;
+}
+
+.filter-group[data-filter="type"]:hover {
+  background: linear-gradient(135deg, #f8bbd9 0%, #e91e63 100%);
+}
+
+.filter-group[data-filter="location"] {
+  background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+  border-color: #4caf50;
+}
+
+.filter-group[data-filter="location"]:hover {
+  background: linear-gradient(135deg, #a5d6a7 0%, #66bb6a 100%);
+}
+
+.filter-group[data-filter="sort"] {
+  background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
+  border-color: #e91e63;
+}
+
+.filter-group[data-filter="sort"]:hover {
+  background: linear-gradient(135deg, #f48fb1 0%, #ec407a 100%);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .customer-filters {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+  
+  .filter-group {
+    justify-content: space-between;
+  }
+  
+  .filter-group select {
+    min-width: auto;
+    flex: 1;
+    text-align: right;
+  }
+  
+  .filter-summary {
+    margin-left: 0;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .filter-group {
+    padding: 0.75rem;
+  }
+  
+  .filter-group label {
+    font-size: 0.85rem;
+  }
+  
+  .filter-group select {
+    font-size: 0.85rem;
+  }
+}

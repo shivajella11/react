@@ -1,0 +1,276 @@
+/* Circular Menu Overlay */
+.circular-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 998;
+  opacity: 0;
+  animation: circularMenuFadeIn 0.3s ease-out forwards;
+}
+
+/* Circular Menu Container */
+.circular-menu-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  height: 400px;
+  transform: translate(-50%, -50%) scale(0);
+  z-index: 999;
+  pointer-events: none;
+  transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.circular-menu-container.circular-menu-open {
+  transform: translate(-50%, -50%) scale(1);
+  pointer-events: all;
+}
+
+/* Center Close Button */
+.circular-menu-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1001;
+}
+
+.circular-menu-close-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+  transition: all 0.3s ease;
+  animation: circularMenuCenterPulse 0.6s ease-out;
+}
+
+.circular-menu-close-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+}
+
+.circular-menu-close-btn:active {
+  transform: scale(0.95);
+}
+
+/* Menu Items */
+.circular-menu-item {
+  position: absolute;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+  animation: circularMenuItemAppear 0.5s ease-out forwards;
+}
+
+.circular-menu-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  background: white;
+  border-radius: 50%;
+  text-decoration: none;
+  color: #4a5568;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 3px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.circular-menu-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 50%;
+}
+
+.circular-menu-link:hover::before,
+.circular-menu-link.circular-menu-active::before {
+  opacity: 1;
+}
+
+.circular-menu-link:hover {
+  transform: scale(1.15);
+  box-shadow: 0 8px 30px rgba(102, 126, 234, 0.3);
+  color: white;
+}
+
+.circular-menu-link.circular-menu-active {
+  color: white;
+  border-color: #667eea;
+}
+
+.circular-menu-icon {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 4px;
+  transition: transform 0.3s ease;
+}
+
+.circular-menu-link:hover .circular-menu-icon {
+  transform: scale(1.1);
+}
+
+.circular-menu-label {
+  position: relative;
+  z-index: 2;
+  font-size: 10px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1;
+  max-width: 70px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Dark Mode Support */
+.dark-mode .circular-menu-link {
+  background: #2d3748;
+  color: #e2e8f0;
+}
+
+.dark-mode .circular-menu-link:hover {
+  color: white;
+}
+
+.dark-mode .circular-menu-overlay {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+/* Animations */
+@keyframes circularMenuFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes circularMenuCenterPulse {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes circularMenuItemAppear {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0) rotate(-180deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .circular-menu-container {
+    width: 320px;
+    height: 320px;
+  }
+  
+  .circular-menu-link {
+    width: 65px;
+    height: 65px;
+  }
+  
+  .circular-menu-label {
+    font-size: 9px;
+    max-width: 55px;
+  }
+  
+  .circular-menu-close-btn {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .circular-menu-container {
+    width: 280px;
+    height: 280px;
+  }
+  
+  .circular-menu-link {
+    width: 55px;
+    height: 55px;
+  }
+  
+  .circular-menu-label {
+    font-size: 8px;
+    max-width: 45px;
+  }
+  
+  .circular-menu-close-btn {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .circular-menu-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .circular-menu-link {
+    border: 2px solid #000;
+  }
+  
+  .circular-menu-close-btn {
+    border: 2px solid #fff;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .circular-menu-container {
+    transition: none;
+  }
+  
+  .circular-menu-item {
+    animation: none;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  
+  .circular-menu-close-btn {
+    animation: none;
+  }
+  
+  .circular-menu-overlay {
+    animation: none;
+    opacity: 1;
+  }
+}

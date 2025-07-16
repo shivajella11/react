@@ -1,0 +1,1241 @@
+/* Cattle Management Page Styles */
+.cattle-management-page {
+  padding: 20px;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+/* Header Styles - Reduced size */
+.page-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 20px 25px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.header-left h1 {
+  font-size: 2rem;
+  margin: 0 0 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-left p {
+  font-size: 1rem;
+  opacity: 0.9;
+  margin: 0;
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Button Styles */
+.btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #545b62;
+}
+
+.btn-warning {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.btn-warning:hover {
+  background-color: #e0a800;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+.btn-info {
+  background-color: #17a2b8;
+  color: white;
+}
+
+.btn-info:hover {
+  background-color: #138496;
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: #007bff;
+  border: 2px solid #007bff;
+}
+
+.btn-outline:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 12px;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Statistics Grid */
+.statistics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.stat-card {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: all 0.3s ease;
+  border-left: 5px solid;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.stat-card.total {
+  border-left-color: #007bff;
+}
+
+.stat-card.healthy {
+  border-left-color: #28a745;
+}
+
+.stat-card.sick {
+  border-left-color: #dc3545;
+}
+
+.stat-card.pregnant {
+  border-left-color: #ffc107;
+}
+
+.stat-card.production {
+  border-left-color: #17a2b8;
+}
+
+.stat-card.alerts {
+  border-left-color: #fd7e14;
+}
+
+.stat-icon {
+  font-size: 2.5rem;
+  color: #6c757d;
+  opacity: 0.8;
+}
+
+.stat-content h3 {
+  font-size: 2rem;
+  margin: 0;
+  color: #2c3e50;
+  font-weight: 700;
+}
+
+.stat-content p {
+  margin: 5px 0 0 0;
+  color: #6c757d;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Alerts Section */
+.alerts-section {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  margin-bottom: 30px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.alerts-section h3 {
+  margin: 0 0 20px 0;
+  color: #2c3e50;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.alerts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.alert {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  border-radius: 10px;
+  border-left: 5px solid;
+  background-color: #f8f9fa;
+}
+
+.alert-high {
+  border-left-color: #dc3545;
+  background-color: #fff5f5;
+}
+
+.alert-medium {
+  border-left-color: #ffc107;
+  background-color: #fffbf0;
+}
+
+.alert-low {
+  border-left-color: #17a2b8;
+  background-color: #f0f9ff;
+}
+
+.alert-icon {
+  font-size: 1.5rem;
+  color: #6c757d;
+}
+
+.alert-content {
+  flex: 1;
+}
+
+.alert-content h4 {
+  margin: 0 0 5px 0;
+  color: #2c3e50;
+  font-size: 1.1rem;
+}
+
+.alert-content p {
+  margin: 0 0 5px 0;
+  color: #495057;
+}
+
+.alert-date {
+  font-size: 0.8rem;
+  color: #6c757d;
+}
+
+.alert-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Tabs */
+.tabs-container {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+
+.tabs {
+  display: flex;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.tab {
+  flex: 1;
+  padding: 15px 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6c757d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  border-bottom: 3px solid transparent;
+}
+
+.tab:hover {
+  background-color: #e9ecef;
+  color: #495057;
+}
+
+.tab.active {
+  background-color: white;
+  color: #007bff;
+  border-bottom-color: #007bff;
+}
+
+/* Tab Content */
+.tab-content {
+  background: white;
+  padding: 30px;
+  border-radius: 0 0 15px 15px;
+}
+
+/* Controls Section */
+.controls-section {
+  margin-bottom: 25px;
+}
+
+.search-controls {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.search-box {
+  position: relative;
+  flex: 1;
+  min-width: 300px;
+}
+
+.search-box svg {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6c757d;
+  font-size: 16px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 12px 15px 12px 45px;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.filter-controls {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.filter-controls select {
+  padding: 10px 15px;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  font-size: 14px;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-controls select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+/* Table Styles */
+.table-container {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  margin-bottom: 25px;
+  overflow-x: auto;
+}
+
+.cattle-table, .table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  table-layout: fixed;
+  min-width: 1200px;
+}
+
+.cattle-table th, .table th {
+  background-color: #f8f9fa;
+  padding: 15px 12px;
+  text-align: center;
+  font-weight: 600;
+  color: #495057;
+  border-bottom: 2px solid #dee2e6;
+  border-right: 1px solid #e9ecef;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.3s ease;
+  vertical-align: middle;
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  line-height: 1.4;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.cattle-table th:last-child, .table th:last-child {
+  border-right: none;
+}
+
+.cattle-table th:hover, .table th:hover {
+  background-color: #e9ecef;
+}
+
+.cattle-table td, .table td {
+  padding: 15px 12px;
+  border-bottom: 1px solid #f1f3f4;
+  vertical-align: middle;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cattle-table tr:hover, .table tr:hover {
+  background-color: #f8f9fa;
+}
+
+/* Specific column widths for better alignment */
+.cattle-table th:nth-child(1), .cattle-table td:nth-child(1) { 
+  width: 8%; 
+  text-align: center;
+} /* ID */
+
+.cattle-table th:nth-child(2), .cattle-table td:nth-child(2) { 
+  width: 12%; 
+  text-align: left; 
+} /* Name */
+
+.cattle-table th:nth-child(3), .cattle-table td:nth-child(3) { 
+  width: 12%; 
+  text-align: center;
+} /* Breed */
+
+.cattle-table th:nth-child(4), .cattle-table td:nth-child(4) { 
+  width: 6%; 
+  text-align: center;
+} /* Age */
+
+.cattle-table th:nth-child(5), .cattle-table td:nth-child(5) { 
+  width: 8%; 
+  text-align: center;
+} /* Weight */
+
+.cattle-table th:nth-child(6), .cattle-table td:nth-child(6) { 
+  width: 8%; 
+  text-align: center;
+} /* Gender */
+
+.cattle-table th:nth-child(7), .cattle-table td:nth-child(7) { 
+  width: 10%; 
+  text-align: center;
+} /* Status */
+
+.cattle-table th:nth-child(8), .cattle-table td:nth-child(8) { 
+  width: 10%; 
+  text-align: center;
+} /* Location */
+
+.cattle-table th:nth-child(9), .cattle-table td:nth-child(9) { 
+  width: 12%; 
+  text-align: center;
+} /* Farmer */
+
+.cattle-table th:nth-child(10), .cattle-table td:nth-child(10) { 
+  width: 10%; 
+  text-align: center;
+} /* Milk Production */
+
+.cattle-table th:nth-child(11), .cattle-table td:nth-child(11) { 
+  width: 120px; 
+  min-width: 120px;
+  text-align: center;
+  vertical-align: middle;
+  padding: 8px 4px;
+} /* Actions */
+
+/* Actions column styling - Perfect alignment for View and Edit buttons */
+.actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  padding: 10px 8px;
+  height: 100%;
+  min-height: 50px;
+}
+
+.actions .btn {
+  min-width: 36px;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  line-height: 1;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+.actions .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  scale: 1.05;
+}
+
+.actions .btn:active {
+  transform: translateY(0);
+  scale: 0.98;
+}
+
+.actions .btn-info {
+  background-color: #17a2b8;
+  color: white;
+}
+
+.actions .btn-info:hover {
+  background-color: #138496;
+}
+
+.actions .btn-warning {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.actions .btn-warning:hover {
+  background-color: #e0a800;
+}
+
+.actions .btn-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+.actions .btn-danger:hover {
+  background-color: #c82333;
+}
+
+.actions .btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.actions .btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.actions .btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.actions .btn-secondary:hover {
+  background-color: #545b62;
+}
+
+/* Responsive table adjustments */
+@media (max-width: 1200px) {
+  .table-container {
+    overflow-x: auto;
+  }
+  
+  .cattle-table {
+    min-width: 1000px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cattle-table {
+    min-width: 800px;
+    font-size: 12px;
+  }
+  
+  .cattle-table th, .cattle-table td {
+    padding: 10px 8px;
+  }
+}
+
+.cattle-id {
+  font-weight: 600;
+  color: #007bff;
+  text-align: center;
+}
+
+.name-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.cattle-icon {
+  color: #6c757d;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: capitalize;
+  white-space: nowrap;
+  min-width: 80px;
+}
+
+.performance-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.performance-badge.excellent {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.performance-badge.good {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.performance-badge.average {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.status-badge.completed {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status-badge.pregnant {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status-badge.not-pregnant {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.milk-production {
+  font-weight: 600;
+  color: #17a2b8;
+  text-align: center;
+}
+
+.production-value {
+  font-weight: 600;
+  color: #28a745;
+  text-align: center;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 25px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.pagination-info {
+  color: #6c757d;
+  font-size: 14px;
+}
+
+.pagination-controls {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+/* Health Tab Styles */
+.health-overview, .breeding-overview, .production-overview, .reports-overview {
+  margin-bottom: 30px;
+}
+
+.health-overview h3, .breeding-overview h3, .production-overview h3, .reports-overview h3 {
+  margin: 0 0 20px 0;
+  color: #2c3e50;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.health-stats, .breeding-stats, .production-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.health-stat, .breeding-stat, .production-stat {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+  border-left: 4px solid #007bff;
+}
+
+.health-stat h4, .breeding-stat h4, .production-stat h4 {
+  margin: 0 0 10px 0;
+  color: #2c3e50;
+  font-size: 1.1rem;
+}
+
+.health-stat p, .breeding-stat p, .production-stat p {
+  margin: 0;
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+.health-records-table, .breeding-records, .production-records {
+  margin-top: 30px;
+}
+
+.health-records-table h4, .breeding-records h4, .production-records h4 {
+  margin: 0 0 20px 0;
+  color: #2c3e50;
+}
+
+/* Reports Tab */
+.report-actions {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.quick-reports {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.report-card {
+  background: #f8f9fa;
+  padding: 25px;
+  border-radius: 10px;
+  text-align: center;
+  border: 2px solid #e9ecef;
+  transition: all 0.3s ease;
+}
+
+.report-card:hover {
+  border-color: #007bff;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.report-card h4 {
+  margin: 0 0 10px 0;
+  color: #2c3e50;
+}
+
+.report-card p {
+  margin: 0 0 20px 0;
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal.large {
+  max-width: 1200px;
+}
+
+.modal-header {
+  padding: 25px 30px;
+  border-bottom: 1px solid #dee2e6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f8f9fa;
+  border-radius: 15px 15px 0 0;
+}
+
+.modal-header h3 {
+  margin: 0;
+  color: #2c3e50;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #6c757d;
+  padding: 5px;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+  background-color: #e9ecef;
+  color: #495057;
+}
+
+.modal-body {
+  padding: 30px;
+}
+
+.modal-footer {
+  padding: 20px 30px;
+  border-top: 1px solid #dee2e6;
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  background-color: #f8f9fa;
+  border-radius: 0 0 15px 15px;
+}
+
+/* Form Styles */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-group label {
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #495057;
+  font-size: 14px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 12px 15px;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.form-group input:disabled {
+  background-color: #f8f9fa;
+  cursor: not-allowed;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Details Modal */
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.details-section {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+  border-left: 4px solid #007bff;
+}
+
+.details-section.full-width {
+  grid-column: 1 / -1;
+}
+
+.details-section h4 {
+  margin: 0 0 20px 0;
+  color: #2c3e50;
+  font-size: 1.2rem;
+}
+
+.details-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.details-row:last-child {
+  border-bottom: none;
+}
+
+.details-row .label {
+  font-weight: 500;
+  color: #6c757d;
+  flex: 0 0 40%;
+}
+
+.details-row .value {
+  color: #2c3e50;
+  flex: 1;
+  text-align: right;
+}
+
+.details-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.details-table th,
+.details-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.details-table th {
+  background-color: #e9ecef;
+  font-weight: 600;
+  color: #495057;
+}
+
+.notes-text {
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+  color: #495057;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .cattle-management-page {
+    padding: 15px;
+  }
+
+  .header-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .header-left h1 {
+    font-size: 2rem;
+  }
+
+  .statistics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tabs {
+    flex-direction: column;
+  }
+
+  .tab {
+    border-bottom: 1px solid #dee2e6;
+    border-right: none;
+  }
+
+  .tab.active {
+    border-bottom-color: #007bff;
+    border-right: none;
+  }
+
+  .search-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-box {
+    min-width: auto;
+  }
+
+  .filter-controls {
+    justify-content: center;
+  }
+
+  .table-container {
+    overflow-x: auto;
+  }
+
+  .cattle-table,
+  .table {
+    min-width: 800px;
+  }
+
+  .pagination {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal {
+    margin: 10px;
+    max-height: calc(100vh - 20px);
+  }
+
+  .modal-header,
+  .modal-body,
+  .modal-footer {
+    padding: 20px;
+  }
+
+  .health-stats,
+  .breeding-stats,
+  .production-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .quick-reports {
+    grid-template-columns: 1fr;
+  }
+
+  .report-actions {
+    flex-direction: column;
+  }
+
+  .alert {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .alert-actions {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn {
+    justify-content: center;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .pagination-controls {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+/* Animation Classes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Loading States */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+  color: #6c757d;
+}
+
+.loading::after {
+  content: '';
+  width: 20px;
+  height: 20px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #007bff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-left: 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Print Styles */
+@media print {
+  .header-actions,
+  .controls-section,
+  .pagination,
+  .actions,
+  .modal-overlay {
+    display: none !important;
+  }
+
+  .cattle-management-page {
+    padding: 0;
+    background: white;
+  }
+
+  .page-header {
+    background: white !important;
+    color: black !important;
+    box-shadow: none;
+    border-bottom: 2px solid #000;
+  }
+
+  .stat-card {
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+
+  .table-container {
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+
+  .cattle-table th,
+  .table th {
+    background-color: #f0f0f0 !important;
+    -webkit-print-color-adjust: exact;
+  }
+}
