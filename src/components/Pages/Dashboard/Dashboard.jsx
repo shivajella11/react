@@ -171,6 +171,9 @@ function Dashboard() {
   const [analyticsView, setAnalyticsView] = useState('forecast');
   const [selectedTimeframe, setSelectedTimeframe] = useState('week');
 
+  // B2B Operations toggle state
+  const [b2bOperationsVisible, setB2bOperationsVisible] = useState(false);
+  
   // Chart data for different periods
   const chartData = {
     weekly: {
@@ -190,19 +193,131 @@ function Dashboard() {
     }
   };
 
-  // Pie chart data for market distribution
-  const pieChartData = [
-    { label: 'Retail Sales', value: 35, color: '#3498db' },
-    { label: 'B2B Wholesale', value: 28, color: '#2ecc71' },
-    { label: 'Direct Supply', value: 20, color: '#f39c12' },
-    { label: 'Online Orders', value: 17, color: '#e74c3c' }
-  ];
+  // Dynamic pie chart data for sales distribution based on period
+  const pieChartData = {
+    weekly: [
+      { label: 'Retail Sales', value: 35, color: '#3498db', amount: '₹43,750' },
+      { label: 'B2B Wholesale', value: 28, color: '#2ecc71', amount: '₹35,000' },
+      { label: 'Direct Supply', value: 20, color: '#f39c12', amount: '₹25,000' },
+      { label: 'Online Orders', value: 17, color: '#e74c3c', amount: '₹21,250' }
+    ],
+    monthly: [
+      { label: 'Retail Sales', value: 32, color: '#3498db', amount: '₹1,60,000' },
+      { label: 'B2B Wholesale', value: 31, color: '#2ecc71', amount: '₹1,55,000' },
+      { label: 'Direct Supply', value: 22, color: '#f39c12', amount: '₹1,10,000' },
+      { label: 'Online Orders', value: 15, color: '#e74c3c', amount: '₹75,000' }
+    ],
+    yearly: [
+      { label: 'B2B Wholesale', value: 38, color: '#2ecc71', amount: '₹22,80,000' },
+      { label: 'Retail Sales', value: 29, color: '#3498db', amount: '₹17,40,000' },
+      { label: 'Direct Supply', value: 18, color: '#f39c12', amount: '₹10,80,000' },
+      { label: 'Online Orders', value: 15, color: '#e74c3c', amount: '₹9,00,000' }
+    ]
+  };
 
   // B2B Operations state
   const [b2bView, setB2bView] = useState('clients');
   
-  // B2B Clients data
-  const b2bClients = [
+  // Form states for Add New Client and Add New Vendor
+  const [showClientForm, setShowClientForm] = useState(false);
+  const [showVendorForm, setShowVendorForm] = useState(false);
+  
+  // Form validation states
+  const [clientFormErrors, setClientFormErrors] = useState({});
+  const [vendorFormErrors, setVendorFormErrors] = useState({});
+  const [isClientFormSubmitting, setIsClientFormSubmitting] = useState(false);
+  const [isVendorFormSubmitting, setIsVendorFormSubmitting] = useState(false);
+  
+  // Client form data
+  const [clientFormData, setClientFormData] = useState({
+    name: '',
+    type: '',
+    volume: '',
+    contact: '',
+    email: '',
+    contractValue: '',
+    address: '',
+    businessType: '',
+    paymentTerms: '',
+    deliverySchedule: ''
+  });
+  
+  // Vendor form data
+  const [vendorFormData, setVendorFormData] = useState({
+    name: '',
+    type: '',
+    volume: '',
+    contact: '',
+    email: '',
+    contractValue: '',
+    address: '',
+    farmSize: '',
+    cattleCount: '',
+    qualityGrade: '',
+    pricePerLiter: '',
+    certifications: '',
+    geographicRegion: '',
+    paymentTerms: '',
+    collectionSchedule: ''
+  });
+
+  // Client Operations Form States
+  const [showViewOrdersForm, setShowViewOrdersForm] = useState(false);
+  const [showContactForm, setShowContactForm] = useState(false);
+  const [showInvoiceForm, setShowInvoiceForm] = useState(false);
+  const [selectedClient, setSelectedClient] = useState(null);
+
+  // View Orders Form Data
+  const [viewOrdersData, setViewOrdersData] = useState({
+    orderId: '',
+    orderDate: '',
+    deliveryDate: '',
+    quantity: '',
+    status: '',
+    priority: '',
+    specialInstructions: '',
+    deliveryAddress: '',
+    contactPerson: '',
+    orderValue: ''
+  });
+
+  // Contact Form Data
+  const [contactFormData, setContactFormData] = useState({
+    subject: '',
+    message: '',
+    priority: '',
+    contactMethod: '',
+    followUpDate: '',
+    category: '',
+    attachments: ''
+  });
+
+  // Invoice Form Data
+  const [invoiceFormData, setInvoiceFormData] = useState({
+    invoiceNumber: '',
+    invoiceDate: '',
+    dueDate: '',
+    amount: '',
+    taxAmount: '',
+    totalAmount: '',
+    paymentTerms: '',
+    description: '',
+    quantity: '',
+    unitPrice: '',
+    discount: '',
+    notes: ''
+  });
+
+  // Form validation states for client operations
+  const [viewOrdersFormErrors, setViewOrdersFormErrors] = useState({});
+  const [contactFormErrors, setContactFormErrors] = useState({});
+  const [invoiceFormErrors, setInvoiceFormErrors] = useState({});
+  const [isViewOrdersFormSubmitting, setIsViewOrdersFormSubmitting] = useState(false);
+  const [isContactFormSubmitting, setIsContactFormSubmitting] = useState(false);
+  const [isInvoiceFormSubmitting, setIsInvoiceFormSubmitting] = useState(false);
+  
+  // B2B Clients data - now using state to allow dynamic additions
+  const [b2bClients, setB2bClients] = useState([
     { 
       id: 'CL001',
       name: 'Metro Supermarkets',
@@ -299,10 +414,10 @@ function Dashboard() {
       contact: '+91 98765 43215',
       email: 'supply@dairyqueen.com'
     }
-  ];
+  ]);
 
-  // Enhanced B2B Vendors/Suppliers data with comprehensive details
-  const b2bVendors = [
+  // Enhanced B2B Vendors/Suppliers data with comprehensive details - now using state
+  const [b2bVendors, setB2bVendors] = useState([
     {
       id: 'VN001',
       name: 'Green Valley Dairy Farm',
@@ -608,7 +723,7 @@ function Dashboard() {
         { period: '2023-2024', performance: 'Below average', renewal: 'At risk' }
       ]
     }
-  ];
+  ]);
 
   // Enhanced B2B Analytics and KPIs
   const b2bAnalytics = {
@@ -754,6 +869,27 @@ function Dashboard() {
     ]
   };
 
+  // Auto-remove newly added styling after 30 seconds
+  useEffect(() => {
+    const removeNewStyling = () => {
+      setB2bClients(prev => prev.map(client => 
+        client.isNewlyAdded && Date.now() - new Date(client.dateAdded).getTime() > 30000
+          ? { ...client, isNewlyAdded: false }
+          : client
+      ));
+      
+      setB2bVendors(prev => prev.map(vendor => 
+        vendor.isNewlyAdded && Date.now() - new Date(vendor.dateAdded).getTime() > 30000
+          ? { ...vendor, isNewlyAdded: false }
+          : vendor
+      ));
+    };
+
+    const stylingInterval = setInterval(removeNewStyling, 5000); // Check every 5 seconds
+    
+    return () => clearInterval(stylingInterval);
+  }, []);
+
   // Real-time data refresh effect
   useEffect(() => {
     const refreshInterval = setInterval(() => {
@@ -850,58 +986,72 @@ function Dashboard() {
   // Button action handlers
   const handleViewOrders = (entity) => {
     console.log(`Viewing orders for ${entity.name}`);
-    // Add navigation to orders page or open modal
-    const notification = {
-      id: Date.now(),
-      type: 'info',
-      message: `Opening orders for ${entity.name}...`,
-      timestamp: new Date()
-    };
-    setNotifications(prev => [notification, ...prev.slice(0, 4)]);
+    setSelectedClient(entity);
     
-    // Auto remove notification after 3 seconds
-    setTimeout(() => {
-      setNotifications(prev => prev.filter(n => n.id !== notification.id));
-    }, 3000);
+    // Pre-populate form with client data
+    setViewOrdersData({
+      orderId: `ORD-${entity.id}-${Date.now().toString().slice(-6)}`,
+      orderDate: new Date().toISOString().split('T')[0],
+      deliveryDate: '',
+      quantity: entity.volume || '',
+      status: 'pending',
+      priority: 'medium',
+      specialInstructions: '',
+      deliveryAddress: entity.address || '',
+      contactPerson: entity.name,
+      orderValue: entity.contractValue || ''
+    });
+    
+    setShowViewOrdersForm(true);
   };
 
   const handleContact = (entity) => {
     console.log(`Contacting ${entity.name} at ${entity.contact}`);
-    // Open contact modal or initiate call
-    const notification = {
-      id: Date.now(),
-      type: 'info',
-      message: `Initiating contact with ${entity.name}...`,
-      timestamp: new Date()
-    };
-    setNotifications(prev => [notification, ...prev.slice(0, 4)]);
+    setSelectedClient(entity);
     
-    // Auto remove notification after 3 seconds
-    setTimeout(() => {
-      setNotifications(prev => prev.filter(n => n.id !== notification.id));
-    }, 3000);
+    // Pre-populate form with client data
+    setContactFormData({
+      subject: `Contact regarding ${entity.name}`,
+      message: '',
+      priority: 'medium',
+      contactMethod: 'email',
+      followUpDate: '',
+      category: 'general',
+      attachments: ''
+    });
+    
+    setShowContactForm(true);
   };
 
   const handleInvoice = (entity) => {
     console.log(`Generating invoice for ${entity.name}`);
-    // Generate or view invoice
-    const notification = {
-      id: Date.now(),
-      type: 'success',
-      message: `Invoice generated for ${entity.name}`,
-      timestamp: new Date()
-    };
-    setNotifications(prev => [notification, ...prev.slice(0, 4)]);
+    setSelectedClient(entity);
     
-    // Auto remove notification after 3 seconds
-    setTimeout(() => {
-      setNotifications(prev => prev.filter(n => n.id !== notification.id));
-    }, 3000);
+    // Pre-populate form with client data
+    const invoiceNumber = `INV-${entity.id}-${Date.now().toString().slice(-6)}`;
+    const today = new Date();
+    const dueDate = new Date(today.getTime() + (30 * 24 * 60 * 60 * 1000)); // 30 days from today
+    
+    setInvoiceFormData({
+      invoiceNumber: invoiceNumber,
+      invoiceDate: today.toISOString().split('T')[0],
+      dueDate: dueDate.toISOString().split('T')[0],
+      amount: entity.contractValue?.replace(/[^\d.,]/g, '') || '',
+      taxAmount: '',
+      totalAmount: '',
+      paymentTerms: entity.paymentTerms || 'Net 30 days',
+      description: `Monthly supply contract for ${entity.name}`,
+      quantity: entity.volume || '',
+      unitPrice: '',
+      discount: '0',
+      notes: ''
+    });
+    
+    setShowInvoiceForm(true);
   };
 
   const handleAddClient = () => {
-    console.log('Adding new client');
-    // Open add client modal
+    setShowClientForm(true);
     const notification = {
       id: Date.now(),
       type: 'info',
@@ -917,8 +1067,7 @@ function Dashboard() {
   };
 
   const handleAddVendor = () => {
-    console.log('Adding new vendor');
-    // Open add vendor modal
+    setShowVendorForm(true);
     const notification = {
       id: Date.now(),
       type: 'info',
@@ -931,6 +1080,1004 @@ function Dashboard() {
     setTimeout(() => {
       setNotifications(prev => prev.filter(n => n.id !== notification.id));
     }, 3000);
+  };
+
+  // Validation functions
+  const validateClientForm = (data) => {
+    const errors = {};
+    
+    // Name validation
+    if (!data.name || data.name.trim().length < 2) {
+      errors.name = 'Client name must be at least 2 characters long';
+    } else if (data.name.trim().length > 100) {
+      errors.name = 'Client name must not exceed 100 characters';
+    } else if (!/^[a-zA-Z0-9\s&.-]+$/.test(data.name.trim())) {
+      errors.name = 'Client name contains invalid characters';
+    }
+    
+    // Check for duplicate client names
+    if (data.name && b2bClients.some(client => 
+      client.name.toLowerCase() === data.name.trim().toLowerCase()
+    )) {
+      errors.name = 'A client with this name already exists';
+    }
+    
+    // Business Type validation
+    if (!data.businessType) {
+      errors.businessType = 'Please select a business type';
+    }
+    
+    // Contract Type validation
+    if (!data.type) {
+      errors.type = 'Please select a contract type';
+    }
+    
+    // Volume validation
+    if (!data.volume || data.volume.trim() === '') {
+      errors.volume = 'Daily volume is required';
+    } else if (!/^\d+([,.]?\d+)?\s*(L|l|liters?|Liters?)(\/day|\/Day)?$/i.test(data.volume.trim())) {
+      errors.volume = 'Volume format should be like "2,500L/day" or "1500 liters/day"';
+    }
+    
+    // Contact validation
+    if (!data.contact || data.contact.trim() === '') {
+      errors.contact = 'Contact number is required';
+    } else if (!/^(\+91[\s-]?)?[6-9]\d{9}$/.test(data.contact.replace(/[\s-]/g, ''))) {
+      errors.contact = 'Please enter a valid Indian mobile number';
+    }
+    
+    // Email validation
+    if (!data.email || data.email.trim() === '') {
+      errors.email = 'Email address is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email.trim())) {
+      errors.email = 'Please enter a valid email address';
+    } else if (data.email.trim().length > 100) {
+      errors.email = 'Email address is too long';
+    }
+    
+    // Check for duplicate email
+    if (data.email && b2bClients.some(client => 
+      client.email.toLowerCase() === data.email.trim().toLowerCase()
+    )) {
+      errors.email = 'A client with this email already exists';
+    }
+    
+    // Contract Value validation
+    if (!data.contractValue || data.contractValue.trim() === '') {
+      errors.contractValue = 'Contract value is required';
+    } else if (!/^₹?\s*\d+([,.]?\d+)*\s*(\/month|\/Month|per month|Per Month)?$/i.test(data.contractValue.trim())) {
+      errors.contractValue = 'Contract value format should be like "₹1,25,000/month"';
+    }
+    
+    // Payment Terms validation
+    if (!data.paymentTerms) {
+      errors.paymentTerms = 'Please select payment terms';
+    }
+    
+    // Delivery Schedule validation
+    if (!data.deliverySchedule || data.deliverySchedule.trim() === '') {
+      errors.deliverySchedule = 'Delivery schedule is required';
+    } else if (data.deliverySchedule.trim().length < 5) {
+      errors.deliverySchedule = 'Please provide a detailed delivery schedule';
+    }
+    
+    // Address validation (optional but if provided, should be valid)
+    if (data.address && data.address.trim().length > 0 && data.address.trim().length < 10) {
+      errors.address = 'Address should be at least 10 characters if provided';
+    } else if (data.address && data.address.trim().length > 500) {
+      errors.address = 'Address is too long (max 500 characters)';
+    }
+    
+    return errors;
+  };
+
+  const validateVendorForm = (data) => {
+    const errors = {};
+    
+    // Name validation
+    if (!data.name || data.name.trim().length < 2) {
+      errors.name = 'Vendor name must be at least 2 characters long';
+    } else if (data.name.trim().length > 100) {
+      errors.name = 'Vendor name must not exceed 100 characters';
+    } else if (!/^[a-zA-Z0-9\s&.-]+$/.test(data.name.trim())) {
+      errors.name = 'Vendor name contains invalid characters';
+    }
+    
+    // Check for duplicate vendor names
+    if (data.name && b2bVendors.some(vendor => 
+      vendor.name.toLowerCase() === data.name.trim().toLowerCase()
+    )) {
+      errors.name = 'A vendor with this name already exists';
+    }
+    
+    // Vendor Type validation
+    if (!data.type) {
+      errors.type = 'Please select a vendor type';
+    }
+    
+    // Volume validation
+    if (!data.volume || data.volume.trim() === '') {
+      errors.volume = 'Daily volume is required';
+    } else if (!/^\d+([,.]?\d+)?\s*(L|l|liters?|Liters?)(\/day|\/Day)?$/i.test(data.volume.trim())) {
+      errors.volume = 'Volume format should be like "5,000L/day" or "3000 liters/day"';
+    }
+    
+    // Quality Grade validation
+    if (!data.qualityGrade) {
+      errors.qualityGrade = 'Please select a quality grade';
+    }
+    
+    // Contact validation
+    if (!data.contact || data.contact.trim() === '') {
+      errors.contact = 'Contact number is required';
+    } else if (!/^(\+91[\s-]?)?[6-9]\d{9}$/.test(data.contact.replace(/[\s-]/g, ''))) {
+      errors.contact = 'Please enter a valid Indian mobile number';
+    }
+    
+    // Email validation
+    if (!data.email || data.email.trim() === '') {
+      errors.email = 'Email address is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email.trim())) {
+      errors.email = 'Please enter a valid email address';
+    } else if (data.email.trim().length > 100) {
+      errors.email = 'Email address is too long';
+    }
+    
+    // Check for duplicate email
+    if (data.email && b2bVendors.some(vendor => 
+      vendor.email.toLowerCase() === data.email.trim().toLowerCase()
+    )) {
+      errors.email = 'A vendor with this email already exists';
+    }
+    
+    // Contract Value validation
+    if (!data.contractValue || data.contractValue.trim() === '') {
+      errors.contractValue = 'Contract value is required';
+    } else if (!/^₹?\s*\d+([,.]?\d+)*\s*(\/month|\/Month|per month|Per Month)?$/i.test(data.contractValue.trim())) {
+      errors.contractValue = 'Contract value format should be like "₹2,25,000/month"';
+    }
+    
+    // Price per Liter validation
+    if (!data.pricePerLiter || data.pricePerLiter.trim() === '') {
+      errors.pricePerLiter = 'Price per liter is required';
+    } else if (!/^₹?\s*\d+(\.\d{1,2})?$/.test(data.pricePerLiter.trim())) {
+      errors.pricePerLiter = 'Price format should be like "₹45.00" or "45.50"';
+    } else {
+      const price = parseFloat(data.pricePerLiter.replace('₹', '').trim());
+      if (price < 10 || price > 200) {
+        errors.pricePerLiter = 'Price per liter should be between ₹10 and ₹200';
+      }
+    }
+    
+    // Farm Size validation (optional)
+    if (data.farmSize && data.farmSize.trim() !== '') {
+      if (!/^\d+(\.\d+)?\s*(acres?|hectares?|Acres?|Hectares?)$/i.test(data.farmSize.trim())) {
+        errors.farmSize = 'Farm size format should be like "150 acres" or "60.5 hectares"';
+      }
+    }
+    
+    // Cattle Count validation (optional)
+    if (data.cattleCount && data.cattleCount.trim() !== '') {
+      const count = parseInt(data.cattleCount);
+      if (isNaN(count) || count < 1 || count > 10000) {
+        errors.cattleCount = 'Cattle count should be a number between 1 and 10,000';
+      }
+    }
+    
+    // Geographic Region validation
+    if (!data.geographicRegion) {
+      errors.geographicRegion = 'Please select a geographic region';
+    }
+    
+    // Payment Terms validation
+    if (!data.paymentTerms) {
+      errors.paymentTerms = 'Please select payment terms';
+    }
+    
+    // Collection Schedule validation
+    if (!data.collectionSchedule || data.collectionSchedule.trim() === '') {
+      errors.collectionSchedule = 'Collection schedule is required';
+    } else if (data.collectionSchedule.trim().length < 5) {
+      errors.collectionSchedule = 'Please provide a detailed collection schedule';
+    }
+    
+    // Certifications validation (optional)
+    if (data.certifications && data.certifications.trim() !== '') {
+      const certs = data.certifications.split(',');
+      if (certs.length > 10) {
+        errors.certifications = 'Too many certifications listed (max 10)';
+      }
+      for (let cert of certs) {
+        if (cert.trim().length < 2) {
+          errors.certifications = 'Each certification should be at least 2 characters';
+          break;
+        }
+      }
+    }
+    
+    // Address validation (optional but if provided, should be valid)
+    if (data.address && data.address.trim().length > 0 && data.address.trim().length < 10) {
+      errors.address = 'Address should be at least 10 characters if provided';
+    } else if (data.address && data.address.trim().length > 500) {
+      errors.address = 'Address is too long (max 500 characters)';
+    }
+    
+    return errors;
+  };
+
+  // Form handlers with validation
+  const handleClientFormChange = (field, value) => {
+    setClientFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
+    
+    // Clear specific field error when user starts typing
+    if (clientFormErrors[field]) {
+      setClientFormErrors(prev => ({
+        ...prev,
+        [field]: ''
+      }));
+    }
+  };
+
+  const handleVendorFormChange = (field, value) => {
+    setVendorFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
+    
+    // Clear specific field error when user starts typing
+    if (vendorFormErrors[field]) {
+      setVendorFormErrors(prev => ({
+        ...prev,
+        [field]: ''
+      }));
+    }
+  };
+
+  const handleClientFormSubmit = (e) => {
+    e.preventDefault();
+    
+    // Set submitting state
+    setIsClientFormSubmitting(true);
+    
+    // Validate form
+    const errors = validateClientForm(clientFormData);
+    
+    if (Object.keys(errors).length > 0) {
+      setClientFormErrors(errors);
+      setIsClientFormSubmitting(false);
+      
+      // Show validation error notification
+      const notification = {
+        id: Date.now(),
+        type: 'error',
+        message: 'Please fix the validation errors before submitting',
+        timestamp: new Date()
+      };
+      setNotifications(prev => [notification, ...prev.slice(0, 4)]);
+      
+      setTimeout(() => {
+        setNotifications(prev => prev.filter(n => n.id !== notification.id));
+      }, 5000);
+      
+      return;
+    }
+    
+    // Clear any existing errors
+    setClientFormErrors({});
+    
+    console.log('Submitting client form:', clientFormData);
+    
+    // Simulate API call delay
+    setTimeout(() => {
+      // Generate unique ID for new client
+      const newClientId = `CL${String(b2bClients.length + 1).padStart(3, '0')}`;
+      
+      // Get business type icon
+      const getBusinessIcon = (businessType) => {
+        const iconMap = {
+          'Retail Chain': '🏪',
+          'Restaurant': '🍽️',
+          'Bakery': '🍰',
+          'Hotel': '🏨',
+          'Cafe': '☕',
+          'Institutional': '🎓',
+          'Wholesale': '📦'
+        };
+        return iconMap[businessType] || '🏢';
+      };
+      
+      // Get business type colors
+      const getBusinessColors = (businessType) => {
+        const colorMap = {
+          'Retail Chain': { bg: 'rgba(52, 152, 219, 0.1)', icon: '#3498db' },
+          'Restaurant': { bg: 'rgba(231, 76, 60, 0.1)', icon: '#e74c3c' },
+          'Bakery': { bg: 'rgba(46, 204, 113, 0.1)', icon: '#2ecc71' },
+          'Hotel': { bg: 'rgba(155, 89, 182, 0.1)', icon: '#9b59b6' },
+          'Cafe': { bg: 'rgba(241, 196, 15, 0.1)', icon: '#f1c40f' },
+          'Institutional': { bg: 'rgba(52, 73, 94, 0.1)', icon: '#34495e' },
+          'Wholesale': { bg: 'rgba(26, 188, 156, 0.1)', icon: '#1abc9c' }
+        };
+        return colorMap[businessType] || { bg: 'rgba(149, 165, 166, 0.1)', icon: '#95a5a6' };
+      };
+      
+      const colors = getBusinessColors(clientFormData.businessType);
+      
+      // Create new client object with trimmed data
+      const newClient = {
+        id: newClientId,
+        name: clientFormData.name.trim(),
+        type: clientFormData.type,
+        volume: clientFormData.volume.trim(),
+        status: 'active',
+        nextDelivery: 'Tomorrow 8:00 AM', // Default next delivery
+        contractValue: clientFormData.contractValue.trim(),
+        paymentStatus: 'paid', // Default status for new clients
+        lastOrder: new Date().toISOString().split('T')[0], // Today's date
+        icon: getBusinessIcon(clientFormData.businessType),
+        bgColor: colors.bg,
+        iconColor: colors.icon,
+        contact: clientFormData.contact.trim(),
+        email: clientFormData.email.trim().toLowerCase(),
+        businessType: clientFormData.businessType,
+        paymentTerms: clientFormData.paymentTerms,
+        deliverySchedule: clientFormData.deliverySchedule.trim(),
+        address: clientFormData.address.trim(),
+        // Additional fields for new clients
+        dateAdded: new Date().toISOString(),
+        isNewlyAdded: true
+      };
+      
+      // Add new client to the list
+      setB2bClients(prev => [newClient, ...prev]);
+      
+      // Add success notification
+      const notification = {
+        id: Date.now(),
+        type: 'success',
+        message: `✅ Client "${clientFormData.name.trim()}" added successfully! ID: ${newClientId}`,
+        timestamp: new Date()
+      };
+      setNotifications(prev => [notification, ...prev.slice(0, 4)]);
+      
+      // Reset form and close
+      setClientFormData({
+        name: '',
+        type: '',
+        volume: '',
+        contact: '',
+        email: '',
+        contractValue: '',
+        address: '',
+        businessType: '',
+        paymentTerms: '',
+        deliverySchedule: ''
+      });
+      setClientFormErrors({});
+      setShowClientForm(false);
+      setIsClientFormSubmitting(false);
+      
+      // Auto remove notification after 5 seconds
+      setTimeout(() => {
+        setNotifications(prev => prev.filter(n => n.id !== notification.id));
+      }, 5000);
+    }, 1000); // 1 second delay to simulate API call
+  };
+
+  const handleVendorFormSubmit = (e) => {
+    e.preventDefault();
+    
+    // Set submitting state
+    setIsVendorFormSubmitting(true);
+    
+    // Validate form
+    const errors = validateVendorForm(vendorFormData);
+    
+    if (Object.keys(errors).length > 0) {
+      setVendorFormErrors(errors);
+      setIsVendorFormSubmitting(false);
+      
+      // Show validation error notification
+      const notification = {
+        id: Date.now(),
+        type: 'error',
+        message: 'Please fix the validation errors before submitting',
+        timestamp: new Date()
+      };
+      setNotifications(prev => [notification, ...prev.slice(0, 4)]);
+      
+      setTimeout(() => {
+        setNotifications(prev => prev.filter(n => n.id !== notification.id));
+      }, 5000);
+      
+      return;
+    }
+    
+    // Clear any existing errors
+    setVendorFormErrors({});
+    
+    console.log('Submitting vendor form:', vendorFormData);
+    
+    // Simulate API call delay
+    setTimeout(() => {
+      // Generate unique ID for new vendor
+      const newVendorId = `VN${String(b2bVendors.length + 1).padStart(3, '0')}`;
+      
+      // Get vendor type icon
+      const getVendorIcon = (vendorType) => {
+        const iconMap = {
+          'Raw Milk Supplier': '🐄',
+          'Organic Milk Supplier': '🌱',
+          'Premium Milk Supplier': '⭐',
+          'Bulk Milk Supplier': '🚛',
+          'Specialty Supplier': '🏆'
+        };
+        return iconMap[vendorType] || '🚜';
+      };
+      
+      // Get vendor type colors
+      const getVendorColors = (vendorType) => {
+        const colorMap = {
+          'Raw Milk Supplier': { bg: 'rgba(46, 204, 113, 0.1)', icon: '#2ecc71' },
+          'Organic Milk Supplier': { bg: 'rgba(52, 152, 219, 0.1)', icon: '#3498db' },
+          'Premium Milk Supplier': { bg: 'rgba(241, 196, 15, 0.1)', icon: '#f1c40f' },
+          'Bulk Milk Supplier': { bg: 'rgba(155, 89, 182, 0.1)', icon: '#9b59b6' },
+          'Specialty Supplier': { bg: 'rgba(231, 76, 60, 0.1)', icon: '#e74c3c' }
+        };
+        return colorMap[vendorType] || { bg: 'rgba(149, 165, 166, 0.1)', icon: '#95a5a6' };
+      };
+      
+      // Get quality rating based on grade
+      const getQualityRating = (grade) => {
+        const ratingMap = {
+          'Grade A+': 4.9,
+          'Grade A': 4.7,
+          'Grade B+': 4.5,
+          'Grade B': 4.2,
+          'Organic Grade A+': 4.9,
+          'Premium Grade': 4.8
+        };
+        return ratingMap[grade] || 4.5;
+      };
+      
+      // Get quality label
+      const getQualityLabel = (grade) => {
+        if (grade.includes('Organic')) return 'Organic Premium';
+        if (grade.includes('Premium')) return 'Premium';
+        if (grade.includes('A+')) return 'Premium';
+        if (grade.includes('A')) return 'Standard';
+        return 'Standard';
+      };
+      
+      const colors = getVendorColors(vendorFormData.type);
+      
+      // Create new vendor object with comprehensive data and trimmed values
+      const newVendor = {
+        id: newVendorId,
+        name: vendorFormData.name.trim(),
+        type: vendorFormData.type,
+        volume: vendorFormData.volume.trim(),
+        status: 'active',
+        nextCollection: 'Tomorrow 5:00 AM', // Default next collection
+        contractValue: vendorFormData.contractValue.trim(),
+        paymentStatus: 'paid', // Default status for new vendors
+        lastDelivery: new Date().toISOString().split('T')[0], // Today's date
+        icon: getVendorIcon(vendorFormData.type),
+        bgColor: colors.bg,
+        iconColor: colors.icon,
+        contact: vendorFormData.contact.trim(),
+        email: vendorFormData.email.trim().toLowerCase(),
+        rating: getQualityRating(vendorFormData.qualityGrade),
+        quality: getQualityLabel(vendorFormData.qualityGrade),
+        // Enhanced data
+        contractStart: new Date().toISOString().split('T')[0],
+        contractEnd: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0], // 1 year from now
+        paymentTerms: vendorFormData.paymentTerms,
+        pricePerLiter: vendorFormData.pricePerLiter.trim(),
+        qualityGrade: vendorFormData.qualityGrade,
+        certifications: vendorFormData.certifications ? vendorFormData.certifications.split(',').map(cert => cert.trim()).filter(cert => cert.length > 0) : [],
+        farmSize: vendorFormData.farmSize.trim() || 'Not specified',
+        cattleCount: parseInt(vendorFormData.cattleCount) || 0,
+        avgFatContent: '4.0%', // Default values for new vendors
+        avgProteinContent: '3.5%',
+        dailyCapacity: vendorFormData.volume.trim(),
+        geographicRegion: vendorFormData.geographicRegion,
+        relationshipManager: 'New Assignment Pending',
+        managerContact: '+91 98765 00000',
+        performanceScore: 85, // Default score for new vendors
+        renewalProbability: 90,
+        sustainabilityScore: 80,
+        complianceRecord: 'New - Under Review',
+        transportationMode: 'Standard truck',
+        deliveryWindow: vendorFormData.collectionSchedule.trim() || '5:00 AM - 7:00 AM',
+        emergencyContact: vendorFormData.contact.trim(),
+        backupSupplier: 'To be assigned',
+        seasonalVariation: 'Low',
+        weatherDependency: 'Medium',
+        technologyAdoption: 'Medium',
+        digitalIntegration: 'Manual reporting',
+        keyStrengths: ['New partnership', 'Quality commitment', 'Reliable supply'],
+        riskFactors: ['New vendor', 'Performance unproven'],
+        contractHistory: [
+          { period: new Date().getFullYear() + '-' + (new Date().getFullYear() + 1), performance: 'New', renewal: 'Initial contract' }
+        ],
+        // Additional fields for new vendors
+        dateAdded: new Date().toISOString(),
+        isNewlyAdded: true,
+        address: vendorFormData.address.trim(),
+        collectionSchedule: vendorFormData.collectionSchedule.trim()
+      };
+      
+      // Add new vendor to the list
+      setB2bVendors(prev => [newVendor, ...prev]);
+      
+      // Add success notification
+      const notification = {
+        id: Date.now(),
+        type: 'success',
+        message: `✅ Vendor "${vendorFormData.name.trim()}" added successfully! ID: ${newVendorId}`,
+        timestamp: new Date()
+      };
+      setNotifications(prev => [notification, ...prev.slice(0, 4)]);
+      
+      // Reset form and close
+      setVendorFormData({
+        name: '',
+        type: '',
+        volume: '',
+        contact: '',
+        email: '',
+        contractValue: '',
+        address: '',
+        farmSize: '',
+        cattleCount: '',
+        qualityGrade: '',
+        pricePerLiter: '',
+        certifications: '',
+        geographicRegion: '',
+        paymentTerms: '',
+        collectionSchedule: ''
+      });
+      setVendorFormErrors({});
+      setShowVendorForm(false);
+      setIsVendorFormSubmitting(false);
+      
+      // Auto remove notification after 5 seconds
+      setTimeout(() => {
+        setNotifications(prev => prev.filter(n => n.id !== notification.id));
+      }, 5000);
+    }, 1000); // 1 second delay to simulate API call
+  };
+
+  const handleFormCancel = (formType) => {
+    if (formType === 'client') {
+      setShowClientForm(false);
+      setClientFormData({
+        name: '',
+        type: '',
+        volume: '',
+        contact: '',
+        email: '',
+        contractValue: '',
+        address: '',
+        businessType: '',
+        paymentTerms: '',
+        deliverySchedule: ''
+      });
+      setClientFormErrors({});
+      setIsClientFormSubmitting(false);
+    } else {
+      setShowVendorForm(false);
+      setVendorFormData({
+        name: '',
+        type: '',
+        volume: '',
+        contact: '',
+        email: '',
+        contractValue: '',
+        address: '',
+        farmSize: '',
+        cattleCount: '',
+        qualityGrade: '',
+        pricePerLiter: '',
+        certifications: '',
+        geographicRegion: '',
+        paymentTerms: '',
+        collectionSchedule: ''
+      });
+      setVendorFormErrors({});
+      setIsVendorFormSubmitting(false);
+    }
+  };
+
+  // Client Operations Form Handlers
+  const handleViewOrdersFormChange = (field, value) => {
+    setViewOrdersData(prev => ({
+      ...prev,
+      [field]: value
+    }));
+    
+    // Clear specific field error when user starts typing
+    if (viewOrdersFormErrors[field]) {
+      setViewOrdersFormErrors(prev => ({
+        ...prev,
+        [field]: ''
+      }));
+    }
+  };
+
+  const handleContactFormChange = (field, value) => {
+    setContactFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
+    
+    // Clear specific field error when user starts typing
+    if (contactFormErrors[field]) {
+      setContactFormErrors(prev => ({
+        ...prev,
+        [field]: ''
+      }));
+    }
+  };
+
+  const handleInvoiceFormChange = (field, value) => {
+    setInvoiceFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
+    
+    // Clear specific field error when user starts typing
+    if (invoiceFormErrors[field]) {
+      setInvoiceFormErrors(prev => ({
+        ...prev,
+        [field]: ''
+      }));
+    }
+  };
+
+  // Form validation functions for client operations
+  const validateViewOrdersForm = (data) => {
+    const errors = {};
+    
+    if (!data.orderId || data.orderId.trim().length < 3) {
+      errors.orderId = 'Order ID must be at least 3 characters long';
+    }
+    
+    if (!data.orderDate) {
+      errors.orderDate = 'Order date is required';
+    }
+    
+    if (!data.deliveryDate) {
+      errors.deliveryDate = 'Delivery date is required';
+    } else if (new Date(data.deliveryDate) <= new Date(data.orderDate)) {
+      errors.deliveryDate = 'Delivery date must be after order date';
+    }
+    
+    if (!data.quantity || data.quantity.trim() === '') {
+      errors.quantity = 'Quantity is required';
+    }
+    
+    if (!data.status) {
+      errors.status = 'Please select order status';
+    }
+    
+    if (!data.priority) {
+      errors.priority = 'Please select priority level';
+    }
+    
+    if (!data.contactPerson || data.contactPerson.trim().length < 2) {
+      errors.contactPerson = 'Contact person name is required';
+    }
+    
+    return errors;
+  };
+
+  const validateContactForm = (data) => {
+    const errors = {};
+    
+    if (!data.subject || data.subject.trim().length < 5) {
+      errors.subject = 'Subject must be at least 5 characters long';
+    }
+    
+    if (!data.message || data.message.trim().length < 10) {
+      errors.message = 'Message must be at least 10 characters long';
+    }
+    
+    if (!data.priority) {
+      errors.priority = 'Please select priority level';
+    }
+    
+    if (!data.contactMethod) {
+      errors.contactMethod = 'Please select contact method';
+    }
+    
+    if (!data.category) {
+      errors.category = 'Please select message category';
+    }
+    
+    return errors;
+  };
+
+  const validateInvoiceForm = (data) => {
+    const errors = {};
+    
+    if (!data.invoiceNumber || data.invoiceNumber.trim().length < 3) {
+      errors.invoiceNumber = 'Invoice number is required';
+    }
+    
+    if (!data.invoiceDate) {
+      errors.invoiceDate = 'Invoice date is required';
+    }
+    
+    if (!data.dueDate) {
+      errors.dueDate = 'Due date is required';
+    } else if (new Date(data.dueDate) <= new Date(data.invoiceDate)) {
+      errors.dueDate = 'Due date must be after invoice date';
+    }
+    
+    if (!data.amount || data.amount.trim() === '') {
+      errors.amount = 'Amount is required';
+    } else if (isNaN(parseFloat(data.amount.replace(/[^\d.]/g, '')))) {
+      errors.amount = 'Please enter a valid amount';
+    }
+    
+    if (!data.description || data.description.trim().length < 5) {
+      errors.description = 'Description must be at least 5 characters long';
+    }
+    
+    if (!data.quantity || data.quantity.trim() === '') {
+      errors.quantity = 'Quantity is required';
+    }
+    
+    return errors;
+  };
+
+  // Form submit handlers for client operations
+  const handleViewOrdersFormSubmit = (e) => {
+    e.preventDefault();
+    setIsViewOrdersFormSubmitting(true);
+    
+    const errors = validateViewOrdersForm(viewOrdersData);
+    
+    if (Object.keys(errors).length > 0) {
+      setViewOrdersFormErrors(errors);
+      setIsViewOrdersFormSubmitting(false);
+      
+      const notification = {
+        id: Date.now(),
+        type: 'error',
+        message: 'Please fix the validation errors before submitting',
+        timestamp: new Date()
+      };
+      setNotifications(prev => [notification, ...prev.slice(0, 4)]);
+      
+      setTimeout(() => {
+        setNotifications(prev => prev.filter(n => n.id !== notification.id));
+      }, 5000);
+      
+      return;
+    }
+    
+    // Simulate API call
+    setTimeout(() => {
+      const notification = {
+        id: Date.now(),
+        type: 'success',
+        message: `✅ Order ${viewOrdersData.orderId} created successfully for ${selectedClient?.name}!`,
+        timestamp: new Date()
+      };
+      setNotifications(prev => [notification, ...prev.slice(0, 4)]);
+      
+      // Reset form and close
+      setViewOrdersData({
+        orderId: '',
+        orderDate: '',
+        deliveryDate: '',
+        quantity: '',
+        status: '',
+        priority: '',
+        specialInstructions: '',
+        deliveryAddress: '',
+        contactPerson: '',
+        orderValue: ''
+      });
+      setViewOrdersFormErrors({});
+      setIsViewOrdersFormSubmitting(false);
+      setShowViewOrdersForm(false);
+      setSelectedClient(null);
+      
+      setTimeout(() => {
+        setNotifications(prev => prev.filter(n => n.id !== notification.id));
+      }, 5000);
+    }, 1500);
+  };
+
+  const handleContactFormSubmit = (e) => {
+    e.preventDefault();
+    setIsContactFormSubmitting(true);
+    
+    const errors = validateContactForm(contactFormData);
+    
+    if (Object.keys(errors).length > 0) {
+      setContactFormErrors(errors);
+      setIsContactFormSubmitting(false);
+      
+      const notification = {
+        id: Date.now(),
+        type: 'error',
+        message: 'Please fix the validation errors before submitting',
+        timestamp: new Date()
+      };
+      setNotifications(prev => [notification, ...prev.slice(0, 4)]);
+      
+      setTimeout(() => {
+        setNotifications(prev => prev.filter(n => n.id !== notification.id));
+      }, 5000);
+      
+      return;
+    }
+    
+    // Simulate API call
+    setTimeout(() => {
+      const notification = {
+        id: Date.now(),
+        type: 'success',
+        message: `✅ Message sent successfully to ${selectedClient?.name}!`,
+        timestamp: new Date()
+      };
+      setNotifications(prev => [notification, ...prev.slice(0, 4)]);
+      
+      // Reset form and close
+      setContactFormData({
+        subject: '',
+        message: '',
+        priority: '',
+        contactMethod: '',
+        followUpDate: '',
+        category: '',
+        attachments: ''
+      });
+      setContactFormErrors({});
+      setIsContactFormSubmitting(false);
+      setShowContactForm(false);
+      setSelectedClient(null);
+      
+      setTimeout(() => {
+        setNotifications(prev => prev.filter(n => n.id !== notification.id));
+      }, 5000);
+    }, 1500);
+  };
+
+  const handleInvoiceFormSubmit = (e) => {
+    e.preventDefault();
+    setIsInvoiceFormSubmitting(true);
+    
+    const errors = validateInvoiceForm(invoiceFormData);
+    
+    if (Object.keys(errors).length > 0) {
+      setInvoiceFormErrors(errors);
+      setIsInvoiceFormSubmitting(false);
+      
+      const notification = {
+        id: Date.now(),
+        type: 'error',
+        message: 'Please fix the validation errors before submitting',
+        timestamp: new Date()
+      };
+      setNotifications(prev => [notification, ...prev.slice(0, 4)]);
+      
+      setTimeout(() => {
+        setNotifications(prev => prev.filter(n => n.id !== notification.id));
+      }, 5000);
+      
+      return;
+    }
+    
+    // Simulate API call
+    setTimeout(() => {
+      const notification = {
+        id: Date.now(),
+        type: 'success',
+        message: `✅ Invoice ${invoiceFormData.invoiceNumber} generated successfully for ${selectedClient?.name}!`,
+        timestamp: new Date()
+      };
+      setNotifications(prev => [notification, ...prev.slice(0, 4)]);
+      
+      // Reset form and close
+      setInvoiceFormData({
+        invoiceNumber: '',
+        invoiceDate: '',
+        dueDate: '',
+        amount: '',
+        taxAmount: '',
+        totalAmount: '',
+        paymentTerms: '',
+        description: '',
+        quantity: '',
+        unitPrice: '',
+        discount: '',
+        notes: ''
+      });
+      setInvoiceFormErrors({});
+      setIsInvoiceFormSubmitting(false);
+      setShowInvoiceForm(false);
+      setSelectedClient(null);
+      
+      setTimeout(() => {
+        setNotifications(prev => prev.filter(n => n.id !== notification.id));
+      }, 5000);
+    }, 1500);
+  };
+
+  // Handle form cancellation for client operations
+  const handleClientOperationFormCancel = (formType) => {
+    switch(formType) {
+      case 'viewOrders':
+        setShowViewOrdersForm(false);
+        setViewOrdersData({
+          orderId: '',
+          orderDate: '',
+          deliveryDate: '',
+          quantity: '',
+          status: '',
+          priority: '',
+          specialInstructions: '',
+          deliveryAddress: '',
+          contactPerson: '',
+          orderValue: ''
+        });
+        setViewOrdersFormErrors({});
+        setIsViewOrdersFormSubmitting(false);
+        break;
+      case 'contact':
+        setShowContactForm(false);
+        setContactFormData({
+          subject: '',
+          message: '',
+          priority: '',
+          contactMethod: '',
+          followUpDate: '',
+          category: '',
+          attachments: ''
+        });
+        setContactFormErrors({});
+        setIsContactFormSubmitting(false);
+        break;
+      case 'invoice':
+        setShowInvoiceForm(false);
+        setInvoiceFormData({
+          invoiceNumber: '',
+          invoiceDate: '',
+          dueDate: '',
+          amount: '',
+          taxAmount: '',
+          totalAmount: '',
+          paymentTerms: '',
+          description: '',
+          quantity: '',
+          unitPrice: '',
+          discount: '',
+          notes: ''
+        });
+        setInvoiceFormErrors({});
+        setIsInvoiceFormSubmitting(false);
+        break;
+    }
+    setSelectedClient(null);
+  };
+
+  // Handle clicking outside forms to close them
+  const handleOverlayClick = (e, formType) => {
+    if (e.target.classList.contains('dashboard-form-overlay')) {
+      if (['viewOrders', 'contact', 'invoice'].includes(formType)) {
+        handleClientOperationFormCancel(formType);
+      } else {
+        handleFormCancel(formType);
+      }
+    }
   };
 
   // Key milk production metrics with beautiful light colors
@@ -1090,12 +2237,1073 @@ function Dashboard() {
             <p>{timeGreeting.greeting}! Have a productive day.</p>
           </div>
           <div className="welcome-actions">
+            <div className="quick-actions">
+              
+            </div>
             <div className="last-refresh">
               <span className="refresh-text">Last updated: {lastRefresh.toLocaleTimeString()}</span>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Add New Client Form */}
+      {showClientForm && (
+        <div className="dashboard-form-overlay" onClick={(e) => handleOverlayClick(e, 'client')}>
+          <div className="dashboard-form-container client-form-container">
+            <div className="dashboard-form-header">
+              <h3 className="dashboard-form-title">
+                <span className="dashboard-form-icon">🏢</span>
+                Add New Client
+              </h3>
+              <button 
+                className="dashboard-form-close-btn"
+                onClick={() => handleFormCancel('client')}
+              >
+                ×
+              </button>
+            </div>
+            
+            <form onSubmit={handleClientFormSubmit} className="dashboard-form-content">
+              <div className="dashboard-form-grid">
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Client Name *</label>
+                  <input
+                    type="text"
+                    className={`dashboard-form-input ${clientFormErrors.name ? 'error' : ''}`}
+                    value={clientFormData.name}
+                    onChange={(e) => handleClientFormChange('name', e.target.value)}
+                    placeholder="Enter client name"
+                    required
+                  />
+                  {clientFormErrors.name && (
+                    <span className="dashboard-form-error">{clientFormErrors.name}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Business Type *</label>
+                  <select
+                    className={`dashboard-form-select ${clientFormErrors.businessType ? 'error' : ''}`}
+                    value={clientFormData.businessType}
+                    onChange={(e) => handleClientFormChange('businessType', e.target.value)}
+                    required
+                  >
+                    <option value="">Select business type</option>
+                    <option value="Retail Chain">Retail Chain</option>
+                    <option value="Restaurant">Restaurant</option>
+                    <option value="Bakery">Bakery</option>
+                    <option value="Hotel">Hotel</option>
+                    <option value="Cafe">Cafe</option>
+                    <option value="Institutional">Institutional</option>
+                    <option value="Wholesale">Wholesale</option>
+                  </select>
+                  {clientFormErrors.businessType && (
+                    <span className="dashboard-form-error">{clientFormErrors.businessType}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Contract Type *</label>
+                  <select
+                    className={`dashboard-form-select ${clientFormErrors.type ? 'error' : ''}`}
+                    value={clientFormData.type}
+                    onChange={(e) => handleClientFormChange('type', e.target.value)}
+                    required
+                  >
+                    <option value="">Select contract type</option>
+                    <option value="Wholesale Contract">Wholesale Contract</option>
+                    <option value="Bulk Supply">Bulk Supply</option>
+                    <option value="Premium Supply">Premium Supply</option>
+                    <option value="Institutional Supply">Institutional Supply</option>
+                    <option value="Regular Supply">Regular Supply</option>
+                  </select>
+                  {clientFormErrors.type && (
+                    <span className="dashboard-form-error">{clientFormErrors.type}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Daily Volume *</label>
+                  <input
+                    type="text"
+                    className={`dashboard-form-input ${clientFormErrors.volume ? 'error' : ''}`}
+                    value={clientFormData.volume}
+                    onChange={(e) => handleClientFormChange('volume', e.target.value)}
+                    placeholder="e.g., 2,500L/day"
+                    required
+                  />
+                  {clientFormErrors.volume && (
+                    <span className="dashboard-form-error">{clientFormErrors.volume}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Contact Number *</label>
+                  <input
+                    type="tel"
+                    className={`dashboard-form-input ${clientFormErrors.contact ? 'error' : ''}`}
+                    value={clientFormData.contact}
+                    onChange={(e) => handleClientFormChange('contact', e.target.value)}
+                    placeholder="+91 98765 43210"
+                    required
+                  />
+                  {clientFormErrors.contact && (
+                    <span className="dashboard-form-error">{clientFormErrors.contact}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Email Address *</label>
+                  <input
+                    type="email"
+                    className={`dashboard-form-input ${clientFormErrors.email ? 'error' : ''}`}
+                    value={clientFormData.email}
+                    onChange={(e) => handleClientFormChange('email', e.target.value)}
+                    placeholder="client@example.com"
+                    required
+                  />
+                  {clientFormErrors.email && (
+                    <span className="dashboard-form-error">{clientFormErrors.email}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Contract Value *</label>
+                  <input
+                    type="text"
+                    className={`dashboard-form-input ${clientFormErrors.contractValue ? 'error' : ''}`}
+                    value={clientFormData.contractValue}
+                    onChange={(e) => handleClientFormChange('contractValue', e.target.value)}
+                    placeholder="₹1,25,000/month"
+                    required
+                  />
+                  {clientFormErrors.contractValue && (
+                    <span className="dashboard-form-error">{clientFormErrors.contractValue}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Payment Terms *</label>
+                  <select
+                    className={`dashboard-form-select ${clientFormErrors.paymentTerms ? 'error' : ''}`}
+                    value={clientFormData.paymentTerms}
+                    onChange={(e) => handleClientFormChange('paymentTerms', e.target.value)}
+                    required
+                  >
+                    <option value="">Select payment terms</option>
+                    <option value="Net 15 days">Net 15 days</option>
+                    <option value="Net 30 days">Net 30 days</option>
+                    <option value="Net 45 days">Net 45 days</option>
+                    <option value="Advance Payment">Advance Payment</option>
+                    <option value="Cash on Delivery">Cash on Delivery</option>
+                  </select>
+                  {clientFormErrors.paymentTerms && (
+                    <span className="dashboard-form-error">{clientFormErrors.paymentTerms}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group dashboard-form-group-full">
+                  <label className="dashboard-form-label">Delivery Schedule *</label>
+                  <input
+                    type="text"
+                    className={`dashboard-form-input ${clientFormErrors.deliverySchedule ? 'error' : ''}`}
+                    value={clientFormData.deliverySchedule}
+                    onChange={(e) => handleClientFormChange('deliverySchedule', e.target.value)}
+                    placeholder="e.g., Daily 6:00 AM"
+                    required
+                  />
+                  {clientFormErrors.deliverySchedule && (
+                    <span className="dashboard-form-error">{clientFormErrors.deliverySchedule}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group dashboard-form-group-full">
+                  <label className="dashboard-form-label">Address</label>
+                  <textarea
+                    className={`dashboard-form-textarea ${clientFormErrors.address ? 'error' : ''}`}
+                    value={clientFormData.address}
+                    onChange={(e) => handleClientFormChange('address', e.target.value)}
+                    placeholder="Enter complete address"
+                    rows="3"
+                  />
+                  {clientFormErrors.address && (
+                    <span className="dashboard-form-error">{clientFormErrors.address}</span>
+                  )}
+                </div>
+              </div>
+              
+              <div className="dashboard-form-actions">
+                <button 
+                  type="button" 
+                  className="dashboard-form-btn dashboard-form-btn-cancel"
+                  onClick={() => handleFormCancel('client')}
+                  disabled={isClientFormSubmitting}
+                >
+                  Cancel
+                </button>
+                <button 
+                  type="submit" 
+                  className={`dashboard-form-btn dashboard-form-btn-submit ${isClientFormSubmitting ? 'loading' : ''}`}
+                  disabled={isClientFormSubmitting}
+                >
+                  <span className="dashboard-form-btn-icon">
+                    {isClientFormSubmitting ? '⏳' : '✓'}
+                  </span>
+                  {isClientFormSubmitting ? 'Adding Client...' : 'Add Client'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Add New Vendor Form */}
+      {showVendorForm && (
+        <div className="dashboard-form-overlay" onClick={(e) => handleOverlayClick(e, 'vendor')}>
+          <div className="dashboard-form-container vendor-form-container">
+            <div className="dashboard-form-header">
+              <h3 className="dashboard-form-title">
+                <span className="dashboard-form-icon">🚜</span>
+                Add New Vendor
+              </h3>
+              <button 
+                className="dashboard-form-close-btn"
+                onClick={() => handleFormCancel('vendor')}
+              >
+                ×
+              </button>
+            </div>
+            
+            <form onSubmit={handleVendorFormSubmit} className="dashboard-form-content">
+              <div className="dashboard-form-grid">
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Vendor Name *</label>
+                  <input
+                    type="text"
+                    className={`dashboard-form-input ${vendorFormErrors.name ? 'error' : ''}`}
+                    value={vendorFormData.name}
+                    onChange={(e) => handleVendorFormChange('name', e.target.value)}
+                    placeholder="Enter vendor name"
+                    required
+                  />
+                  {vendorFormErrors.name && (
+                    <span className="dashboard-form-error">{vendorFormErrors.name}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Vendor Type *</label>
+                  <select
+                    className={`dashboard-form-select ${vendorFormErrors.type ? 'error' : ''}`}
+                    value={vendorFormData.type}
+                    onChange={(e) => handleVendorFormChange('type', e.target.value)}
+                    required
+                  >
+                    <option value="">Select vendor type</option>
+                    <option value="Raw Milk Supplier">Raw Milk Supplier</option>
+                    <option value="Organic Milk Supplier">Organic Milk Supplier</option>
+                    <option value="Premium Milk Supplier">Premium Milk Supplier</option>
+                    <option value="Bulk Milk Supplier">Bulk Milk Supplier</option>
+                    <option value="Specialty Supplier">Specialty Supplier</option>
+                  </select>
+                  {vendorFormErrors.type && (
+                    <span className="dashboard-form-error">{vendorFormErrors.type}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Daily Volume *</label>
+                  <input
+                    type="text"
+                    className={`dashboard-form-input ${vendorFormErrors.volume ? 'error' : ''}`}
+                    value={vendorFormData.volume}
+                    onChange={(e) => handleVendorFormChange('volume', e.target.value)}
+                    placeholder="e.g., 5,000L/day"
+                    required
+                  />
+                  {vendorFormErrors.volume && (
+                    <span className="dashboard-form-error">{vendorFormErrors.volume}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Quality Grade *</label>
+                  <select
+                    className={`dashboard-form-select ${vendorFormErrors.qualityGrade ? 'error' : ''}`}
+                    value={vendorFormData.qualityGrade}
+                    onChange={(e) => handleVendorFormChange('qualityGrade', e.target.value)}
+                    required
+                  >
+                    <option value="">Select quality grade</option>
+                    <option value="Grade A+">Grade A+</option>
+                    <option value="Grade A">Grade A</option>
+                    <option value="Grade B+">Grade B+</option>
+                    <option value="Grade B">Grade B</option>
+                    <option value="Organic Grade A+">Organic Grade A+</option>
+                    <option value="Premium Grade">Premium Grade</option>
+                  </select>
+                  {vendorFormErrors.qualityGrade && (
+                    <span className="dashboard-form-error">{vendorFormErrors.qualityGrade}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Contact Number *</label>
+                  <input
+                    type="tel"
+                    className={`dashboard-form-input ${vendorFormErrors.contact ? 'error' : ''}`}
+                    value={vendorFormData.contact}
+                    onChange={(e) => handleVendorFormChange('contact', e.target.value)}
+                    placeholder="+91 98765 54321"
+                    required
+                  />
+                  {vendorFormErrors.contact && (
+                    <span className="dashboard-form-error">{vendorFormErrors.contact}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Email Address *</label>
+                  <input
+                    type="email"
+                    className={`dashboard-form-input ${vendorFormErrors.email ? 'error' : ''}`}
+                    value={vendorFormData.email}
+                    onChange={(e) => handleVendorFormChange('email', e.target.value)}
+                    placeholder="vendor@example.com"
+                    required
+                  />
+                  {vendorFormErrors.email && (
+                    <span className="dashboard-form-error">{vendorFormErrors.email}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Contract Value *</label>
+                  <input
+                    type="text"
+                    className={`dashboard-form-input ${vendorFormErrors.contractValue ? 'error' : ''}`}
+                    value={vendorFormData.contractValue}
+                    onChange={(e) => handleVendorFormChange('contractValue', e.target.value)}
+                    placeholder="₹2,25,000/month"
+                    required
+                  />
+                  {vendorFormErrors.contractValue && (
+                    <span className="dashboard-form-error">{vendorFormErrors.contractValue}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Price per Liter *</label>
+                  <input
+                    type="text"
+                    className={`dashboard-form-input ${vendorFormErrors.pricePerLiter ? 'error' : ''}`}
+                    value={vendorFormData.pricePerLiter}
+                    onChange={(e) => handleVendorFormChange('pricePerLiter', e.target.value)}
+                    placeholder="₹45.00"
+                    required
+                  />
+                  {vendorFormErrors.pricePerLiter && (
+                    <span className="dashboard-form-error">{vendorFormErrors.pricePerLiter}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Farm Size</label>
+                  <input
+                    type="text"
+                    className={`dashboard-form-input ${vendorFormErrors.farmSize ? 'error' : ''}`}
+                    value={vendorFormData.farmSize}
+                    onChange={(e) => handleVendorFormChange('farmSize', e.target.value)}
+                    placeholder="e.g., 150 acres"
+                  />
+                  {vendorFormErrors.farmSize && (
+                    <span className="dashboard-form-error">{vendorFormErrors.farmSize}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Cattle Count</label>
+                  <input
+                    type="number"
+                    className={`dashboard-form-input ${vendorFormErrors.cattleCount ? 'error' : ''}`}
+                    value={vendorFormData.cattleCount}
+                    onChange={(e) => handleVendorFormChange('cattleCount', e.target.value)}
+                    placeholder="250"
+                    min="1"
+                    max="10000"
+                  />
+                  {vendorFormErrors.cattleCount && (
+                    <span className="dashboard-form-error">{vendorFormErrors.cattleCount}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Geographic Region *</label>
+                  <select
+                    className={`dashboard-form-select ${vendorFormErrors.geographicRegion ? 'error' : ''}`}
+                    value={vendorFormData.geographicRegion}
+                    onChange={(e) => handleVendorFormChange('geographicRegion', e.target.value)}
+                    required
+                  >
+                    <option value="">Select region</option>
+                    <option value="Punjab">Punjab</option>
+                    <option value="Haryana">Haryana</option>
+                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                    <option value="Rajasthan">Rajasthan</option>
+                    <option value="Gujarat">Gujarat</option>
+                    <option value="Maharashtra">Maharashtra</option>
+                    <option value="Karnataka">Karnataka</option>
+                    <option value="Tamil Nadu">Tamil Nadu</option>
+                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                    <option value="West Bengal">West Bengal</option>
+                  </select>
+                  {vendorFormErrors.geographicRegion && (
+                    <span className="dashboard-form-error">{vendorFormErrors.geographicRegion}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Payment Terms *</label>
+                  <select
+                    className={`dashboard-form-select ${vendorFormErrors.paymentTerms ? 'error' : ''}`}
+                    value={vendorFormData.paymentTerms}
+                    onChange={(e) => handleVendorFormChange('paymentTerms', e.target.value)}
+                    required
+                  >
+                    <option value="">Select payment terms</option>
+                    <option value="Net 15 days">Net 15 days</option>
+                    <option value="Net 30 days">Net 30 days</option>
+                    <option value="Net 45 days">Net 45 days</option>
+                    <option value="Advance Payment">Advance Payment</option>
+                    <option value="Cash on Delivery">Cash on Delivery</option>
+                  </select>
+                  {vendorFormErrors.paymentTerms && (
+                    <span className="dashboard-form-error">{vendorFormErrors.paymentTerms}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group dashboard-form-group-full">
+                  <label className="dashboard-form-label">Collection Schedule *</label>
+                  <input
+                    type="text"
+                    className={`dashboard-form-input ${vendorFormErrors.collectionSchedule ? 'error' : ''}`}
+                    value={vendorFormData.collectionSchedule}
+                    onChange={(e) => handleVendorFormChange('collectionSchedule', e.target.value)}
+                    placeholder="e.g., Daily 5:00 AM"
+                    required
+                  />
+                  {vendorFormErrors.collectionSchedule && (
+                    <span className="dashboard-form-error">{vendorFormErrors.collectionSchedule}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group dashboard-form-group-full">
+                  <label className="dashboard-form-label">Certifications</label>
+                  <input
+                    type="text"
+                    className={`dashboard-form-input ${vendorFormErrors.certifications ? 'error' : ''}`}
+                    value={vendorFormData.certifications}
+                    onChange={(e) => handleVendorFormChange('certifications', e.target.value)}
+                    placeholder="e.g., ISO 9001, HACCP, FSSAI (comma separated)"
+                  />
+                  {vendorFormErrors.certifications && (
+                    <span className="dashboard-form-error">{vendorFormErrors.certifications}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group dashboard-form-group-full">
+                  <label className="dashboard-form-label">Address</label>
+                  <textarea
+                    className={`dashboard-form-textarea ${vendorFormErrors.address ? 'error' : ''}`}
+                    value={vendorFormData.address}
+                    onChange={(e) => handleVendorFormChange('address', e.target.value)}
+                    placeholder="Enter complete address"
+                    rows="3"
+                  />
+                  {vendorFormErrors.address && (
+                    <span className="dashboard-form-error">{vendorFormErrors.address}</span>
+                  )}
+                </div>
+              </div>
+              
+              <div className="dashboard-form-actions">
+                <button 
+                  type="button" 
+                  className="dashboard-form-btn dashboard-form-btn-cancel"
+                  onClick={() => handleFormCancel('vendor')}
+                  disabled={isVendorFormSubmitting}
+                >
+                  Cancel
+                </button>
+                <button 
+                  type="submit" 
+                  className={`dashboard-form-btn dashboard-form-btn-submit ${isVendorFormSubmitting ? 'loading' : ''}`}
+                  disabled={isVendorFormSubmitting}
+                >
+                  <span className="dashboard-form-btn-icon">
+                    {isVendorFormSubmitting ? '⏳' : '✓'}
+                  </span>
+                  {isVendorFormSubmitting ? 'Adding Vendor...' : 'Add Vendor'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* View Orders Form */}
+      {showViewOrdersForm && (
+        <div className="dashboard-form-overlay" onClick={(e) => handleOverlayClick(e, 'viewOrders')}>
+          <div className="dashboard-form-modal view-orders-form-modal">
+            <div className="dashboard-form-header">
+              <h3 className="dashboard-form-title">
+                <span className="dashboard-form-icon">📋</span>
+                View Orders - {selectedClient?.name}
+              </h3>
+              <button 
+                className="dashboard-form-close-btn"
+                onClick={() => handleClientOperationFormCancel('viewOrders')}
+              >
+                ×
+              </button>
+            </div>
+            
+            <form onSubmit={handleViewOrdersFormSubmit} className="dashboard-form-content">
+              <div className="dashboard-form-grid">
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Order ID *</label>
+                  <input
+                    type="text"
+                    className={`dashboard-form-input ${viewOrdersFormErrors.orderId ? 'error' : ''}`}
+                    value={viewOrdersData.orderId}
+                    onChange={(e) => handleViewOrdersFormChange('orderId', e.target.value)}
+                    placeholder="ORD-CL001-123456"
+                    required
+                  />
+                  {viewOrdersFormErrors.orderId && (
+                    <span className="dashboard-form-error">{viewOrdersFormErrors.orderId}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Order Date *</label>
+                  <input
+                    type="date"
+                    className={`dashboard-form-input ${viewOrdersFormErrors.orderDate ? 'error' : ''}`}
+                    value={viewOrdersData.orderDate}
+                    onChange={(e) => handleViewOrdersFormChange('orderDate', e.target.value)}
+                    required
+                  />
+                  {viewOrdersFormErrors.orderDate && (
+                    <span className="dashboard-form-error">{viewOrdersFormErrors.orderDate}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Delivery Date *</label>
+                  <input
+                    type="date"
+                    className={`dashboard-form-input ${viewOrdersFormErrors.deliveryDate ? 'error' : ''}`}
+                    value={viewOrdersData.deliveryDate}
+                    onChange={(e) => handleViewOrdersFormChange('deliveryDate', e.target.value)}
+                    required
+                  />
+                  {viewOrdersFormErrors.deliveryDate && (
+                    <span className="dashboard-form-error">{viewOrdersFormErrors.deliveryDate}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Quantity *</label>
+                  <input
+                    type="text"
+                    className={`dashboard-form-input ${viewOrdersFormErrors.quantity ? 'error' : ''}`}
+                    value={viewOrdersData.quantity}
+                    onChange={(e) => handleViewOrdersFormChange('quantity', e.target.value)}
+                    placeholder="e.g., 2,500L"
+                    required
+                  />
+                  {viewOrdersFormErrors.quantity && (
+                    <span className="dashboard-form-error">{viewOrdersFormErrors.quantity}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Order Status *</label>
+                  <select
+                    className={`dashboard-form-select ${viewOrdersFormErrors.status ? 'error' : ''}`}
+                    value={viewOrdersData.status}
+                    onChange={(e) => handleViewOrdersFormChange('status', e.target.value)}
+                    required
+                  >
+                    <option value="">Select status</option>
+                    <option value="pending">Pending</option>
+                    <option value="confirmed">Confirmed</option>
+                    <option value="processing">Processing</option>
+                    <option value="shipped">Shipped</option>
+                    <option value="delivered">Delivered</option>
+                    <option value="cancelled">Cancelled</option>
+                  </select>
+                  {viewOrdersFormErrors.status && (
+                    <span className="dashboard-form-error">{viewOrdersFormErrors.status}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Priority *</label>
+                  <select
+                    className={`dashboard-form-select ${viewOrdersFormErrors.priority ? 'error' : ''}`}
+                    value={viewOrdersData.priority}
+                    onChange={(e) => handleViewOrdersFormChange('priority', e.target.value)}
+                    required
+                  >
+                    <option value="">Select priority</option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                    <option value="urgent">Urgent</option>
+                  </select>
+                  {viewOrdersFormErrors.priority && (
+                    <span className="dashboard-form-error">{viewOrdersFormErrors.priority}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Contact Person *</label>
+                  <input
+                    type="text"
+                    className={`dashboard-form-input ${viewOrdersFormErrors.contactPerson ? 'error' : ''}`}
+                    value={viewOrdersData.contactPerson}
+                    onChange={(e) => handleViewOrdersFormChange('contactPerson', e.target.value)}
+                    placeholder="Contact person name"
+                    required
+                  />
+                  {viewOrdersFormErrors.contactPerson && (
+                    <span className="dashboard-form-error">{viewOrdersFormErrors.contactPerson}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Order Value</label>
+                  <input
+                    type="text"
+                    className="dashboard-form-input"
+                    value={viewOrdersData.orderValue}
+                    onChange={(e) => handleViewOrdersFormChange('orderValue', e.target.value)}
+                    placeholder="₹1,25,000"
+                  />
+                </div>
+                
+                <div className="dashboard-form-group dashboard-form-group-full">
+                  <label className="dashboard-form-label">Delivery Address</label>
+                  <textarea
+                    className="dashboard-form-textarea"
+                    value={viewOrdersData.deliveryAddress}
+                    onChange={(e) => handleViewOrdersFormChange('deliveryAddress', e.target.value)}
+                    placeholder="Enter delivery address"
+                    rows="2"
+                  />
+                </div>
+                
+                <div className="dashboard-form-group dashboard-form-group-full">
+                  <label className="dashboard-form-label">Special Instructions</label>
+                  <textarea
+                    className="dashboard-form-textarea"
+                    value={viewOrdersData.specialInstructions}
+                    onChange={(e) => handleViewOrdersFormChange('specialInstructions', e.target.value)}
+                    placeholder="Any special instructions for this order"
+                    rows="3"
+                  />
+                </div>
+              </div>
+              
+              <div className="dashboard-form-actions">
+                <button 
+                  type="button" 
+                  className="dashboard-form-btn dashboard-form-btn-cancel"
+                  onClick={() => handleClientOperationFormCancel('viewOrders')}
+                  disabled={isViewOrdersFormSubmitting}
+                >
+                  Cancel
+                </button>
+                <button 
+                  type="submit" 
+                  className={`dashboard-form-btn dashboard-form-btn-submit ${isViewOrdersFormSubmitting ? 'loading' : ''}`}
+                  disabled={isViewOrdersFormSubmitting}
+                >
+                  <span className="dashboard-form-btn-icon">
+                    {isViewOrdersFormSubmitting ? '⏳' : '📋'}
+                  </span>
+                  {isViewOrdersFormSubmitting ? 'Creating Order...' : 'Create Order'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Contact Form */}
+      {showContactForm && (
+        <div className="dashboard-form-overlay" onClick={(e) => handleOverlayClick(e, 'contact')}>
+          <div className="dashboard-form-modal contact-form-modal">
+            <div className="dashboard-form-header">
+              <h3 className="dashboard-form-title">
+                <span className="dashboard-form-icon">📞</span>
+                Contact - {selectedClient?.name}
+              </h3>
+              <button 
+                className="dashboard-form-close-btn"
+                onClick={() => handleClientOperationFormCancel('contact')}
+              >
+                ×
+              </button>
+            </div>
+            
+            <form onSubmit={handleContactFormSubmit} className="dashboard-form-content">
+              <div className="dashboard-form-grid">
+                <div className="dashboard-form-group dashboard-form-group-full">
+                  <label className="dashboard-form-label">Subject *</label>
+                  <input
+                    type="text"
+                    className={`dashboard-form-input ${contactFormErrors.subject ? 'error' : ''}`}
+                    value={contactFormData.subject}
+                    onChange={(e) => handleContactFormChange('subject', e.target.value)}
+                    placeholder="Enter message subject"
+                    required
+                  />
+                  {contactFormErrors.subject && (
+                    <span className="dashboard-form-error">{contactFormErrors.subject}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Priority *</label>
+                  <select
+                    className={`dashboard-form-select ${contactFormErrors.priority ? 'error' : ''}`}
+                    value={contactFormData.priority}
+                    onChange={(e) => handleContactFormChange('priority', e.target.value)}
+                    required
+                  >
+                    <option value="">Select priority</option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                    <option value="urgent">Urgent</option>
+                  </select>
+                  {contactFormErrors.priority && (
+                    <span className="dashboard-form-error">{contactFormErrors.priority}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Contact Method *</label>
+                  <select
+                    className={`dashboard-form-select ${contactFormErrors.contactMethod ? 'error' : ''}`}
+                    value={contactFormData.contactMethod}
+                    onChange={(e) => handleContactFormChange('contactMethod', e.target.value)}
+                    required
+                  >
+                    <option value="">Select method</option>
+                    <option value="email">Email</option>
+                    <option value="phone">Phone Call</option>
+                    <option value="sms">SMS</option>
+                    <option value="whatsapp">WhatsApp</option>
+                    <option value="meeting">In-Person Meeting</option>
+                  </select>
+                  {contactFormErrors.contactMethod && (
+                    <span className="dashboard-form-error">{contactFormErrors.contactMethod}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Category *</label>
+                  <select
+                    className={`dashboard-form-select ${contactFormErrors.category ? 'error' : ''}`}
+                    value={contactFormData.category}
+                    onChange={(e) => handleContactFormChange('category', e.target.value)}
+                    required
+                  >
+                    <option value="">Select category</option>
+                    <option value="general">General Inquiry</option>
+                    <option value="order">Order Related</option>
+                    <option value="payment">Payment Issue</option>
+                    <option value="quality">Quality Concern</option>
+                    <option value="delivery">Delivery Issue</option>
+                    <option value="contract">Contract Discussion</option>
+                    <option value="complaint">Complaint</option>
+                    <option value="feedback">Feedback</option>
+                  </select>
+                  {contactFormErrors.category && (
+                    <span className="dashboard-form-error">{contactFormErrors.category}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Follow-up Date</label>
+                  <input
+                    type="date"
+                    className="dashboard-form-input"
+                    value={contactFormData.followUpDate}
+                    onChange={(e) => handleContactFormChange('followUpDate', e.target.value)}
+                  />
+                </div>
+                
+                <div className="dashboard-form-group dashboard-form-group-full">
+                  <label className="dashboard-form-label">Message *</label>
+                  <textarea
+                    className={`dashboard-form-textarea ${contactFormErrors.message ? 'error' : ''}`}
+                    value={contactFormData.message}
+                    onChange={(e) => handleContactFormChange('message', e.target.value)}
+                    placeholder="Enter your message here..."
+                    rows="4"
+                    required
+                  />
+                  {contactFormErrors.message && (
+                    <span className="dashboard-form-error">{contactFormErrors.message}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group dashboard-form-group-full">
+                  <label className="dashboard-form-label">Attachments</label>
+                  <input
+                    type="text"
+                    className="dashboard-form-input"
+                    value={contactFormData.attachments}
+                    onChange={(e) => handleContactFormChange('attachments', e.target.value)}
+                    placeholder="File names or URLs (comma separated)"
+                  />
+                </div>
+              </div>
+              
+              <div className="dashboard-form-actions">
+                <button 
+                  type="button" 
+                  className="dashboard-form-btn dashboard-form-btn-cancel"
+                  onClick={() => handleClientOperationFormCancel('contact')}
+                  disabled={isContactFormSubmitting}
+                >
+                  Cancel
+                </button>
+                <button 
+                  type="submit" 
+                  className={`dashboard-form-btn dashboard-form-btn-submit ${isContactFormSubmitting ? 'loading' : ''}`}
+                  disabled={isContactFormSubmitting}
+                >
+                  <span className="dashboard-form-btn-icon">
+                    {isContactFormSubmitting ? '⏳' : '📞'}
+                  </span>
+                  {isContactFormSubmitting ? 'Sending Message...' : 'Send Message'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Invoice Form */}
+      {showInvoiceForm && (
+        <div className="dashboard-form-overlay" onClick={(e) => handleOverlayClick(e, 'invoice')}>
+          <div className="dashboard-form-modal invoice-form-modal">
+            <div className="dashboard-form-header">
+              <h3 className="dashboard-form-title">
+                <span className="dashboard-form-icon">💰</span>
+                Generate Invoice - {selectedClient?.name}
+              </h3>
+              <button 
+                className="dashboard-form-close-btn"
+                onClick={() => handleClientOperationFormCancel('invoice')}
+              >
+                ×
+              </button>
+            </div>
+            
+            <form onSubmit={handleInvoiceFormSubmit} className="dashboard-form-content">
+              <div className="dashboard-form-grid">
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Invoice Number *</label>
+                  <input
+                    type="text"
+                    className={`dashboard-form-input ${invoiceFormErrors.invoiceNumber ? 'error' : ''}`}
+                    value={invoiceFormData.invoiceNumber}
+                    onChange={(e) => handleInvoiceFormChange('invoiceNumber', e.target.value)}
+                    placeholder="INV-CL001-123456"
+                    required
+                  />
+                  {invoiceFormErrors.invoiceNumber && (
+                    <span className="dashboard-form-error">{invoiceFormErrors.invoiceNumber}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Invoice Date *</label>
+                  <input
+                    type="date"
+                    className={`dashboard-form-input ${invoiceFormErrors.invoiceDate ? 'error' : ''}`}
+                    value={invoiceFormData.invoiceDate}
+                    onChange={(e) => handleInvoiceFormChange('invoiceDate', e.target.value)}
+                    required
+                  />
+                  {invoiceFormErrors.invoiceDate && (
+                    <span className="dashboard-form-error">{invoiceFormErrors.invoiceDate}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Due Date *</label>
+                  <input
+                    type="date"
+                    className={`dashboard-form-input ${invoiceFormErrors.dueDate ? 'error' : ''}`}
+                    value={invoiceFormData.dueDate}
+                    onChange={(e) => handleInvoiceFormChange('dueDate', e.target.value)}
+                    required
+                  />
+                  {invoiceFormErrors.dueDate && (
+                    <span className="dashboard-form-error">{invoiceFormErrors.dueDate}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Payment Terms</label>
+                  <select
+                    className="dashboard-form-select"
+                    value={invoiceFormData.paymentTerms}
+                    onChange={(e) => handleInvoiceFormChange('paymentTerms', e.target.value)}
+                  >
+                    <option value="">Select payment terms</option>
+                    <option value="Net 15 days">Net 15 days</option>
+                    <option value="Net 30 days">Net 30 days</option>
+                    <option value="Net 45 days">Net 45 days</option>
+                    <option value="Due on receipt">Due on receipt</option>
+                    <option value="Cash on delivery">Cash on delivery</option>
+                  </select>
+                </div>
+                
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Quantity *</label>
+                  <input
+                    type="text"
+                    className={`dashboard-form-input ${invoiceFormErrors.quantity ? 'error' : ''}`}
+                    value={invoiceFormData.quantity}
+                    onChange={(e) => handleInvoiceFormChange('quantity', e.target.value)}
+                    placeholder="e.g., 2,500L"
+                    required
+                  />
+                  {invoiceFormErrors.quantity && (
+                    <span className="dashboard-form-error">{invoiceFormErrors.quantity}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Unit Price</label>
+                  <input
+                    type="text"
+                    className="dashboard-form-input"
+                    value={invoiceFormData.unitPrice}
+                    onChange={(e) => handleInvoiceFormChange('unitPrice', e.target.value)}
+                    placeholder="₹50.00"
+                  />
+                </div>
+                
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Amount *</label>
+                  <input
+                    type="text"
+                    className={`dashboard-form-input ${invoiceFormErrors.amount ? 'error' : ''}`}
+                    value={invoiceFormData.amount}
+                    onChange={(e) => handleInvoiceFormChange('amount', e.target.value)}
+                    placeholder="₹1,25,000"
+                    required
+                  />
+                  {invoiceFormErrors.amount && (
+                    <span className="dashboard-form-error">{invoiceFormErrors.amount}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Tax Amount</label>
+                  <input
+                    type="text"
+                    className="dashboard-form-input"
+                    value={invoiceFormData.taxAmount}
+                    onChange={(e) => handleInvoiceFormChange('taxAmount', e.target.value)}
+                    placeholder="₹22,500"
+                  />
+                </div>
+                
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Discount</label>
+                  <input
+                    type="text"
+                    className="dashboard-form-input"
+                    value={invoiceFormData.discount}
+                    onChange={(e) => handleInvoiceFormChange('discount', e.target.value)}
+                    placeholder="₹0 or 5%"
+                  />
+                </div>
+                
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Total Amount</label>
+                  <input
+                    type="text"
+                    className="dashboard-form-input"
+                    value={invoiceFormData.totalAmount}
+                    onChange={(e) => handleInvoiceFormChange('totalAmount', e.target.value)}
+                    placeholder="₹1,47,500"
+                  />
+                </div>
+                
+                <div className="dashboard-form-group dashboard-form-group-full">
+                  <label className="dashboard-form-label">Description *</label>
+                  <textarea
+                    className={`dashboard-form-textarea ${invoiceFormErrors.description ? 'error' : ''}`}
+                    value={invoiceFormData.description}
+                    onChange={(e) => handleInvoiceFormChange('description', e.target.value)}
+                    placeholder="Description of goods/services"
+                    rows="2"
+                    required
+                  />
+                  {invoiceFormErrors.description && (
+                    <span className="dashboard-form-error">{invoiceFormErrors.description}</span>
+                  )}
+                </div>
+                
+                <div className="dashboard-form-group dashboard-form-group-full">
+                  <label className="dashboard-form-label">Notes</label>
+                  <textarea
+                    className="dashboard-form-textarea"
+                    value={invoiceFormData.notes}
+                    onChange={(e) => handleInvoiceFormChange('notes', e.target.value)}
+                    placeholder="Additional notes or terms"
+                    rows="3"
+                  />
+                </div>
+              </div>
+              
+              <div className="dashboard-form-actions">
+                <button 
+                  type="button" 
+                  className="dashboard-form-btn dashboard-form-btn-cancel"
+                  onClick={() => handleClientOperationFormCancel('invoice')}
+                  disabled={isInvoiceFormSubmitting}
+                >
+                  Cancel
+                </button>
+                <button 
+                  type="submit" 
+                  className={`dashboard-form-btn dashboard-form-btn-submit ${isInvoiceFormSubmitting ? 'loading' : ''}`}
+                  disabled={isInvoiceFormSubmitting}
+                >
+                  <span className="dashboard-form-btn-icon">
+                    {isInvoiceFormSubmitting ? '⏳' : '💰'}
+                  </span>
+                  {isInvoiceFormSubmitting ? 'Generating Invoice...' : 'Generate Invoice'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
 
       {/* Enhanced Key Metrics Cards */}
       <div className="metrics-grid">
@@ -1189,182 +3397,405 @@ function Dashboard() {
         })}
       </div>
 
-      {/* Dashboard Content */}
-      <div className="dashboard-content">
-        {/* Advanced Collection Chart */}
-        <div className="chart-section">
-          <div className="chart-card">
-            <div className="card-header">
-              <h3>Milk Collection Analytics</h3>
-              <div className="chart-controls">
-                {/* Chart Type Toggle */}
-                <div className="chart-toggle">
-                  <button 
-                    className={`toggle-btn ${chartType === 'bar' ? 'active' : ''}`}
-                    onClick={() => setChartType('bar')}
-                  >
-                    📊 Bar
-                  </button>
-                  <button 
-                    className={`toggle-btn ${chartType === 'line' ? 'active' : ''}`}
-                    onClick={() => setChartType('line')}
-                  >
-                    📈 Line
-                  </button>
-                </div>
-                {/* Period Selector */}
-                <select 
-                  className="period-selector"
-                  value={selectedPeriod}
-                  onChange={(e) => setSelectedPeriod(e.target.value)}
-                >
-                  <option value="weekly">Weekly</option>
-                  <option value="monthly">Monthly</option>
-                  <option value="yearly">Yearly</option>
-                </select>
-              </div>
-            </div>
-            <div className="chart-container">
-              {chartType === 'bar' ? (
-                // Bar Chart
-                <div className="chart-view">
-                  <div className="chart-bars">
-                    {chartData[selectedPeriod].values.map((height, index) => (
-                      <div key={index} className="bar" style={{ height: `${height}%` }}>
-                        <div className="bar-value">{chartData[selectedPeriod].displayValues[index]}</div>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="chart-labels">
-                    {chartData[selectedPeriod].labels.map((label, index) => (
-                      <span key={index}>{label}</span>
-                    ))}
-                  </div>
-                </div>
-              ) : (
-                // Line Chart
-                <div className="chart-view">
-                  <div className="line-chart-wrapper">
-                    <svg width="100%" height="280" viewBox="0 0 500 280">
-                      {/* Grid lines */}
-                      <defs>
-                        <pattern id="grid" width="50" height="35" patternUnits="userSpaceOnUse">
-                          <path d="M 50 0 L 0 0 0 35" fill="none" stroke="#f0f0f0" strokeWidth="1"/>
-                        </pattern>
-                      </defs>
-                      <rect width="100%" height="220" fill="url(#grid)" />
-                      
-                      {/* Y-axis labels */}
-                      <g>
-                        <text x="15" y="30" fontSize="10" fill="#7f8c8d" textAnchor="middle">Max</text>
-                        <text x="15" y="120" fontSize="10" fill="#7f8c8d" textAnchor="middle">Avg</text>
-                        <text x="15" y="210" fontSize="10" fill="#7f8c8d" textAnchor="middle">Min</text>
-                      </g>
-                      
-                      {/* Line path */}
-                      <path
-                        d={chartData[selectedPeriod].values.map((value, index) => {
-                          const x = (index * 420) / (chartData[selectedPeriod].values.length - 1) + 40;
-                          const y = 200 - ((value / 100) * 160);
-                          return `${index === 0 ? 'M' : 'L'} ${x} ${y}`;
-                        }).join(' ')}
-                        fill="none"
-                        stroke="#3498db"
-                        strokeWidth="3"
-                        strokeLinecap="round"
-                      />
-                      
-                      {/* Area under line */}
-                      <path
-                        d={`M 40 200 ${chartData[selectedPeriod].values.map((value, index) => {
-                          const x = (index * 420) / (chartData[selectedPeriod].values.length - 1) + 40;
-                          const y = 200 - ((value / 100) * 160);
-                          return `L ${x} ${y}`;
-                        }).join(' ')} L ${(chartData[selectedPeriod].values.length - 1) * 420 / (chartData[selectedPeriod].values.length - 1) + 40} 200 Z`}
-                        fill="rgba(52, 152, 219, 0.1)"
-                      />
-                      
-                      {/* Data points */}
-                      {chartData[selectedPeriod].values.map((value, index) => {
-                        const x = (index * 420) / (chartData[selectedPeriod].values.length - 1) + 40;
-                        const y = 200 - ((value / 100) * 160);
-                        return (
-                          <g key={index}>
-                            <circle cx={x} cy={y} r="5" fill="#3498db" stroke="#ffffff" strokeWidth="2"/>
-                            <text x={x} y={y - 15} textAnchor="middle" fontSize="11" fill="#2c3e50" fontWeight="600">
-                              {chartData[selectedPeriod].displayValues[index]}
-                            </text>
-                          </g>
-                        );
-                      })}
-                      
-                      {/* X-axis labels */}
-                      {chartData[selectedPeriod].labels.map((label, index) => {
-                        const x = (index * 420) / (chartData[selectedPeriod].labels.length - 1) + 40;
-                        return (
-                          <text key={index} x={x} y={240} textAnchor="middle" fontSize="12" fill="#7f8c8d">
-                            {label}
-                          </text>
-                        );
-                      })}
-                    </svg>
-                  </div>
-                </div>
-              )}
+      {/* Production Analytics & Sales Distribution - Positioned Above B2B Operations Management */}
+      <div className="dashboard-charts-main-section">
+        <div className="charts-section-header">
+          <h3>📊 Production Analytics & Sales Distribution</h3>
+          <div className="charts-period-controls">
+            <div className="chart-period-selector">
+              <button 
+                className={`chart-period-btn ${selectedPeriod === 'weekly' ? 'active' : ''}`}
+                onClick={() => setSelectedPeriod('weekly')}
+              >
+                Weekly
+              </button>
+              <button 
+                className={`chart-period-btn ${selectedPeriod === 'monthly' ? 'active' : ''}`}
+                onClick={() => setSelectedPeriod('monthly')}
+              >
+                Monthly
+              </button>
+              <button 
+                className={`chart-period-btn ${selectedPeriod === 'yearly' ? 'active' : ''}`}
+                onClick={() => setSelectedPeriod('yearly')}
+              >
+                Yearly
+              </button>
             </div>
           </div>
         </div>
 
-        {/* Pie Chart for Market Distribution */}
-        <div className="pie-chart-section">
-          <div className="chart-card">
-            <div className="card-header">
-              <h3>Market Distribution</h3>
-              <span className="chart-subtitle">Sales by Channel</span>
-            </div>
-            <div className="pie-chart-container">
-              <div className="pie-chart">
-                <svg width="200" height="200" viewBox="0 0 200 200">
-                  {pieChartData.map((segment, index) => {
-                    const total = pieChartData.reduce((sum, item) => sum + item.value, 0);
-                    const percentage = (segment.value / total) * 100;
-                    const angle = (segment.value / total) * 360;
-                    const startAngle = pieChartData.slice(0, index).reduce((sum, item) => sum + (item.value / total) * 360, 0);
-                    
-                    const x1 = 100 + 80 * Math.cos((startAngle - 90) * Math.PI / 180);
-                    const y1 = 100 + 80 * Math.sin((startAngle - 90) * Math.PI / 180);
-                    const x2 = 100 + 80 * Math.cos((startAngle + angle - 90) * Math.PI / 180);
-                    const y2 = 100 + 80 * Math.sin((startAngle + angle - 90) * Math.PI / 180);
-                    
-                    const largeArcFlag = angle > 180 ? 1 : 0;
-                    
-                    const pathData = [
-                      `M 100 100`,
-                      `L ${x1} ${y1}`,
-                      `A 80 80 0 ${largeArcFlag} 1 ${x2} ${y2}`,
-                      'Z'
-                    ].join(' ');
-                    
-                    return (
-                      <path
-                        key={index}
-                        d={pathData}
-                        fill={segment.color}
-                        stroke="white"
-                        strokeWidth="2"
-                      />
-                    );
-                  })}
-                </svg>
+        <div className="dashboard-charts-equal-grid">
+          {/* Production Chart Card */}
+          <div className="production-chart-main-card">
+            <div className="production-chart-card-header">
+              <h4>🏭 Production Trends</h4>
+              <div className="production-chart-info">
+                <span className="production-chart-period">{selectedPeriod.charAt(0).toUpperCase() + selectedPeriod.slice(1)}</span>
+                <div className="production-chart-type-toggle">
+                  <button 
+                    className={`production-chart-type-btn ${chartType === 'bar' ? 'active' : ''}`}
+                    onClick={() => setChartType('bar')}
+                    title="Bar Chart"
+                  >
+                    📊
+                  </button>
+                  <button 
+                    className={`production-chart-type-btn ${chartType === 'line' ? 'active' : ''}`}
+                    onClick={() => setChartType('line')}
+                    title="Line Chart"
+                  >
+                    📈
+                  </button>
+                </div>
               </div>
-              <div className="pie-chart-legend">
-                {pieChartData.map((segment, index) => (
-                  <div key={index} className="legend-item">
-                    <div className="legend-color" style={{ backgroundColor: segment.color }}></div>
-                    <span className="legend-label">{segment.label}</span>
-                    <span className="legend-value">{segment.value}%</span>
+            </div>
+            <div className="production-chart-card-content">
+              <div className="production-chart-container">
+                <div className="production-chart-wrapper">
+                  {chartType === 'bar' ? (
+                    <div className={`production-bar-chart production-trends-bar-chart-${selectedPeriod}`}>
+                      {chartData[selectedPeriod].labels.map((label, index) => {
+                        // Define unique color schemes for each period
+                        const getBarStyling = (period, index) => {
+                          const colorSchemes = {
+                            weekly: {
+                              gradient: 'linear-gradient(135deg, #a8e6cf 0%, #7fcdcd 100%)',
+                              shadow: 'rgba(127, 205, 205, 0.3)'
+                            },
+                            monthly: {
+                              gradient: 'linear-gradient(135deg, #ffd3a5 0%, #fd9853 100%)',
+                              shadow: 'rgba(253, 152, 83, 0.3)'
+                            },
+                            yearly: [
+                              'linear-gradient(135deg, #e8f5e8 0%, #81c784 100%)', // Jan - Light Green
+                              'linear-gradient(135deg, #fff3e0 0%, #ffb74d 100%)', // Feb - Light Orange
+                              'linear-gradient(135deg, #f3e5f5 0%, #ba68c8 100%)', // Mar - Light Purple
+                              'linear-gradient(135deg, #e3f2fd 0%, #64b5f6 100%)', // Apr - Light Blue
+                              'linear-gradient(135deg, #fff8e1 0%, #ffcc02 100%)', // May - Light Yellow
+                              'linear-gradient(135deg, #fce4ec 0%, #f06292 100%)', // Jun - Light Pink
+                              'linear-gradient(135deg, #e0f2f1 0%, #4db6ac 100%)', // Jul - Light Teal
+                              'linear-gradient(135deg, #f1f8e9 0%, #8bc34a 100%)', // Aug - Light Lime
+                              'linear-gradient(135deg, #ede7f6 0%, #9575cd 100%)', // Sep - Light Deep Purple
+                              'linear-gradient(135deg, #e8eaf6 0%, #7986cb 100%)', // Oct - Light Indigo
+                              'linear-gradient(135deg, #fff9c4 0%, #f9a825 100%)', // Nov - Light Amber
+                              'linear-gradient(135deg, #ffebee 0%, #ef5350 100%)'  // Dec - Light Red
+                            ]
+                          };
+                          
+                          if (period === 'yearly') {
+                            return {
+                              gradient: colorSchemes.yearly[index % colorSchemes.yearly.length],
+                              shadow: 'rgba(129, 199, 132, 0.2)'
+                            };
+                          }
+                          return colorSchemes[period];
+                        };
+                        
+                        const barStyling = getBarStyling(selectedPeriod, index);
+                        
+                        // Define spacing based on period
+                        const getItemSpacing = (period) => {
+                          const spacing = {
+                            weekly: { margin: '0 2px', minWidth: 'auto' },
+                            monthly: { margin: '0 3px', minWidth: 'auto' },
+                            yearly: { margin: '0 1px', minWidth: '28px' } // Smaller gaps for 12 months
+                          };
+                          return spacing[period];
+                        };
+                        
+                        const itemSpacing = getItemSpacing(selectedPeriod);
+                        
+                        return (
+                          <div 
+                            key={index} 
+                            className={`production-bar-item production-trends-bar-item-${selectedPeriod}`}
+                            style={{
+                              margin: itemSpacing.margin,
+                              minWidth: itemSpacing.minWidth,
+                              flex: selectedPeriod === 'yearly' ? '1' : 'auto'
+                            }}
+                          >
+                            <div className="production-bar-container">
+                              <div 
+                                className={`production-bar production-trends-bar-${selectedPeriod}`}
+                                style={{ 
+                                  height: `${chartData[selectedPeriod].values[index]}%`,
+                                  background: barStyling.gradient,
+                                  boxShadow: `0 4px 8px ${barStyling.shadow}`,
+                                  borderRadius: selectedPeriod === 'yearly' ? '6px 6px 2px 2px' : '4px 4px 2px 2px',
+                                  transition: 'all 0.3s ease',
+                                  minHeight: '20px'
+                                }}
+                              >
+                                <span 
+                                  className={`production-bar-value production-trends-bar-value-${selectedPeriod}`}
+                                  style={{
+                                    fontSize: selectedPeriod === 'yearly' ? '9px' : '11px',
+                                    fontWeight: '600',
+                                    color: '#2c3e50'
+                                  }}
+                                >
+                                  {chartData[selectedPeriod].displayValues[index]}
+                                </span>
+                              </div>
+                            </div>
+                            <span 
+                              className={`production-bar-label production-trends-bar-label-${selectedPeriod}`}
+                              style={{
+                                fontSize: selectedPeriod === 'yearly' ? '9px' : '11px',
+                                fontWeight: '500',
+                                color: '#34495e',
+                                textAlign: 'center',
+                                marginTop: '4px',
+                                display: 'block'
+                              }}
+                            >
+                              {label}
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    <div className={`production-line-chart production-trends-line-chart-${selectedPeriod}`}>
+                      <svg viewBox="0 0 400 200" className={`production-line-chart-svg production-trends-line-svg-${selectedPeriod}`}>
+                        <defs>
+                          {/* Weekly gradient */}
+                          <linearGradient id="productionTrendsLineGradientWeekly" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stopColor="#7fcdcd" />
+                            <stop offset="100%" stopColor="#a8e6cf" />
+                          </linearGradient>
+                          {/* Monthly gradient */}
+                          <linearGradient id="productionTrendsLineGradientMonthly" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stopColor="#fd9853" />
+                            <stop offset="100%" stopColor="#ffd3a5" />
+                          </linearGradient>
+                          {/* Yearly gradient */}
+                          <linearGradient id="productionTrendsLineGradientYearly" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stopColor="#81c784" />
+                            <stop offset="50%" stopColor="#a5d6a7" />
+                            <stop offset="100%" stopColor="#c8e6c9" />
+                          </linearGradient>
+                          {/* Area fill gradients */}
+                          <linearGradient id="productionTrendsAreaGradientWeekly" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stopColor="rgba(127, 205, 205, 0.3)" />
+                            <stop offset="100%" stopColor="rgba(168, 230, 207, 0.1)" />
+                          </linearGradient>
+                          <linearGradient id="productionTrendsAreaGradientMonthly" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stopColor="rgba(253, 152, 83, 0.3)" />
+                            <stop offset="100%" stopColor="rgba(255, 211, 165, 0.1)" />
+                          </linearGradient>
+                          <linearGradient id="productionTrendsAreaGradientYearly" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stopColor="rgba(129, 199, 132, 0.3)" />
+                            <stop offset="100%" stopColor="rgba(200, 230, 201, 0.1)" />
+                          </linearGradient>
+                        </defs>
+                        
+                        {/* Area fill under the line */}
+                        <polygon
+                          fill={`url(#productionTrendsAreaGradient${selectedPeriod.charAt(0).toUpperCase() + selectedPeriod.slice(1)})`}
+                          points={`0,200 ${chartData[selectedPeriod].values.map((value, index) => 
+                            `${(index * 400) / (chartData[selectedPeriod].values.length - 1)},${200 - (value * 2)}`
+                          ).join(' ')} 400,200`}
+                        />
+                        
+                        {/* Main line */}
+                        <polyline
+                          fill="none"
+                          stroke={`url(#productionTrendsLineGradient${selectedPeriod.charAt(0).toUpperCase() + selectedPeriod.slice(1)})`}
+                          strokeWidth="3"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          points={chartData[selectedPeriod].values.map((value, index) => 
+                            `${(index * 400) / (chartData[selectedPeriod].values.length - 1)},${200 - (value * 2)}`
+                          ).join(' ')}
+                        />
+                        
+                        {/* Data points */}
+                        {chartData[selectedPeriod].values.map((value, index) => {
+                          const getPointColor = (period) => {
+                            const colors = {
+                              weekly: '#7fcdcd',
+                              monthly: '#fd9853',
+                              yearly: '#81c784'
+                            };
+                            return colors[period];
+                          };
+                          
+                          return (
+                            <circle
+                              key={index}
+                              cx={(index * 400) / (chartData[selectedPeriod].values.length - 1)}
+                              cy={200 - (value * 2)}
+                              r="5"
+                              fill={getPointColor(selectedPeriod)}
+                              stroke="#ffffff"
+                              strokeWidth="2"
+                              className={`production-line-point production-trends-line-point-${selectedPeriod}`}
+                            />
+                          );
+                        })}
+                      </svg>
+                      <div className={`production-line-chart-labels production-trends-line-labels-${selectedPeriod}`}>
+                        {chartData[selectedPeriod].labels.map((label, index) => (
+                          <span 
+                            key={index} 
+                            className={`production-line-label production-trends-line-label-${selectedPeriod}`}
+                            style={{
+                              fontSize: selectedPeriod === 'yearly' ? '9px' : '11px',
+                              fontWeight: '500',
+                              color: '#34495e'
+                            }}
+                          >
+                            {label}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="production-chart-stats">
+                <div className="production-chart-stat">
+                  <span className="production-stat-label">Peak:</span>
+                  <span className="production-stat-value">
+                    {Math.max(...chartData[selectedPeriod].values)}%
+                  </span>
+                </div>
+                <div className="production-chart-stat">
+                  <span className="production-stat-label">Average:</span>
+                  <span className="production-stat-value">
+                    {Math.round(chartData[selectedPeriod].values.reduce((a, b) => a + b, 0) / chartData[selectedPeriod].values.length)}%
+                  </span>
+                </div>
+                <div className="production-chart-stat">
+                  <span className="production-stat-label">Trend:</span>
+                  <span className="production-stat-value production-positive">↗️ +8.2%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Sales Distribution Pie Chart Card */}
+          <div className="sales-pie-chart-main-card">
+            <div className="sales-pie-chart-card-header">
+              <h4>🥧 Sales Distribution</h4>
+              <div className="sales-pie-chart-info">
+                <span className="sales-pie-chart-period">
+                  {selectedPeriod === 'weekly' ? 'This Week' : 
+                   selectedPeriod === 'monthly' ? 'This Month' : 'This Year'}
+                </span>
+                <span className="sales-pie-chart-type">🥧</span>
+              </div>
+            </div>
+            <div className="sales-pie-chart-card-content">
+              <div className="sales-pie-chart-container" style={{ height: '260px', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', marginBottom: '4px', padding: '5px 0 0 0' }}>
+                <div className="sales-pie-chart-wrapper" style={{ height: '250px', width: '250px', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <div className="sales-pie-chart" style={{ position: 'relative', width: '100%', height: '100%' }}>
+                    <svg viewBox="0 0 240 240" className="sales-pie-chart-svg" style={{ height: '250px', width: '250px', display: 'block' }}>
+                      {(() => {
+                        let cumulativePercentage = 0;
+                        return pieChartData[selectedPeriod].map((segment, index) => {
+                          const startAngle = cumulativePercentage * 3.6;
+                          const endAngle = (cumulativePercentage + segment.value) * 3.6;
+                          cumulativePercentage += segment.value;
+                          
+                          const startAngleRad = (startAngle - 90) * (Math.PI / 180);
+                          const endAngleRad = (endAngle - 90) * (Math.PI / 180);
+                          
+                          const centerX = 120;
+                          const centerY = 120;
+                          const largeArcFlag = segment.value > 50 ? 1 : 0;
+                          
+                          const outerRadius = 100;
+                          const innerRadius = 45;
+                          
+                          const x1 = centerX + outerRadius * Math.cos(startAngleRad);
+                          const y1 = centerY + outerRadius * Math.sin(startAngleRad);
+                          const x2 = centerX + outerRadius * Math.cos(endAngleRad);
+                          const y2 = centerY + outerRadius * Math.sin(endAngleRad);
+                          
+                          const x3 = centerX + innerRadius * Math.cos(endAngleRad);
+                          const y3 = centerY + innerRadius * Math.sin(endAngleRad);
+                          const x4 = centerX + innerRadius * Math.cos(startAngleRad);
+                          const y4 = centerY + innerRadius * Math.sin(startAngleRad);
+                          
+                          const pathData = [
+                            `M ${x1} ${y1}`,
+                            `A ${outerRadius} ${outerRadius} 0 ${largeArcFlag} 1 ${x2} ${y2}`,
+                            `L ${x3} ${y3}`,
+                            `A ${innerRadius} ${innerRadius} 0 ${largeArcFlag} 0 ${x4} ${y4}`,
+                            `Z`
+                          ].join(' ');
+                          
+                          return (
+                            <path
+                              key={index}
+                              d={pathData}
+                              fill={segment.color}
+                              stroke="#ffffff"
+                              strokeWidth="2"
+                              className="sales-pie-segment"
+                            />
+                          );
+                        });
+                      })()}
+                    </svg>
+                    <div className="sales-analytics-donut-center-container" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', pointerEvents: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '80px', height: '80px', background: 'transparent', zIndex: 10, borderRadius: '50%' }}>
+                      <div className="sales-analytics-center-percentage" style={{ fontSize: '22px', fontWeight: 'bold', color: '#2c3e50', lineHeight: '1', marginBottom: '2px', whiteSpace: 'nowrap', textAlign: 'center', letterSpacing: '-0.5px' }}>100%</div>
+                      <div className="sales-analytics-center-label" style={{ fontSize: '11px', color: '#7f8c8d', fontWeight: '500', lineHeight: '1', whiteSpace: 'nowrap', textAlign: 'center', letterSpacing: '0.2px' }}>Total Sales</div>
+                    </div>
                   </div>
-                ))}
+                </div>
+              </div>
+              <div className="sales-pie-chart-details" style={{ padding: '8px 12px', fontSize: '11px', minHeight: '120px', height: 'auto', overflow: 'visible', marginTop: '8px' }}>
+                <div className="sales-pie-legend" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px', marginBottom: '10px' }}>
+                  {pieChartData[selectedPeriod].map((segment, index) => (
+                    <div key={index} className="sales-legend-item" style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '10px', padding: '2px 0' }}>
+                      <div 
+                        className="sales-legend-color" 
+                        style={{ backgroundColor: segment.color, width: '8px', height: '8px', borderRadius: '2px', flexShrink: 0 }}
+                      ></div>
+                      <div className="sales-legend-content" style={{ minWidth: 0, flex: 1 }}>
+                        <div style={{ fontSize: '9px', fontWeight: '500', color: '#2c3e50', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{segment.label}</div>
+                        <div style={{ fontSize: '8px', color: '#7f8c8d', display: 'flex', gap: '4px' }}>
+                          <span>{segment.value}%</span>
+                          <span>{segment.amount}</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="sales-summary-stats" style={{ display: 'flex', justifyContent: 'space-between', fontSize: '9px', gap: '8px', marginTop: '4px', paddingBottom: '4px' }}>
+                  <div className="sales-summary-item" style={{ textAlign: 'center', flex: 1 }}>
+                    <div style={{ color: '#7f8c8d', fontSize: '8px', marginBottom: '1px' }}>Total Revenue</div>
+                    <div style={{ color: '#2c3e50', fontWeight: 'bold', fontSize: '9px' }}>
+                      {(() => {
+                        const total = pieChartData[selectedPeriod].reduce((sum, segment) => {
+                          const amount = parseInt(segment.amount.replace(/[₹,]/g, ''));
+                          return sum + amount;
+                        }, 0);
+                        return `₹${total.toLocaleString()}`;
+                      })()}
+                    </div>
+                  </div>
+                  <div className="sales-summary-item" style={{ textAlign: 'center', flex: 1 }}>
+                    <div style={{ color: '#7f8c8d', fontSize: '8px', marginBottom: '1px' }}>Best Performer</div>
+                    <div style={{ color: '#2c3e50', fontWeight: 'bold', fontSize: '9px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      {pieChartData[selectedPeriod].reduce((max, segment) => 
+                        segment.value > max.value ? segment : max
+                      ).label}
+                    </div>
+                  </div>
+                  <div className="sales-summary-item" style={{ textAlign: 'center', flex: 1 }}>
+                    <div style={{ color: '#7f8c8d', fontSize: '8px', marginBottom: '1px' }}>Growth</div>
+                    <div style={{ color: '#27ae60', fontWeight: 'bold', fontSize: '9px' }}>
+                      {selectedPeriod === 'weekly' ? '+8.5%' : 
+                       selectedPeriod === 'monthly' ? '+12.5%' : '+15.8%'}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1372,7 +3803,7 @@ function Dashboard() {
       </div>
 
       {/* Comprehensive B2B Operations Management Section */}
-      <div className="b2b-section enhanced">
+      <div className="b2b-section enhanced" style={{ position: 'relative' }}>
         <div className="section-header">
           <h3>🏢 B2B Operations Management</h3>
           <div className="b2b-controls">
@@ -1393,111 +3824,133 @@ function Dashboard() {
           </div>
         </div>
 
-        {/* B2B Analytics Overview */}
-        <div className="b2b-analytics-overview">
-          <div className="analytics-card contracts-card">
-            <div className="analytics-header">
-              <h4>📊 Total Contracts</h4>
-              <span className="analytics-value">{b2bAnalytics.totalContracts}</span>
-            </div>
-            <div className="analytics-details">
-              <div className="detail-item">
-                <span className="detail-label">Active:</span>
-                <span className="detail-value">{b2bAnalytics.activeClients + b2bAnalytics.activeVendors}</span>
-              </div>
-              <div className="detail-item">
-                <span className="detail-label">Pending:</span>
-                <span className="detail-value">{b2bAnalytics.pendingContracts}</span>
+
+
+        {/* B2B Analytics Overview - Ultra Compact 3-Card Row Design */}
+        <div className="b2b-analytics-overview b2b-ops-ultra-compact-grid">
+          <div className="analytics-card b2b-ops-ultra-contracts">
+            <div className="b2b-ops-ultra-header">
+              <div className="b2b-ops-ultra-icon">📊</div>
+              <div className="b2b-ops-ultra-content">
+                <h4 className="b2b-ops-ultra-title">Total Contracts</h4>
+                <span className="b2b-ops-ultra-value">{b2bAnalytics.totalContracts}</span>
               </div>
             </div>
-          </div>
-          
-          <div className="analytics-card revenue-card">
-            <div className="analytics-header">
-              <h4>💰 Monthly Value</h4>
-              <span className="analytics-value">{b2bAnalytics.totalMonthlyValue}</span>
-            </div>
-            <div className="analytics-details">
-              <div className="detail-item">
-                <span className="detail-label">Growth:</span>
-                <span className="detail-value positive">+{b2bAnalytics.businessGrowth}%</span>
+            <div className="b2b-ops-ultra-metrics">
+              <div className="b2b-ops-ultra-metric">
+                <span className="b2b-ops-ultra-label">Active:</span>
+                <span className="b2b-ops-ultra-data">{b2bAnalytics.activeClients + b2bAnalytics.activeVendors}</span>
               </div>
-              <div className="detail-item">
-                <span className="detail-label">Avg Contract:</span>
-                <span className="detail-value">{b2bAnalytics.avgContractValue}</span>
+              <div className="b2b-ops-ultra-metric">
+                <span className="b2b-ops-ultra-label">Pending:</span>
+                <span className="b2b-ops-ultra-data">{b2bAnalytics.pendingContracts}</span>
               </div>
             </div>
           </div>
           
-          <div className="analytics-card satisfaction-card">
-            <div className="analytics-header">
-              <h4>⭐ Satisfaction</h4>
-              <span className="analytics-value">{b2bAnalytics.clientSatisfaction}/5</span>
-            </div>
-            <div className="analytics-details">
-              <div className="detail-item">
-                <span className="detail-label">Clients:</span>
-                <span className="detail-value">{b2bAnalytics.clientSatisfaction}</span>
-              </div>
-              <div className="detail-item">
-                <span className="detail-label">Vendors:</span>
-                <span className="detail-value">{b2bAnalytics.vendorSatisfaction}</span>
+          <div className="analytics-card b2b-ops-ultra-revenue">
+            <div className="b2b-ops-ultra-header">
+              <div className="b2b-ops-ultra-icon">💰</div>
+              <div className="b2b-ops-ultra-content">
+                <h4 className="b2b-ops-ultra-title">Monthly Value</h4>
+                <span className="b2b-ops-ultra-value">{b2bAnalytics.totalMonthlyValue}</span>
               </div>
             </div>
-          </div>
-          
-          <div className="analytics-card renewal-card">
-            <div className="analytics-header">
-              <h4>🔄 Renewal Rate</h4>
-              <span className="analytics-value">{b2bAnalytics.renewalRate}%</span>
-            </div>
-            <div className="analytics-details">
-              <div className="detail-item">
-                <span className="detail-label">Collection:</span>
-                <span className="detail-value">{b2bAnalytics.paymentCollection}%</span>
+            <div className="b2b-ops-ultra-metrics">
+              <div className="b2b-ops-ultra-metric">
+                <span className="b2b-ops-ultra-label">Growth:</span>
+                <span className="b2b-ops-ultra-data positive">+{b2bAnalytics.businessGrowth}%</span>
               </div>
-              <div className="detail-item">
-                <span className="detail-label">Compliance:</span>
-                <span className="detail-value">{b2bAnalytics.qualityCompliance}%</span>
+              <div className="b2b-ops-ultra-metric">
+                <span className="b2b-ops-ultra-label">Avg Contract:</span>
+                <span className="b2b-ops-ultra-data">{b2bAnalytics.avgContractValue}</span>
               </div>
             </div>
           </div>
           
-          <div className="analytics-card efficiency-card">
-            <div className="analytics-header">
-              <h4>🚛 Efficiency</h4>
-              <span className="analytics-value">{supplyChainData.deliveryEfficiency}%</span>
-            </div>
-            <div className="analytics-details">
-              <div className="detail-item">
-                <span className="detail-label">On-Time:</span>
-                <span className="detail-value">{supplyChainData.onTimeDelivery}%</span>
+          <div className="analytics-card b2b-ops-ultra-satisfaction">
+            <div className="b2b-ops-ultra-header">
+              <div className="b2b-ops-ultra-icon">⭐</div>
+              <div className="b2b-ops-ultra-content">
+                <h4 className="b2b-ops-ultra-title">Satisfaction</h4>
+                <span className="b2b-ops-ultra-value">{b2bAnalytics.clientSatisfaction}/5</span>
               </div>
-              <div className="detail-item">
-                <span className="detail-label">Avg Time:</span>
-                <span className="detail-value">{b2bAnalytics.avgDeliveryTime}</span>
+            </div>
+            <div className="b2b-ops-ultra-metrics">
+              <div className="b2b-ops-ultra-metric">
+                <span className="b2b-ops-ultra-label">Clients:</span>
+                <span className="b2b-ops-ultra-data">{b2bAnalytics.clientSatisfaction}</span>
+              </div>
+              <div className="b2b-ops-ultra-metric">
+                <span className="b2b-ops-ultra-label">Vendors:</span>
+                <span className="b2b-ops-ultra-data">{b2bAnalytics.vendorSatisfaction}</span>
               </div>
             </div>
           </div>
           
-          <div className="analytics-card risk-card">
-            <div className="analytics-header">
-              <h4>⚠️ Risk Level</h4>
-              <span className="analytics-value risk-medium">{b2bAnalytics.riskAssessment}</span>
-            </div>
-            <div className="analytics-details">
-              <div className="detail-item">
-                <span className="detail-label">High Risk:</span>
-                <span className="detail-value">{b2bPerformanceMetrics.riskAssessment.filter(r => r.risk === 'high').length}</span>
+          <div className="analytics-card b2b-ops-ultra-renewal">
+            <div className="b2b-ops-ultra-header">
+              <div className="b2b-ops-ultra-icon">🔄</div>
+              <div className="b2b-ops-ultra-content">
+                <h4 className="b2b-ops-ultra-title">Renewal Rate</h4>
+                <span className="b2b-ops-ultra-value">{b2bAnalytics.renewalRate}%</span>
               </div>
-              <div className="detail-item">
-                <span className="detail-label">Medium Risk:</span>
-                <span className="detail-value">{b2bPerformanceMetrics.riskAssessment.filter(r => r.risk === 'medium').length}</span>
+            </div>
+            <div className="b2b-ops-ultra-metrics">
+              <div className="b2b-ops-ultra-metric">
+                <span className="b2b-ops-ultra-label">Collection:</span>
+                <span className="b2b-ops-ultra-data">{b2bAnalytics.paymentCollection}%</span>
+              </div>
+              <div className="b2b-ops-ultra-metric">
+                <span className="b2b-ops-ultra-label">Compliance:</span>
+                <span className="b2b-ops-ultra-data">{b2bAnalytics.qualityCompliance}%</span>
+              </div>
+            </div>
+          </div>
+          
+          <div className="analytics-card b2b-ops-ultra-efficiency">
+            <div className="b2b-ops-ultra-header">
+              <div className="b2b-ops-ultra-icon">🚛</div>
+              <div className="b2b-ops-ultra-content">
+                <h4 className="b2b-ops-ultra-title">Efficiency</h4>
+                <span className="b2b-ops-ultra-value">{supplyChainData.deliveryEfficiency}%</span>
+              </div>
+            </div>
+            <div className="b2b-ops-ultra-metrics">
+              <div className="b2b-ops-ultra-metric">
+                <span className="b2b-ops-ultra-label">On-Time:</span>
+                <span className="b2b-ops-ultra-data">{supplyChainData.onTimeDelivery}%</span>
+              </div>
+              <div className="b2b-ops-ultra-metric">
+                <span className="b2b-ops-ultra-label">Avg Time:</span>
+                <span className="b2b-ops-ultra-data">{b2bAnalytics.avgDeliveryTime}</span>
+              </div>
+            </div>
+          </div>
+          
+          <div className="analytics-card b2b-ops-ultra-risk">
+            <div className="b2b-ops-ultra-header">
+              <div className="b2b-ops-ultra-icon">⚠️</div>
+              <div className="b2b-ops-ultra-content">
+                <h4 className="b2b-ops-ultra-title">Risk Level</h4>
+                <span className="b2b-ops-ultra-value risk-medium">{b2bAnalytics.riskAssessment}</span>
+              </div>
+            </div>
+            <div className="b2b-ops-ultra-metrics">
+              <div className="b2b-ops-ultra-metric">
+                <span className="b2b-ops-ultra-label">High Risk:</span>
+                <span className="b2b-ops-ultra-data">{b2bPerformanceMetrics.riskAssessment.filter(r => r.risk === 'high').length}</span>
+              </div>
+              <div className="b2b-ops-ultra-metric">
+                <span className="b2b-ops-ultra-label">Medium Risk:</span>
+                <span className="b2b-ops-ultra-data">{b2bPerformanceMetrics.riskAssessment.filter(r => r.risk === 'medium').length}</span>
               </div>
             </div>
           </div>
         </div>
 
+        {/* B2B Operations Collapsible Content - Everything from Action Button onwards */}
+        <div className={`b2b-operations-collapsible-section ${b2bOperationsVisible ? 'section-visible' : 'section-hidden'}`}>
         {/* B2B Action Button */}
         <div className="b2b-content-actions">
           <button 
@@ -1507,12 +3960,31 @@ function Dashboard() {
             <span className="btn-icon">➕</span>
             {b2bView === 'clients' ? 'Add New Client' : 'Add New Vendor'}
           </button>
+          
+          {/* Show count of newly added items */}
+          {((b2bView === 'clients' ? b2bClients : b2bVendors).filter(item => item.isNewlyAdded).length > 0) && (
+            <div className="new-items-indicator">
+              <span className="new-items-count">
+                {(b2bView === 'clients' ? b2bClients : b2bVendors).filter(item => item.isNewlyAdded).length}
+              </span>
+              <span className="new-items-text">
+                New {b2bView === 'clients' ? 'Client' : 'Vendor'}{(b2bView === 'clients' ? b2bClients : b2bVendors).filter(item => item.isNewlyAdded).length > 1 ? 's' : ''} Added
+              </span>
+            </div>
+          )}
         </div>
 
         {/* B2B Cards Grid */}
         <div className="b2b-grid enhanced">
           {(b2bView === 'clients' ? b2bClients : b2bVendors).map((entity) => (
-            <div key={entity.id} className="b2b-card enhanced">
+            <div 
+              key={entity.id} 
+              className={`b2b-card enhanced ${
+                entity.isNewlyAdded 
+                  ? (b2bView === 'clients' ? 'newly-added-client-card' : 'newly-added-vendor-card')
+                  : ''
+              }`}
+            >
               <div className="b2b-header">
                 <div className="b2b-icon-wrapper">
                   <div 
@@ -1937,8 +4409,8 @@ function Dashboard() {
             <div className="quick-stat">
               <h5>
                 {b2bView === 'clients' 
-                  ? 'Top Client: Metro Supermarkets (2,500L/day)'
-                  : 'Top Vendor: Mountain Fresh Dairy (7,200L/day)'
+                  ? ' Top : Metro Supermarkets (2,500L/day)'
+                  : 'Top : Mountain Fresh Dairy (7,200L/day)'
                 }
               </h5>
             </div>
@@ -1976,9 +4448,27 @@ function Dashboard() {
             </div>
           </div>
         )}
+        </div>
+
+        {/* B2B Operations Toggle Button - Positioned below cards section at complete right end */}
+        <div className="b2b-risk-card-toggle-container">
+          <button 
+            className={`b2b-operations-hide-show-btn ${b2bOperationsVisible ? 'btn-active' : 'btn-inactive'}`}
+            onClick={() => setB2bOperationsVisible(!b2bOperationsVisible)}
+            title={b2bOperationsVisible ? 'Hide B2B Operations' : 'Show B2B Operations'}
+          >
+            <span className="btn-toggle-icon">
+              {b2bOperationsVisible ? '👁️' : '👁️‍🗨️'}
+            </span>
+            <span className="btn-toggle-text">
+              {b2bOperationsVisible ? 'Hide Operations' : 'Show Operations'}
+            </span>
+            <span className={`btn-toggle-arrow ${b2bOperationsVisible ? 'arrow-up' : 'arrow-down'}`}>
+              {b2bOperationsVisible ? '▲' : '▼'}
+            </span>
+          </button>
+        </div>
       </div>
-
-
 
       {/* Enhanced Analytics Section */}
       <div className="analytics-section">
@@ -2083,23 +4573,7 @@ function Dashboard() {
 
       {/* Advanced Analytics & Insights Section */}
       <div className="advanced-analytics-section">
-        <div className="advanced-analytics-header">
-          <div className="analytics-title-wrapper">
-            <h3 className="analytics-main-title">🔮 Advanced Analytics & Insights</h3>
-            <p className="analytics-subtitle">AI-powered predictions and intelligent business insights</p>
-          </div>
-          <div className="analytics-time-control">
-            <select 
-              value={selectedTimeframe} 
-              onChange={(e) => setSelectedTimeframe(e.target.value)}
-              className="analytics-timeframe-select"
-            >
-              <option value="week">This Week</option>
-              <option value="month">This Month</option>
-              <option value="quarter">This Quarter</option>
-            </select>
-          </div>
-        </div>
+        
 
         <div className="analytics-navigation-tabs">
           <button 
@@ -2306,7 +4780,7 @@ function Dashboard() {
           {analyticsView === 'insights' && (
             <div className="insights-content-section">
               <div className="insights-header-section">
-                <h4 className="insights-section-title">🤖 AI-Powered Recommendations</h4>
+                <h4 className="insights-section-title"> Recommendations</h4>
                 <p className="insights-section-subtitle">Smart suggestions to optimize your dairy operations</p>
               </div>
               
@@ -2439,7 +4913,7 @@ function Dashboard() {
 
           <div className="opportunities-card enhanced">
             <div className="card-header">
-              <h4>🚀 Growth Opportunities</h4>
+              <h4>🚀 Growth </h4>
               <span className="opportunities-count">{marketInsights.opportunities.length} Active</span>
             </div>
             <div className="opportunities-list">
@@ -2491,7 +4965,7 @@ function Dashboard() {
                 </div>
                 <div className="intel-metric">
                   <span className="intel-label">Market Sentiment</span>
-                  <span className="intel-value positive">😊 Optimistic</span>
+                  <span className="intel-value positive">😊Optimistic</span>
                 </div>
                 <div className="intel-metric">
                   <span className="intel-label">Supply Chain</span>
@@ -2579,69 +5053,7 @@ function Dashboard() {
             </div>
           </div>
 
-          <div className="weather-insights-grid">
-            <div className="seasonal-factors-card">
-              <h4>🌱 Seasonal Factors</h4>
-              <div className="factors-list">
-                <div className="factor-item">
-                  <span className="factor-label">Temperature:</span>
-                  <span className="factor-value">{weatherImpact.seasonalFactors.temperature}</span>
-                  <span className="factor-status positive">✅</span>
-                </div>
-                <div className="factor-item">
-                  <span className="factor-label">Rainfall:</span>
-                  <span className="factor-value">{weatherImpact.seasonalFactors.rainfall}</span>
-                  <span className="factor-status positive">✅</span>
-                </div>
-                <div className="factor-item">
-                  <span className="factor-label">Humidity:</span>
-                  <span className="factor-value">{weatherImpact.seasonalFactors.humidity}</span>
-                  <span className="factor-status neutral">⚠️</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="weather-recommendations enhanced">
-              <h4>📋 Smart Recommendations</h4>
-              <div className="weather-rec-list">
-                {weatherImpact.alerts.map((alert, index) => (
-                  <div key={index} className={`weather-rec-item ${alert.priority}`}>
-                    <span className="rec-icon">
-                      {alert.type === 'warning' ? '⚠️' : alert.type === 'info' ? 'ℹ️' : '✅'}
-                    </span>
-                    <div className="rec-content">
-                      <span className="rec-text">{alert.message}</span>
-                      <span className={`rec-priority ${alert.priority}`}>
-                        {alert.priority.charAt(0).toUpperCase() + alert.priority.slice(1)} Priority
-                      </span>
-                    </div>
-                    <button 
-                      className="action-btn small primary"
-                      onClick={() => alert(`Action taken for: ${alert.message}`)}
-                    >
-                      Take Action
-                    </button>
-                  </div>
-                ))}
-                <div className="weather-rec-item low">
-                  <span className="rec-icon">🌡️</span>
-                  <div className="rec-content">
-                    <span className="rec-text">Optimal temperature for milk collection: Continue normal operations</span>
-                    <span className="rec-priority low">Low Priority</span>
-                  </div>
-                  <button className="action-btn small outline">Monitor</button>
-                </div>
-                <div className="weather-rec-item low">
-                  <span className="rec-icon">💧</span>
-                  <div className="rec-content">
-                    <span className="rec-text">Humidity levels stable: No impact on storage conditions</span>
-                    <span className="rec-priority low">Low Priority</span>
-                  </div>
-                  <button className="action-btn small outline">Monitor</button>
-                </div>
-              </div>
-            </div>
-          </div>
+          
 
           <div className="weather-analytics-card">
             <h4>📊 Weather Analytics Dashboard</h4>
@@ -2745,6 +5157,8 @@ function Dashboard() {
 
         </div>
       </div>
+
+
     </div>
   );
 }

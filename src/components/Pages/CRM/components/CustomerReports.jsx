@@ -30,6 +30,7 @@ import {
   FiCreditCard,
   FiShield,
   FiChevronRight,
+  FiShare2,
 } from 'react-icons/fi';
 
 function CustomerReports({ customers }) {
@@ -2616,160 +2617,1538 @@ function CustomerReports({ customers }) {
   );
 
   const renderFeedback = () => (
-    <div className="feedback-section">
-      <div className="section-header">
-        <FiStar className="section-icon" />
-        <h4>Customer Feedback</h4>
+    <div className="enhanced-feedback-satisfaction-section">
+      {/* Enhanced Header with Real-time Stats */}
+      <div className="feedback-section-header">
+        <div className="header-content">
+          <div className="title-section">
+            <h2 className="feedback-main-title">
+              <FiStar className="title-icon" />
+              Customer Feedback & Satisfaction Analytics
+            </h2>
+            <p className="feedback-subtitle">
+              Comprehensive insights into customer sentiment, reviews, and satisfaction metrics
+            </p>
+          </div>
+          <div className="header-controls">
+            <div className="satisfaction-score-badge">
+              <div className="score-circle">
+                <span className="score-value">{(reportData.avgRating * 20).toFixed(0)}</span>
+                <span className="score-label">CSAT</span>
+              </div>
+            </div>
+            <div className="time-filter-controls">
+              <select className="time-filter-select">
+                <option value="7days">Last 7 Days</option>
+                <option value="30days">Last 30 Days</option>
+                <option value="90days">Last 90 Days</option>
+                <option value="1year">Last Year</option>
+              </select>
+              <button className="refresh-feedback-btn">
+                <FiRepeat className="btn-icon" />
+                Refresh
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-      
-      <div className="feedback-stats">
-        <div className="feedback-stat">
-          <div className="stat-value">{reportData.avgRating.toFixed(1)}/5.0</div>
-          <div className="stat-label">Average Rating</div>
+
+      {/* Enhanced KPI Dashboard */}
+      <div className="feedback-kpi-dashboard">
+        <div className="kpi-card overall-satisfaction">
+          <div className="kpi-header">
+            <div className="kpi-icon-wrapper satisfaction-icon">
+              <FiHeart className="kpi-icon" />
+            </div>
+            <div className="kpi-trend positive">
+              <FiTrendingUp className="trend-icon" />
+              <span>+2.3%</span>
+            </div>
+          </div>
+          <div className="kpi-content">
+            <div className="kpi-main-value">{reportData.avgRating.toFixed(1)}/5.0</div>
+            <div className="kpi-label">Overall Satisfaction</div>
+            <div className="kpi-subtitle">Based on {(reportData.totalCustomers * 0.73).toFixed(0)} reviews</div>
+            <div className="satisfaction-stars">
+              {[1, 2, 3, 4, 5].map(star => (
+                <FiStar 
+                  key={star} 
+                  className={`star ${star <= Math.round(reportData.avgRating) ? 'filled' : 'empty'}`} 
+                />
+              ))}
+            </div>
+          </div>
         </div>
-        
-        <div className="feedback-stat">
-          <div className="stat-value">2,847</div>
-          <div className="stat-label">Total Reviews</div>
+
+        <div className="kpi-card nps-score">
+          <div className="kpi-header">
+            <div className="kpi-icon-wrapper nps-icon">
+              <FiTarget className="kpi-icon" />
+            </div>
+            <div className="kpi-trend positive">
+              <FiTrendingUp className="trend-icon" />
+              <span>+8.7</span>
+            </div>
+          </div>
+          <div className="kpi-content">
+            <div className="kpi-main-value">68</div>
+            <div className="kpi-label">Net Promoter Score</div>
+            <div className="kpi-subtitle">Industry benchmark: 52</div>
+            <div className="nps-breakdown">
+              <div className="nps-segment promoters">
+                <span className="segment-label">Promoters</span>
+                <span className="segment-value">42%</span>
+              </div>
+              <div className="nps-segment passives">
+                <span className="segment-label">Passives</span>
+                <span className="segment-value">34%</span>
+              </div>
+              <div className="nps-segment detractors">
+                <span className="segment-label">Detractors</span>
+                <span className="segment-value">24%</span>
+              </div>
+            </div>
+          </div>
         </div>
-        
-        <div className="feedback-stat">
-          <div className="stat-value positive">87.3%</div>
-          <div className="stat-label">Positive</div>
+
+        <div className="kpi-card response-rate">
+          <div className="kpi-header">
+            <div className="kpi-icon-wrapper response-icon">
+              <FiMessageSquare className="kpi-icon" />
+            </div>
+            <div className="kpi-trend positive">
+              <FiTrendingUp className="trend-icon" />
+              <span>+5.2%</span>
+            </div>
+          </div>
+          <div className="kpi-content">
+            <div className="kpi-main-value">92.1%</div>
+            <div className="kpi-label">Response Rate</div>
+            <div className="kpi-subtitle">Survey participation</div>
+            <div className="response-channels">
+              <div className="channel-item">
+                <span className="channel-label">Email</span>
+                <span className="channel-value">89%</span>
+              </div>
+              <div className="channel-item">
+                <span className="channel-label">SMS</span>
+                <span className="channel-value">95%</span>
+              </div>
+              <div className="channel-item">
+                <span className="channel-label">App</span>
+                <span className="channel-value">97%</span>
+              </div>
+            </div>
+          </div>
         </div>
-        
-        <div className="feedback-stat">
-          <div className="stat-value positive">92.1%</div>
-          <div className="stat-label">Response Rate</div>
+
+        <div className="kpi-card resolution-time">
+          <div className="kpi-header">
+            <div className="kpi-icon-wrapper resolution-icon">
+              <FiClock className="kpi-icon" />
+            </div>
+            <div className="kpi-trend negative">
+              <FiTrendingUp className="trend-icon" />
+              <span>-18min</span>
+            </div>
+          </div>
+          <div className="kpi-content">
+            <div className="kpi-main-value">2.4h</div>
+            <div className="kpi-label">Avg Resolution Time</div>
+            <div className="kpi-subtitle">Issue response time</div>
+            <div className="resolution-breakdown">
+              <div className="resolution-item">
+                <span className="resolution-label">Critical</span>
+                <span className="resolution-value">45min</span>
+              </div>
+              <div className="resolution-item">
+                <span className="resolution-label">Standard</span>
+                <span className="resolution-value">2.4h</span>
+              </div>
+              <div className="resolution-item">
+                <span className="resolution-label">Low Priority</span>
+                <span className="resolution-value">8.2h</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      
-      <div className="feedback-details">
-        <div className="feedback-detail">
-          <h5>Top Positive Feedback</h5>
-          <ul className="feedback-list">
-            <li>"Excellent product quality and fast delivery" (42%)</li>
-            <li>"Helpful customer support" (28%)</li>
-            <li>"Easy to use mobile app" (18%)</li>
-          </ul>
+
+      {/* Rating Distribution Analysis */}
+      <div className="rating-distribution-section">
+        <div className="section-title">
+          <h3>Rating Distribution Analysis</h3>
+          <p>Detailed breakdown of customer ratings and sentiment analysis</p>
         </div>
         
-        <div className="feedback-detail">
-          <h5>Common Improvement Areas</h5>
-          <ul className="feedback-list">
-            <li>"Delivery times could be more consistent" (15%)</li>
-            <li>"More payment options needed" (9%)</li>
-            <li>"Product variety could be better" (7%)</li>
-          </ul>
+        <div className="rating-distribution-grid">
+          <div className="rating-chart-container">
+            <div className="chart-header">
+              <h4>Rating Breakdown</h4>
+              <div className="chart-total">Total: {(reportData.totalCustomers * 0.73).toFixed(0)} reviews</div>
+            </div>
+            <div className="rating-bars">
+              {[5, 4, 3, 2, 1].map(rating => {
+                const percentage = rating === 5 ? 45 : rating === 4 ? 32 : rating === 3 ? 15 : rating === 2 ? 5 : 3;
+                const count = Math.round((reportData.totalCustomers * 0.73 * percentage) / 100);
+                return (
+                  <div key={rating} className="rating-bar-item">
+                    <div className="rating-info">
+                      <div className="rating-stars">
+                        {[1, 2, 3, 4, 5].map(star => (
+                          <FiStar key={star} className={star <= rating ? 'star filled' : 'star empty'} />
+                        ))}
+                      </div>
+                      <span className="rating-count">({count})</span>
+                    </div>
+                    <div className="rating-bar">
+                      <div 
+                        className={`rating-fill rating-${rating}`} 
+                        style={{ width: `${percentage}%` }}
+                      ></div>
+                    </div>
+                    <span className="rating-percentage">{percentage}%</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="sentiment-analysis-container">
+            <div className="sentiment-header">
+              <h4>Sentiment Analysis</h4>
+              <div className="sentiment-score">
+                <span className="sentiment-value positive">87.3%</span>
+                <span className="sentiment-label">Positive Sentiment</span>
+              </div>
+            </div>
+            <div className="sentiment-breakdown">
+              <div className="sentiment-item positive">
+                <div className="sentiment-icon">😊</div>
+                <div className="sentiment-details">
+                  <span className="sentiment-type">Positive</span>
+                  <span className="sentiment-percent">87.3%</span>
+                  <div className="sentiment-bar">
+                    <div className="sentiment-fill positive" style={{ width: '87.3%' }}></div>
+                  </div>
+                </div>
+              </div>
+              <div className="sentiment-item neutral">
+                <div className="sentiment-icon">😐</div>
+                <div className="sentiment-details">
+                  <span className="sentiment-type">Neutral</span>
+                  <span className="sentiment-percent">8.9%</span>
+                  <div className="sentiment-bar">
+                    <div className="sentiment-fill neutral" style={{ width: '8.9%' }}></div>
+                  </div>
+                </div>
+              </div>
+              <div className="sentiment-item negative">
+                <div className="sentiment-icon">😞</div>
+                <div className="sentiment-details">
+                  <span className="sentiment-type">Negative</span>
+                  <span className="sentiment-percent">3.8%</span>
+                  <div className="sentiment-bar">
+                    <div className="sentiment-fill negative" style={{ width: '3.8%' }}></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Feedback Categories & Topics */}
+      <div className="feedback-categories-section">
+        <div className="section-title">
+          <h3>Feedback Categories & Key Topics</h3>
+          <p>Most discussed topics and categorized feedback analysis</p>
+        </div>
+        
+        <div className="categories-grid">
+          <div className="category-card product-quality">
+            <div className="category-header">
+              <div className="category-icon">
+                <FiAward className="icon" />
+              </div>
+              <div className="category-info">
+                <h4>Product Quality</h4>
+                <span className="category-mentions">1,247 mentions</span>
+              </div>
+              <div className="category-sentiment positive">
+                <span className="sentiment-score">94.2%</span>
+                <span className="sentiment-label">Positive</span>
+              </div>
+            </div>
+            <div className="category-content">
+              <div className="top-keywords">
+                <div className="keyword-item positive">
+                  <span className="keyword">Excellent Quality</span>
+                  <span className="keyword-count">342</span>
+                </div>
+                <div className="keyword-item positive">
+                  <span className="keyword">Fresh Products</span>
+                  <span className="keyword-count">289</span>
+                </div>
+                <div className="keyword-item positive">
+                  <span className="keyword">Premium Grade</span>
+                  <span className="keyword-count">156</span>
+                </div>
+              </div>
+              <div className="category-trend">
+                <FiTrendingUp className="trend-icon positive" />
+                <span className="trend-text">+12% improvement this month</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="category-card delivery-service">
+            <div className="category-header">
+              <div className="category-icon">
+                <FiZap className="icon" />
+              </div>
+              <div className="category-info">
+                <h4>Delivery & Service</h4>
+                <span className="category-mentions">892 mentions</span>
+              </div>
+              <div className="category-sentiment mixed">
+                <span className="sentiment-score">78.5%</span>
+                <span className="sentiment-label">Mixed</span>
+              </div>
+            </div>
+            <div className="category-content">
+              <div className="top-keywords">
+                <div className="keyword-item positive">
+                  <span className="keyword">Fast Delivery</span>
+                  <span className="keyword-count">234</span>
+                </div>
+                <div className="keyword-item negative">
+                  <span className="keyword">Late Delivery</span>
+                  <span className="keyword-count">156</span>
+                </div>
+                <div className="keyword-item positive">
+                  <span className="keyword">Helpful Staff</span>
+                  <span className="keyword-count">198</span>
+                </div>
+              </div>
+              <div className="category-trend">
+                <FiTrendingUp className="trend-icon positive" />
+                <span className="trend-text">+5% improvement this month</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="category-card customer-support">
+            <div className="category-header">
+              <div className="category-icon">
+                <FiPhone className="icon" />
+              </div>
+              <div className="category-info">
+                <h4>Customer Support</h4>
+                <span className="category-mentions">567 mentions</span>
+              </div>
+              <div className="category-sentiment positive">
+                <span className="sentiment-score">91.8%</span>
+                <span className="sentiment-label">Positive</span>
+              </div>
+            </div>
+            <div className="category-content">
+              <div className="top-keywords">
+                <div className="keyword-item positive">
+                  <span className="keyword">Helpful Support</span>
+                  <span className="keyword-count">189</span>
+                </div>
+                <div className="keyword-item positive">
+                  <span className="keyword">Quick Response</span>
+                  <span className="keyword-count">145</span>
+                </div>
+                <div className="keyword-item positive">
+                  <span className="keyword">Professional</span>
+                  <span className="keyword-count">123</span>
+                </div>
+              </div>
+              <div className="category-trend">
+                <FiTrendingUp className="trend-icon positive" />
+                <span className="trend-text">+8% improvement this month</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="category-card pricing-value">
+            <div className="category-header">
+              <div className="category-icon">
+                <FiDollarSign className="icon" />
+              </div>
+              <div className="category-info">
+                <h4>Pricing & Value</h4>
+                <span className="category-mentions">423 mentions</span>
+              </div>
+              <div className="category-sentiment mixed">
+                <span className="sentiment-score">72.1%</span>
+                <span className="sentiment-label">Mixed</span>
+              </div>
+            </div>
+            <div className="category-content">
+              <div className="top-keywords">
+                <div className="keyword-item positive">
+                  <span className="keyword">Good Value</span>
+                  <span className="keyword-count">134</span>
+                </div>
+                <div className="keyword-item negative">
+                  <span className="keyword">Expensive</span>
+                  <span className="keyword-count">89</span>
+                </div>
+                <div className="keyword-item positive">
+                  <span className="keyword">Fair Price</span>
+                  <span className="keyword-count">112</span>
+                </div>
+              </div>
+              <div className="category-trend">
+                <FiTrendingUp className="trend-icon negative" />
+                <span className="trend-text">-2% decline this month</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Recent Reviews & Testimonials */}
+      <div className="recent-reviews-section">
+        <div className="section-title">
+          <h3>Recent Reviews & Customer Testimonials</h3>
+          <p>Latest customer feedback and detailed reviews</p>
+        </div>
+        
+        <div className="reviews-container">
+          <div className="review-filters">
+            <button className="filter-btn active">All Reviews</button>
+            <button className="filter-btn">5 Stars</button>
+            <button className="filter-btn">4 Stars</button>
+            <button className="filter-btn">Critical</button>
+            <button className="filter-btn">Recent</button>
+          </div>
+          
+          <div className="reviews-grid">
+            {[
+              {
+                id: 1,
+                customer: "Rajesh Kumar",
+                rating: 5,
+                date: "2 hours ago",
+                review: "Exceptional service! The milk quality is outstanding and delivery is always on time. The customer support team is very responsive and helpful.",
+                category: "Product Quality",
+                verified: true,
+                helpful: 12
+              },
+              {
+                id: 2,
+                customer: "Priya Sharma",
+                rating: 4,
+                date: "1 day ago",
+                review: "Good quality products and reasonable prices. Sometimes delivery gets delayed but overall satisfied with the service.",
+                category: "Delivery Service",
+                verified: true,
+                helpful: 8
+              },
+              {
+                id: 3,
+                customer: "Amit Patel",
+                rating: 5,
+                date: "2 days ago",
+                review: "Been using their service for 6 months now. Consistent quality and excellent customer service. Highly recommended!",
+                category: "Overall Experience",
+                verified: true,
+                helpful: 15
+              },
+              {
+                id: 4,
+                customer: "Sunita Devi",
+                rating: 3,
+                date: "3 days ago",
+                review: "Product quality is good but pricing could be more competitive. Also, would like more variety in products.",
+                category: "Pricing & Value",
+                verified: true,
+                helpful: 5
+              }
+            ].map(review => (
+              <div key={review.id} className="review-card">
+                <div className="review-header">
+                  <div className="reviewer-info">
+                    <div className="reviewer-avatar">
+                      {review.customer.split(' ').map(n => n[0]).join('')}
+                    </div>
+                    <div className="reviewer-details">
+                      <div className="reviewer-name">
+                        {review.customer}
+                        {review.verified && <FiCheckCircle className="verified-badge" />}
+                      </div>
+                      <div className="review-meta">
+                        <div className="review-rating">
+                          {[1, 2, 3, 4, 5].map(star => (
+                            <FiStar key={star} className={star <= review.rating ? 'star filled' : 'star empty'} />
+                          ))}
+                        </div>
+                        <span className="review-date">{review.date}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="review-category">
+                    <span className="category-tag">{review.category}</span>
+                  </div>
+                </div>
+                <div className="review-content">
+                  <p className="review-text">{review.review}</p>
+                </div>
+                <div className="review-footer">
+                  <div className="review-actions">
+                    <button className="action-btn helpful">
+                      <FiHeart className="action-icon" />
+                      Helpful ({review.helpful})
+                    </button>
+                    <button className="action-btn reply">
+                      <FiMessageSquare className="action-icon" />
+                      Reply
+                    </button>
+                    <button className="action-btn share">
+                      <FiShare2 className="action-icon" />
+                      Share
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          <div className="reviews-pagination">
+            <button className="pagination-btn">Load More Reviews</button>
+            <span className="pagination-info">Showing 4 of 2,847 reviews</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Action Items & Recommendations */}
+      <div className="feedback-actions-section">
+        <div className="section-title">
+          <h3>Action Items & Recommendations</h3>
+          <p>AI-powered insights and recommended actions based on customer feedback</p>
+        </div>
+        
+        <div className="actions-grid">
+          <div className="action-card critical">
+            <div className="action-header">
+              <div className="action-priority critical">CRITICAL</div>
+              <div className="action-impact">High Impact</div>
+            </div>
+            <div className="action-content">
+              <h4>Address Delivery Consistency Issues</h4>
+              <p>15% of customers mentioned delivery delays. Implementing route optimization could improve satisfaction by 12%.</p>
+              <div className="action-metrics">
+                <div className="metric">
+                  <span className="metric-label">Affected Customers:</span>
+                  <span className="metric-value">156 customers</span>
+                </div>
+                <div className="metric">
+                  <span className="metric-label">Potential Impact:</span>
+                  <span className="metric-value">+12% satisfaction</span>
+                </div>
+              </div>
+            </div>
+            <div className="action-footer">
+              <button className="action-btn primary">Take Action</button>
+              <button className="action-btn secondary">View Details</button>
+            </div>
+          </div>
+
+          <div className="action-card high">
+            <div className="action-header">
+              <div className="action-priority high">HIGH</div>
+              <div className="action-impact">Medium Impact</div>
+            </div>
+            <div className="action-content">
+              <h4>Expand Payment Options</h4>
+              <p>9% of feedback requests more payment methods. Adding digital wallets could increase conversion by 8%.</p>
+              <div className="action-metrics">
+                <div className="metric">
+                  <span className="metric-label">Requests:</span>
+                  <span className="metric-value">89 mentions</span>
+                </div>
+                <div className="metric">
+                  <span className="metric-label">Expected Conversion:</span>
+                  <span className="metric-value">+8% increase</span>
+                </div>
+              </div>
+            </div>
+            <div className="action-footer">
+              <button className="action-btn primary">Plan Implementation</button>
+              <button className="action-btn secondary">Research Options</button>
+            </div>
+          </div>
+
+          <div className="action-card medium">
+            <div className="action-header">
+              <div className="action-priority medium">MEDIUM</div>
+              <div className="action-impact">Low Impact</div>
+            </div>
+            <div className="action-content">
+              <h4>Enhance Product Variety</h4>
+              <p>7% of customers want more product options. Market research shows potential for 3 new product lines.</p>
+              <div className="action-metrics">
+                <div className="metric">
+                  <span className="metric-label">Customer Interest:</span>
+                  <span className="metric-value">67 requests</span>
+                </div>
+                <div className="metric">
+                  <span className="metric-label">Market Opportunity:</span>
+                  <span className="metric-value">3 new products</span>
+                </div>
+              </div>
+            </div>
+            <div className="action-footer">
+              <button className="action-btn primary">Research Market</button>
+              <button className="action-btn secondary">Customer Survey</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Satisfaction Trends & Benchmarks */}
+      <div className="satisfaction-trends-section">
+        <div className="section-title">
+          <h3>Satisfaction Trends & Industry Benchmarks</h3>
+          <p>Historical trends and competitive analysis</p>
+        </div>
+        
+        <div className="trends-container">
+          <div className="trends-chart">
+            <div className="chart-header">
+              <h4>Satisfaction Score Trends</h4>
+              <div className="chart-controls">
+                <button className="chart-btn active">6M</button>
+                <button className="chart-btn">1Y</button>
+                <button className="chart-btn">2Y</button>
+              </div>
+            </div>
+            <div className="trend-visualization">
+              <div className="trend-line">
+                {[
+                  { month: 'Jan', score: 4.1, benchmark: 3.8 },
+                  { month: 'Feb', score: 4.2, benchmark: 3.9 },
+                  { month: 'Mar', score: 4.0, benchmark: 3.8 },
+                  { month: 'Apr', score: 4.3, benchmark: 4.0 },
+                  { month: 'May', score: 4.4, benchmark: 4.1 },
+                  { month: 'Jun', score: 4.5, benchmark: 4.0 }
+                ].map((data, index) => (
+                  <div key={data.month} className="trend-point">
+                    <div className="point-data">
+                      <div className="our-score" style={{ height: `${data.score * 20}%` }}></div>
+                      <div className="benchmark-score" style={{ height: `${data.benchmark * 20}%` }}></div>
+                    </div>
+                    <span className="point-label">{data.month}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="trend-legend">
+                <div className="legend-item">
+                  <div className="legend-color our-score"></div>
+                  <span>Our Score</span>
+                </div>
+                <div className="legend-item">
+                  <div className="legend-color benchmark"></div>
+                  <span>Industry Benchmark</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="benchmarks-comparison">
+            <div className="benchmark-header">
+              <h4>Industry Benchmarks</h4>
+              <span className="benchmark-date">Updated: June 2024</span>
+            </div>
+            <div className="benchmark-items">
+              <div className="benchmark-item">
+                <div className="benchmark-metric">
+                  <span className="metric-name">Customer Satisfaction</span>
+                  <div className="metric-comparison">
+                    <div className="our-metric">
+                      <span className="metric-label">Our Score</span>
+                      <span className="metric-value our">{reportData.avgRating.toFixed(1)}/5.0</span>
+                    </div>
+                    <div className="industry-metric">
+                      <span className="metric-label">Industry Avg</span>
+                      <span className="metric-value industry">3.8/5.0</span>
+                    </div>
+                  </div>
+                  <div className="performance-indicator positive">
+                    <FiTrendingUp className="indicator-icon" />
+                    <span>18% above industry</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="benchmark-item">
+                <div className="benchmark-metric">
+                  <span className="metric-name">Response Rate</span>
+                  <div className="metric-comparison">
+                    <div className="our-metric">
+                      <span className="metric-label">Our Rate</span>
+                      <span className="metric-value our">92.1%</span>
+                    </div>
+                    <div className="industry-metric">
+                      <span className="metric-label">Industry Avg</span>
+                      <span className="metric-value industry">67.3%</span>
+                    </div>
+                  </div>
+                  <div className="performance-indicator positive">
+                    <FiTrendingUp className="indicator-icon" />
+                    <span>37% above industry</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="benchmark-item">
+                <div className="benchmark-metric">
+                  <span className="metric-name">Resolution Time</span>
+                  <div className="metric-comparison">
+                    <div className="our-metric">
+                      <span className="metric-label">Our Time</span>
+                      <span className="metric-value our">2.4h</span>
+                    </div>
+                    <div className="industry-metric">
+                      <span className="metric-label">Industry Avg</span>
+                      <span className="metric-value industry">4.2h</span>
+                    </div>
+                  </div>
+                  <div className="performance-indicator positive">
+                    <FiTrendingUp className="indicator-icon" />
+                    <span>43% faster than industry</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   );
 
-  // Comprehensive Action Center
+  // Enhanced Comprehensive Action Center
   const renderActionCenter = () => (
-    <div className="action-center-section">
-      <div className="section-header">
-        <h3>
-          <FiZap className="section-icon" />
-          Quick Actions & Recommendations
-        </h3>
+    <div className="enhanced-action-center-section">
+      {/* Enhanced Header with Controls */}
+      <div className="action-center-header">
+        <div className="header-content">
+          <div className="title-section">
+            <h2 className="action-center-main-title">
+              <FiZap className="title-icon" />
+              Action Center & Smart Recommendations
+            </h2>
+            <p className="action-center-subtitle">
+              AI-powered insights and quick actions to optimize customer relationships and business performance
+            </p>
+          </div>
+          <div className="header-controls">
+            <div className="action-stats-badge">
+              <div className="stats-item">
+                <span className="stats-value">12</span>
+                <span className="stats-label">Pending Actions</span>
+              </div>
+              <div className="stats-divider"></div>
+              <div className="stats-item">
+                <span className="stats-value">8</span>
+                <span className="stats-label">High Priority</span>
+              </div>
+            </div>
+            <div className="header-action-buttons">
+              <button className="header-btn secondary">
+                <FiActivity className="btn-icon" />
+                View All Tasks
+              </button>
+              <button className="header-btn primary">
+                <FiTarget className="btn-icon" />
+                Create Custom Action
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div className="action-center-grid">
-        <div className="action-group marketing">
-          <h4>📢 Marketing Actions</h4>
-          <div className="action-buttons">
-            <button className="action-btn primary">
-              <FiMail className="btn-icon" />
-              <span>Launch Email Campaign</span>
-              <small>Target {reportData.activeCustomers} active customers</small>
-            </button>
-            <button className="action-btn secondary">
-              <FiMessageSquare className="btn-icon" />
-              <span>SMS Promotion</span>
-              <small>78% mobile users</small>
-            </button>
-            <button className="action-btn secondary">
-              <FiTarget className="btn-icon" />
-              <span>Retargeting Campaign</span>
-              <small>{reportData.inactiveCustomers} inactive customers</small>
-            </button>
+      {/* Quick Action Dashboard */}
+      <div className="quick-actions-dashboard">
+        <div className="dashboard-header">
+          <h3 className="dashboard-title">
+            <FiZap className="dashboard-icon" />
+            Quick Actions Dashboard
+          </h3>
+          <div className="dashboard-filters">
+            <button className="filter-chip active">All Categories</button>
+            <button className="filter-chip">High Impact</button>
+            <button className="filter-chip">Urgent</button>
+            <button className="filter-chip">Automated</button>
           </div>
         </div>
 
-        <div className="action-group analytics">
-          <h4>📊 Analytics Actions</h4>
-          <div className="action-buttons">
-            <button className="action-btn primary">
-              <FiBarChart2 className="btn-icon" />
-              <span>Generate Deep Report</span>
-              <small>Comprehensive analysis</small>
-            </button>
+        <div className="action-categories-grid">
+          {/* Marketing & Campaigns Category */}
+          <div className="action-category-card marketing-category">
+            <div className="category-header">
+              <div className="category-icon-wrapper marketing-icon">
+                <FiMail className="category-icon" />
+              </div>
+              <div className="category-info">
+                <h4 className="category-title">Marketing & Campaigns</h4>
+                <p className="category-description">Customer engagement and promotional activities</p>
+              </div>
+              <div className="category-status">
+                <span className="status-badge active">6 Active</span>
+                <span className="status-indicator"></span>
+              </div>
+            </div>
+            
+            <div className="category-metrics">
+              <div className="metric-item">
+                <span className="metric-label">Target Audience:</span>
+                <span className="metric-value">{reportData.activeCustomers.toLocaleString()} customers</span>
+              </div>
+              <div className="metric-item">
+                <span className="metric-label">Potential Reach:</span>
+                <span className="metric-value">78% mobile users</span>
+              </div>
+              <div className="metric-item">
+                <span className="metric-label">Expected ROI:</span>
+                <span className="metric-value positive">+245%</span>
+              </div>
+            </div>
 
-            <button className="action-btn secondary">
-              <FiActivity className="btn-icon" />
-              <span>Real-time Dashboard</span>
-              <small>Live monitoring</small>
-            </button>
+            <div className="action-buttons-container">
+              <button className="enhanced-action-btn primary marketing-btn">
+                <div className="btn-content">
+                  <div className="btn-icon-wrapper">
+                    <FiMail className="btn-icon" />
+                  </div>
+                  <div className="btn-text">
+                    <span className="btn-title">Launch Email Campaign</span>
+                    <small className="btn-subtitle">Target {reportData.activeCustomers} active customers</small>
+                  </div>
+                  <div className="btn-impact">
+                    <span className="impact-value">High Impact</span>
+                  </div>
+                </div>
+                <div className="btn-progress">
+                  <div className="progress-bar" style={{ width: '0%' }}></div>
+                </div>
+              </button>
+
+              <button className="enhanced-action-btn secondary marketing-btn">
+                <div className="btn-content">
+                  <div className="btn-icon-wrapper">
+                    <FiMessageSquare className="btn-icon" />
+                  </div>
+                  <div className="btn-text">
+                    <span className="btn-title">SMS Promotion</span>
+                    <small className="btn-subtitle">Instant mobile engagement</small>
+                  </div>
+                  <div className="btn-impact">
+                    <span className="impact-value">Medium Impact</span>
+                  </div>
+                </div>
+                <div className="btn-progress">
+                  <div className="progress-bar" style={{ width: '0%' }}></div>
+                </div>
+              </button>
+
+              <button className="enhanced-action-btn secondary marketing-btn">
+                <div className="btn-content">
+                  <div className="btn-icon-wrapper">
+                    <FiTarget className="btn-icon" />
+                  </div>
+                  <div className="btn-text">
+                    <span className="btn-title">Retargeting Campaign</span>
+                    <small className="btn-subtitle">{reportData.inactiveCustomers} inactive customers</small>
+                  </div>
+                  <div className="btn-impact">
+                    <span className="impact-value">High Impact</span>
+                  </div>
+                </div>
+                <div className="btn-progress">
+                  <div className="progress-bar" style={{ width: '0%' }}></div>
+                </div>
+              </button>
+
+              <button className="enhanced-action-btn tertiary marketing-btn">
+                <div className="btn-content">
+                  <div className="btn-icon-wrapper">
+                    <FiGlobe className="btn-icon" />
+                  </div>
+                  <div className="btn-text">
+                    <span className="btn-title">Social Media Campaign</span>
+                    <small className="btn-subtitle">Multi-platform engagement</small>
+                  </div>
+                  <div className="btn-impact">
+                    <span className="impact-value">Medium Impact</span>
+                  </div>
+                </div>
+                <div className="btn-progress">
+                  <div className="progress-bar" style={{ width: '0%' }}></div>
+                </div>
+              </button>
+            </div>
+
+            <div className="category-footer">
+              <button className="view-all-btn">
+                <FiChevronRight className="btn-icon" />
+                View All Marketing Actions
+              </button>
+            </div>
+          </div>
+
+          {/* Analytics & Insights Category */}
+          <div className="action-category-card analytics-category">
+            <div className="category-header">
+              <div className="category-icon-wrapper analytics-icon">
+                <FiBarChart2 className="category-icon" />
+              </div>
+              <div className="category-info">
+                <h4 className="category-title">Analytics & Insights</h4>
+                <p className="category-description">Data analysis and business intelligence</p>
+              </div>
+              <div className="category-status">
+                <span className="status-badge processing">4 Processing</span>
+                <span className="status-indicator processing"></span>
+              </div>
+            </div>
+            
+            <div className="category-metrics">
+              <div className="metric-item">
+                <span className="metric-label">Data Points:</span>
+                <span className="metric-value">{(reportData.totalCustomers * 15).toLocaleString()}</span>
+              </div>
+              <div className="metric-item">
+                <span className="metric-label">Report Accuracy:</span>
+                <span className="metric-value">97.8%</span>
+              </div>
+              <div className="metric-item">
+                <span className="metric-label">Processing Time:</span>
+                <span className="metric-value">2.3 min avg</span>
+              </div>
+            </div>
+
+            <div className="action-buttons-container">
+              <button className="enhanced-action-btn primary analytics-btn">
+                <div className="btn-content">
+                  <div className="btn-icon-wrapper">
+                    <FiBarChart2 className="btn-icon" />
+                  </div>
+                  <div className="btn-text">
+                    <span className="btn-title">Generate Deep Report</span>
+                    <small className="btn-subtitle">Comprehensive customer analysis</small>
+                  </div>
+                  <div className="btn-impact">
+                    <span className="impact-value">Critical</span>
+                  </div>
+                </div>
+                <div className="btn-progress">
+                  <div className="progress-bar" style={{ width: '0%' }}></div>
+                </div>
+              </button>
+
+              <button className="enhanced-action-btn secondary analytics-btn">
+                <div className="btn-content">
+                  <div className="btn-icon-wrapper">
+                    <FiActivity className="btn-icon" />
+                  </div>
+                  <div className="btn-text">
+                    <span className="btn-title">Real-time Dashboard</span>
+                    <small className="btn-subtitle">Live monitoring & alerts</small>
+                  </div>
+                  <div className="btn-impact">
+                    <span className="impact-value">High Impact</span>
+                  </div>
+                </div>
+                <div className="btn-progress">
+                  <div className="progress-bar" style={{ width: '0%' }}></div>
+                </div>
+              </button>
+
+              <button className="enhanced-action-btn secondary analytics-btn">
+                <div className="btn-content">
+                  <div className="btn-icon-wrapper">
+                    <FiPieChart className="btn-icon" />
+                  </div>
+                  <div className="btn-text">
+                    <span className="btn-title">Predictive Analysis</span>
+                    <small className="btn-subtitle">AI-powered forecasting</small>
+                  </div>
+                  <div className="btn-impact">
+                    <span className="impact-value">High Impact</span>
+                  </div>
+                </div>
+                <div className="btn-progress">
+                  <div className="progress-bar" style={{ width: '0%' }}></div>
+                </div>
+              </button>
+
+              <button className="enhanced-action-btn tertiary analytics-btn">
+                <div className="btn-content">
+                  <div className="btn-icon-wrapper">
+                    <FiTrendingUp className="btn-icon" />
+                  </div>
+                  <div className="btn-text">
+                    <span className="btn-title">Trend Analysis</span>
+                    <small className="btn-subtitle">Market trend insights</small>
+                  </div>
+                  <div className="btn-impact">
+                    <span className="impact-value">Medium Impact</span>
+                  </div>
+                </div>
+                <div className="btn-progress">
+                  <div className="progress-bar" style={{ width: '0%' }}></div>
+                </div>
+              </button>
+            </div>
+
+            <div className="category-footer">
+              <button className="view-all-btn">
+                <FiChevronRight className="btn-icon" />
+                View All Analytics Actions
+              </button>
+            </div>
+          </div>
+
+          {/* Customer Care & Support Category */}
+          <div className="action-category-card customer-care-category">
+            <div className="category-header">
+              <div className="category-icon-wrapper customer-care-icon">
+                <FiUsers className="category-icon" />
+              </div>
+              <div className="category-info">
+                <h4 className="category-title">Customer Care & Support</h4>
+                <p className="category-description">Customer service and relationship management</p>
+              </div>
+              <div className="category-status">
+                <span className="status-badge urgent">3 Urgent</span>
+                <span className="status-indicator urgent"></span>
+              </div>
+            </div>
+            
+            <div className="category-metrics">
+              <div className="metric-item">
+                <span className="metric-label">High-Risk Customers:</span>
+                <span className="metric-value warning">{reportData.predictiveMetrics.churnRisk.high}</span>
+              </div>
+              <div className="metric-item">
+                <span className="metric-label">Response Time:</span>
+                <span className="metric-value">2.4h avg</span>
+              </div>
+              <div className="metric-item">
+                <span className="metric-label">Satisfaction Rate:</span>
+                <span className="metric-value positive">94.2%</span>
+              </div>
+            </div>
+
+            <div className="action-buttons-container">
+              <button className="enhanced-action-btn primary customer-care-btn">
+                <div className="btn-content">
+                  <div className="btn-icon-wrapper">
+                    <FiPhone className="btn-icon" />
+                  </div>
+                  <div className="btn-text">
+                    <span className="btn-title">Schedule Follow-ups</span>
+                    <small className="btn-subtitle">{reportData.predictiveMetrics.churnRisk.high} high-risk customers</small>
+                  </div>
+                  <div className="btn-impact">
+                    <span className="impact-value urgent">Urgent</span>
+                  </div>
+                </div>
+                <div className="btn-progress">
+                  <div className="progress-bar" style={{ width: '0%' }}></div>
+                </div>
+              </button>
+
+              <button className="enhanced-action-btn secondary customer-care-btn">
+                <div className="btn-content">
+                  <div className="btn-icon-wrapper">
+                    <FiHeart className="btn-icon" />
+                  </div>
+                  <div className="btn-text">
+                    <span className="btn-title">Loyalty Program</span>
+                    <small className="btn-subtitle">Reward top {reportData.premiumCustomers} customers</small>
+                  </div>
+                  <div className="btn-impact">
+                    <span className="impact-value">High Impact</span>
+                  </div>
+                </div>
+                <div className="btn-progress">
+                  <div className="progress-bar" style={{ width: '0%' }}></div>
+                </div>
+              </button>
+
+              <button className="enhanced-action-btn secondary customer-care-btn">
+                <div className="btn-content">
+                  <div className="btn-icon-wrapper">
+                    <FiShield className="btn-icon" />
+                  </div>
+                  <div className="btn-text">
+                    <span className="btn-title">Churn Prevention</span>
+                    <small className="btn-subtitle">Proactive retention strategy</small>
+                  </div>
+                  <div className="btn-impact">
+                    <span className="impact-value">Critical</span>
+                  </div>
+                </div>
+                <div className="btn-progress">
+                  <div className="progress-bar" style={{ width: '0%' }}></div>
+                </div>
+              </button>
+
+              <button className="enhanced-action-btn tertiary customer-care-btn">
+                <div className="btn-content">
+                  <div className="btn-icon-wrapper">
+                    <FiAward className="btn-icon" />
+                  </div>
+                  <div className="btn-text">
+                    <span className="btn-title">VIP Customer Program</span>
+                    <small className="btn-subtitle">Exclusive premium services</small>
+                  </div>
+                  <div className="btn-impact">
+                    <span className="impact-value">Medium Impact</span>
+                  </div>
+                </div>
+                <div className="btn-progress">
+                  <div className="progress-bar" style={{ width: '0%' }}></div>
+                </div>
+              </button>
+            </div>
+
+            <div className="category-footer">
+              <button className="view-all-btn">
+                <FiChevronRight className="btn-icon" />
+                View All Customer Care Actions
+              </button>
+            </div>
+          </div>
+
+          {/* Operations & Automation Category */}
+          <div className="action-category-card operations-category">
+            <div className="category-header">
+              <div className="category-icon-wrapper operations-icon">
+                <FiZap className="category-icon" />
+              </div>
+              <div className="category-info">
+                <h4 className="category-title">Operations & Automation</h4>
+                <p className="category-description">Process optimization and workflow automation</p>
+              </div>
+              <div className="category-status">
+                <span className="status-badge automated">5 Automated</span>
+                <span className="status-indicator automated"></span>
+              </div>
+            </div>
+            
+            <div className="category-metrics">
+              <div className="metric-item">
+                <span className="metric-label">Automation Rate:</span>
+                <span className="metric-value">87.3%</span>
+              </div>
+              <div className="metric-item">
+                <span className="metric-label">Time Saved:</span>
+                <span className="metric-value positive">24.5h/week</span>
+              </div>
+              <div className="metric-item">
+                <span className="metric-label">Error Reduction:</span>
+                <span className="metric-value positive">-68%</span>
+              </div>
+            </div>
+
+            <div className="action-buttons-container">
+              <button className="enhanced-action-btn primary operations-btn">
+                <div className="btn-content">
+                  <div className="btn-icon-wrapper">
+                    <FiZap className="btn-icon" />
+                  </div>
+                  <div className="btn-text">
+                    <span className="btn-title">Automate Workflows</span>
+                    <small className="btn-subtitle">Streamline repetitive tasks</small>
+                  </div>
+                  <div className="btn-impact">
+                    <span className="impact-value">High Impact</span>
+                  </div>
+                </div>
+                <div className="btn-progress">
+                  <div className="progress-bar" style={{ width: '0%' }}></div>
+                </div>
+              </button>
+
+              <button className="enhanced-action-btn secondary operations-btn">
+                <div className="btn-content">
+                  <div className="btn-icon-wrapper">
+                    <FiClock className="btn-icon" />
+                  </div>
+                  <div className="btn-text">
+                    <span className="btn-title">Schedule Reports</span>
+                    <small className="btn-subtitle">Automated report generation</small>
+                  </div>
+                  <div className="btn-impact">
+                    <span className="impact-value">Medium Impact</span>
+                  </div>
+                </div>
+                <div className="btn-progress">
+                  <div className="progress-bar" style={{ width: '0%' }}></div>
+                </div>
+              </button>
+
+              <button className="enhanced-action-btn secondary operations-btn">
+                <div className="btn-content">
+                  <div className="btn-icon-wrapper">
+                    <FiAlertTriangle className="btn-icon" />
+                  </div>
+                  <div className="btn-text">
+                    <span className="btn-title">Alert Management</span>
+                    <small className="btn-subtitle">Smart notification system</small>
+                  </div>
+                  <div className="btn-impact">
+                    <span className="impact-value">Medium Impact</span>
+                  </div>
+                </div>
+                <div className="btn-progress">
+                  <div className="progress-bar" style={{ width: '0%' }}></div>
+                </div>
+              </button>
+
+              <button className="enhanced-action-btn tertiary operations-btn">
+                <div className="btn-content">
+                  <div className="btn-icon-wrapper">
+                    <FiShield className="btn-icon" />
+                  </div>
+                  <div className="btn-text">
+                    <span className="btn-title">Security Audit</span>
+                    <small className="btn-subtitle">System security check</small>
+                  </div>
+                  <div className="btn-impact">
+                    <span className="impact-value">Critical</span>
+                  </div>
+                </div>
+                <div className="btn-progress">
+                  <div className="progress-bar" style={{ width: '0%' }}></div>
+                </div>
+              </button>
+            </div>
+
+            <div className="category-footer">
+              <button className="view-all-btn">
+                <FiChevronRight className="btn-icon" />
+                View All Operations Actions
+              </button>
+            </div>
           </div>
         </div>
-
-        <div className="action-group customer-care">
-          <h4>👥 Customer Care</h4>
-          <div className="action-buttons">
-            <button className="action-btn primary">
-              <FiPhone className="btn-icon" />
-              <span>Schedule Follow-ups</span>
-              <small>{reportData.predictiveMetrics.churnRisk.high} high-risk customers</small>
-            </button>
-            <button className="action-btn secondary">
-              <FiHeart className="btn-icon" />
-              <span>Loyalty Program</span>
-              <small>Reward top customers</small>
-            </button>
-            <button className="action-btn secondary">
-              <FiShield className="btn-icon" />
-              <span>Churn Prevention</span>
-              <small>Proactive retention</small>
-            </button>
-          </div>
-        </div>
-
-
       </div>
 
-      <div className="recommendations-panel">
-        <h4>🎯 AI-Powered Recommendations</h4>
-        <div className="recommendations-list">
-          <div className="recommendation-item priority-high">
-            <div className="rec-priority">HIGH</div>
-            <div className="rec-content">
-              <h5>Focus on Premium Customer Conversion</h5>
-              <p>Convert {Math.round(reportData.activeCustomers * 0.4)} active customers to premium tier</p>
-              <div className="rec-impact">Expected Revenue Impact: +₹{(reportData.totalRevenue * 0.25).toLocaleString()}</div>
-            </div>
-            <button className="rec-action">Take Action</button>
+      {/* AI-Powered Recommendations Panel */}
+      <div className="enhanced-recommendations-panel">
+        <div className="recommendations-header">
+          <div className="header-left">
+            <h3 className="recommendations-title">
+              <FiTarget className="recommendations-icon" />
+              Smart Business Recommendations
+            </h3>
+            <p className="recommendations-subtitle">
+              Data-driven insights and strategic recommendations based on customer analytics and business intelligence
+            </p>
           </div>
-          
-          <div className="recommendation-item priority-medium">
-            <div className="rec-priority">MEDIUM</div>
-            <div className="rec-content">
-              <h5>Expand Geographic Presence</h5>
-              <p>Enter 3 new tier-2 cities with high market potential</p>
-              <div className="rec-impact">Expected Customer Growth: +{Math.round(reportData.totalCustomers * 0.15)}</div>
-            </div>
-            <button className="rec-action">Plan Strategy</button>
+          <div className="header-right">
+            <button className="refresh-recommendations-btn">
+              <FiRepeat className="btn-icon" />
+              Refresh Insights
+            </button>
           </div>
-          
-          <div className="recommendation-item priority-low">
-            <div className="rec-priority">LOW</div>
-            <div className="rec-content">
-              <h5>Enhance Mobile Experience</h5>
-              <p>Improve mobile app to increase engagement by 15%</p>
-              <div className="rec-impact">Expected Retention Improvement: +12%</div>
+        </div>
+
+        <div className="recommendations-grid">
+          <div className="recommendation-card priority-critical">
+            <div className="recommendation-header">
+              <div className="priority-badge critical">
+                <FiAlertTriangle className="priority-icon" />
+                CRITICAL
+              </div>
+              <div className="recommendation-impact">
+                <span className="impact-label">Revenue Impact</span>
+                <span className="impact-value positive">+₹{(reportData.totalRevenue * 0.25).toLocaleString()}</span>
+              </div>
             </div>
-            <button className="rec-action">Review</button>
+            
+            <div className="recommendation-content">
+              <h4 className="recommendation-title">Focus on Premium Customer Conversion</h4>
+              <p className="recommendation-description">
+                Our AI analysis identifies {Math.round(reportData.activeCustomers * 0.4)} active customers with high conversion potential to premium tier. 
+                Implementing targeted premium campaigns could increase revenue by 25%.
+              </p>
+              
+              <div className="recommendation-metrics">
+                <div className="metric-row">
+                  <div className="metric-item">
+                    <span className="metric-label">Target Customers:</span>
+                    <span className="metric-value">{Math.round(reportData.activeCustomers * 0.4)}</span>
+                  </div>
+                  <div className="metric-item">
+                    <span className="metric-label">Conversion Rate:</span>
+                    <span className="metric-value">68%</span>
+                  </div>
+                </div>
+                <div className="metric-row">
+                  <div className="metric-item">
+                    <span className="metric-label">Timeline:</span>
+                    <span className="metric-value">2-3 weeks</span>
+                  </div>
+                  <div className="metric-item">
+                    <span className="metric-label">Success Probability:</span>
+                    <span className="metric-value positive">87%</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="recommendation-insights">
+                <h5>Key Insights:</h5>
+                <ul className="insights-list">
+                  <li>Premium customers show 3.2x higher lifetime value</li>
+                  <li>Current premium conversion rate is below industry average</li>
+                  <li>Optimal timing: End of month promotional campaigns</li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="recommendation-actions">
+              <button className="rec-action-btn primary">
+                <FiZap className="btn-icon" />
+                Execute Strategy
+              </button>
+              <button className="rec-action-btn secondary">
+                <FiEye className="btn-icon" />
+                View Details
+              </button>
+              <button className="rec-action-btn tertiary">
+                <FiCalendar className="btn-icon" />
+                Schedule Later
+              </button>
+            </div>
+          </div>
+
+          <div className="recommendation-card priority-high">
+            <div className="recommendation-header">
+              <div className="priority-badge high">
+                <FiTrendingUp className="priority-icon" />
+                HIGH
+              </div>
+              <div className="recommendation-impact">
+                <span className="impact-label">Customer Growth</span>
+                <span className="impact-value positive">+{Math.round(reportData.totalCustomers * 0.15)}</span>
+              </div>
+            </div>
+            
+            <div className="recommendation-content">
+              <h4 className="recommendation-title">Expand Geographic Presence</h4>
+              <p className="recommendation-description">
+                Market analysis reveals untapped potential in 3 tier-2 cities. Strategic expansion could capture 
+                {Math.round(reportData.totalCustomers * 0.15)} new customers within 6 months.
+              </p>
+              
+              <div className="recommendation-metrics">
+                <div className="metric-row">
+                  <div className="metric-item">
+                    <span className="metric-label">Target Cities:</span>
+                    <span className="metric-value">3 locations</span>
+                  </div>
+                  <div className="metric-item">
+                    <span className="metric-label">Market Size:</span>
+                    <span className="metric-value">2.4M potential</span>
+                  </div>
+                </div>
+                <div className="metric-row">
+                  <div className="metric-item">
+                    <span className="metric-label">Investment:</span>
+                    <span className="metric-value">₹12.5L</span>
+                  </div>
+                  <div className="metric-item">
+                    <span className="metric-label">ROI Timeline:</span>
+                    <span className="metric-value">8-10 months</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="recommendation-insights">
+                <h5>Market Opportunities:</h5>
+                <ul className="insights-list">
+                  <li>Low competition in target markets</li>
+                  <li>High demand for premium dairy products</li>
+                  <li>Strong local distribution network available</li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="recommendation-actions">
+              <button className="rec-action-btn primary">
+                <FiMapPin className="btn-icon" />
+                Plan Expansion
+              </button>
+              <button className="rec-action-btn secondary">
+                <FiBarChart2 className="btn-icon" />
+                Market Research
+              </button>
+              <button className="rec-action-btn tertiary">
+                <FiUsers className="btn-icon" />
+                Team Meeting
+              </button>
+            </div>
+          </div>
+
+          <div className="recommendation-card priority-medium">
+            <div className="recommendation-header">
+              <div className="priority-badge medium">
+                <FiSmartphone className="priority-icon" />
+                MEDIUM
+              </div>
+              <div className="recommendation-impact">
+                <span className="impact-label">Retention Improvement</span>
+                <span className="impact-value positive">+12%</span>
+              </div>
+            </div>
+            
+            <div className="recommendation-content">
+              <h4 className="recommendation-title">Enhance Mobile Experience</h4>
+              <p className="recommendation-description">
+                User behavior analysis shows mobile app improvements could increase customer engagement by 15% 
+                and reduce churn rate by 12%.
+              </p>
+              
+              <div className="recommendation-metrics">
+                <div className="metric-row">
+                  <div className="metric-item">
+                    <span className="metric-label">Mobile Users:</span>
+                    <span className="metric-value">78% of base</span>
+                  </div>
+                  <div className="metric-item">
+                    <span className="metric-label">App Rating:</span>
+                    <span className="metric-value">4.2/5.0</span>
+                  </div>
+                </div>
+                <div className="metric-row">
+                  <div className="metric-item">
+                    <span className="metric-label">Development Time:</span>
+                    <span className="metric-value">6-8 weeks</span>
+                  </div>
+                  <div className="metric-item">
+                    <span className="metric-label">User Impact:</span>
+                    <span className="metric-value">{Math.round(reportData.totalCustomers * 0.78)} users</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="recommendation-insights">
+                <h5>Enhancement Areas:</h5>
+                <ul className="insights-list">
+                  <li>Streamlined checkout process</li>
+                  <li>Personalized product recommendations</li>
+                  <li>Push notification optimization</li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="recommendation-actions">
+              <button className="rec-action-btn primary">
+                <FiSmartphone className="btn-icon" />
+                Start Development
+              </button>
+              <button className="rec-action-btn secondary">
+                <FiUsers className="btn-icon" />
+                User Research
+              </button>
+              <button className="rec-action-btn tertiary">
+                <FiActivity className="btn-icon" />
+                A/B Testing
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Action Timeline & Progress Tracker */}
+      <div className="action-timeline-section">
+        <div className="timeline-header">
+          <h3 className="timeline-title">
+            <FiClock className="timeline-icon" />
+            Action Timeline & Progress Tracker
+          </h3>
+          <div className="timeline-controls">
+            <select className="timeline-dropdown">
+              <option value="week">This Week</option>
+              <option value="month">This Month</option>
+              <option value="quarter">This Quarter</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="timeline-container">
+          <div className="timeline-track">
+            <div className="timeline-item completed">
+              <div className="timeline-marker completed">
+                <FiCheckCircle className="marker-icon" />
+              </div>
+              <div className="timeline-content">
+                <div className="timeline-date">2 days ago</div>
+                <h4 className="timeline-title">Email Campaign Launched</h4>
+                <p className="timeline-description">Successfully launched premium conversion campaign</p>
+                <div className="timeline-metrics">
+                  <span className="metric">Open Rate: 42.3%</span>
+                  <span className="metric">Click Rate: 18.7%</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="timeline-item in-progress">
+              <div className="timeline-marker in-progress">
+                <FiClock className="marker-icon" />
+              </div>
+              <div className="timeline-content">
+                <div className="timeline-date">In Progress</div>
+                <h4 className="timeline-title">Customer Follow-up Calls</h4>
+                <p className="timeline-description">Contacting high-risk customers for retention</p>
+                <div className="timeline-progress">
+                  <div className="progress-bar">
+                    <div className="progress-fill" style={{ width: '67%' }}></div>
+                  </div>
+                  <span className="progress-text">67% Complete</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="timeline-item pending">
+              <div className="timeline-marker pending">
+                <FiCalendar className="marker-icon" />
+              </div>
+              <div className="timeline-content">
+                <div className="timeline-date">Tomorrow</div>
+                <h4 className="timeline-title">Analytics Report Generation</h4>
+                <p className="timeline-description">Scheduled comprehensive customer analysis</p>
+                <div className="timeline-actions">
+                  <button className="timeline-btn">Reschedule</button>
+                  <button className="timeline-btn primary">Start Now</button>
+                </div>
+              </div>
+            </div>
+
+            <div className="timeline-item scheduled">
+              <div className="timeline-marker scheduled">
+                <FiZap className="marker-icon" />
+              </div>
+              <div className="timeline-content">
+                <div className="timeline-date">Next Week</div>
+                <h4 className="timeline-title">Mobile App Enhancement</h4>
+                <p className="timeline-description">Begin development of new mobile features</p>
+                <div className="timeline-team">
+                  <span className="team-label">Assigned to:</span>
+                  <span className="team-members">Development Team</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
